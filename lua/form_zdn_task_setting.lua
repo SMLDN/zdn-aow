@@ -9,10 +9,10 @@ function onFormOpen()
 	local cnt = #TASK_LIST
 	Form.cbx_task_list.DropListBox:ClearString()
 	for i = 1, cnt do
-		Form.cbx_task_list.DropListBox:AddString(nx_widestr(TASK_LIST[i][1]))
+		Form.cbx_task_list.DropListBox:AddString(Utf8ToWstr(TASK_LIST[i][1]))
 	end
 	Form.cbx_task_list.DropListBox.SelectIndex = 0
-	Form.cbx_task_list.Text = nx_widestr(TASK_LIST[1][1])
+	Form.cbx_task_list.Text = Utf8ToWstr(TASK_LIST[1][1])
 	loadConfig()
 end
 
@@ -55,7 +55,7 @@ function addRowToTaskGrid(i, checked)
 end
 
 function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked)
-	local cbtn = createCheckboxButton(checked, nx_widestr(TASK_LIST[taskListIndex][1]))
+	local cbtn = createCheckboxButton(checked, Utf8ToWstr(TASK_LIST[taskListIndex][1]))
 	local upBtn = createUpButton()
 	local downBtn = createDownButton()
 	local settingBtn = createSettingButton(taskListIndex)
@@ -141,7 +141,7 @@ function createDeleteButton(taskListIndex)
 	btn.TabStop = "true"
 	btn.AutoSize = "true"
 	btn.DrawMode = "FitWindow"
-	btn.HintText = nx_widestr("Xóa")
+	btn.HintText = Utf8ToWstr("Xóa")
 	btn.TaskListIndex = taskListIndex
 	nx_bind_script(btn, nx_current())
 	nx_callback(btn, "on_click", "onBtnDeleteRowClick")
@@ -179,7 +179,7 @@ function createSettingButton(taskListIndex)
 	btn.TabStop = "true"
 	btn.AutoSize = "true"
 	btn.DrawMode = "FitWindow"
-	btn.HintText = nx_widestr("Thiết lập")
+	btn.HintText = Utf8ToWstr("Thiết lập")
 	nx_bind_script(btn, nx_current())
 	nx_callback(btn, "on_click", "onBtnSettingRowClick")
 	return groupbox
@@ -216,7 +216,7 @@ function createUpButton()
 	btn.TabStop = "true"
 	btn.AutoSize = "true"
 	btn.DrawMode = "FitWindow"
-	btn.HintText = nx_widestr("Lên trên")
+	btn.HintText = Utf8ToWstr("Lên trên")
 	nx_bind_script(btn, nx_current())
 	nx_callback(btn, "on_click", "onBtnUpRowClick")
 	return groupbox
@@ -253,7 +253,7 @@ function createDownButton()
 	btn.TabStop = "true"
 	btn.AutoSize = "true"
 	btn.DrawMode = "FitWindow"
-	btn.HintText = nx_widestr("Xuống dưới")
+	btn.HintText = Utf8ToWstr("Xuống dưới")
 	nx_bind_script(btn, nx_current())
 	nx_callback(btn, "on_click", "onBtnDownRowClick")
 	return groupbox

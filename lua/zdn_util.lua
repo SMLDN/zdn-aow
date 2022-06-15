@@ -13,7 +13,7 @@ function IniRead(file, section, key, default)
     return nx_widestr(default)
   end
   nx_destroy(ini)
-  return utf8ToWstr(text)
+  return Utf8ToWstr(text)
 end
 
 function IniWrite(file, section, key, value)
@@ -27,7 +27,7 @@ function IniWrite(file, section, key, value)
       return 0
     end
   end
-  ini:WriteString(section, key, wstrToUtf8(nx_widestr(value)))
+  ini:WriteString(section, key, WstrToUtf8(nx_widestr(value)))
   ini:SaveToFile()
   nx_destroy(ini)
   return 1
@@ -85,7 +85,7 @@ function IniReadSection(file, section, utf8Flg)
   local keyList = ini:GetItemList(section)
   for _, key in pairs(keyList) do
     if utf8Flg then
-      sectionText[key] = utf8ToWstr(ini:ReadString(section, key, ""))
+      sectionText[key] = Utf8ToWstr(ini:ReadString(section, key, ""))
     else
       sectionText[key] = nx_string(ini:ReadString(section, key, ""))
     end
@@ -123,6 +123,14 @@ function IniLoadFile(file)
   return ini
 end
 
+function Utf8ToWstr(content)
+  return nx_function("ext_utf8_to_widestr", content)
+end
+
+function WstrToUtf8(content)
+  return nx_function("ext_widestr_to_utf8", content)
+end
+
 -- for debug
 function Console(text)
   local form = nx_value("form_zdn_log")
@@ -133,14 +141,6 @@ end
 -- for debug
 
 -- private
-function utf8ToWstr(content)
-  return nx_function("ext_utf8_to_widestr", content)
-end
-
-function wstrToUtf8(content)
-  return nx_function("ext_widestr_to_utf8", content)
-end
-
 function getUserConfigFile()
   if UserConfigFile == nil then
     local gameConfig = nx_value("game_config")
