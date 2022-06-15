@@ -48,7 +48,7 @@ end
 
 -- private
 function loopNoi6()
-    if isMapLoading() then
+    if IsMapLoading() then
         nx_pause(2)
         return
     end
@@ -331,11 +331,6 @@ function isAllPilesShowed()
         end
     end
     return cnt == 9
-end
-
-function isMapLoading()
-    local form = nx_value("form_common\\form_loading")
-    return nx_is_valid(form) and form.Visible
 end
 
 function onTaskDone()

@@ -41,14 +41,12 @@ local function flyToPos(cur_x, cur_y, cur_z, x, y, z)
     end
 
     SwitchPlayerStateToFly()
-    nx_pause(0.1)
+    nx_pause(0.2)
     y = y + 0.1
     setAngle(x, y, z)
     local temp_angle = role.AngleY
-    if not instantlyFlg then
-        nx_call("player_state\\state_input", "emit_player_input", role, 21, 36, x, y, z, 0, 2.8)
-        nx_pause(1.1)
-    end
+    nx_call("player_state\\state_input", "emit_player_input", role, 21, 36, x, y, z, 0, 3)
+    nx_pause(2.8)
 
     role.move_dest_orient = temp_angle
     game_visual:SetRoleMoveDestX(role, x)

@@ -63,7 +63,7 @@ end
 
 -- private
 function loopNoi6()
-    if isMapLoading() then
+    if IsMapLoading() then
         nx_pause(2)
         return
     end
@@ -172,11 +172,6 @@ end
 
 function isFirstQuestNpc(obj)
     return obj:QueryProp("ConfigID") == "jddb_npc_01"
-end
-
-function isMapLoading()
-    local form = nx_value("form_common\\form_loading")
-    return nx_is_valid(form) and form.Visible
 end
 
 function isSceneNpc(obj)

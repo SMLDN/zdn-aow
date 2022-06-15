@@ -49,7 +49,7 @@ end
 
 -- private
 function loopNoi6()
-    if isMapLoading() then
+    if IsMapLoading() then
         nx_pause(2)
         return
     end
@@ -145,6 +145,7 @@ function throwStone(stone)
 end
 
 function doQuest()
+    nx_pause(2)
     local lvl4Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl4Stone")
     throwStone(lvl4Stone)
     local lvl3Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl3Stone")
@@ -197,11 +198,6 @@ end
 
 function isFirstQuestNpc(obj)
     return obj:QueryProp("ConfigID") == "npc_6n_lh_wyhs_join"
-end
-
-function isMapLoading()
-    local form = nx_value("form_common\\form_loading")
-    return nx_is_valid(form) and form.Visible
 end
 
 function onTaskDone()
