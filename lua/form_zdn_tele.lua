@@ -162,4 +162,5 @@ function onBtnOpenOriginFormClick(btn)
 end
 
 function onBtnSchoolHomePointClick()
+	TeleToSchoolHomePoint()
 end

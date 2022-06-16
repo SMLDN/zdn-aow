@@ -663,7 +663,40 @@ local function isWalkFinished(playerDestX, playerDestZ)
 	return 1 >= distance2d(px, pz, dx, dz)
 end
 
+local function getPlayerSchool()
+	local client = nx_value("game_client")
+	if not nx_is_valid(client) then
+		return ""
+	end
+	local player = client:GetPlayer()
+	if not nx_is_valid(player) then
+		return ""
+	end
+	local school = nx_string(player:QueryProp("Force"))
+	if school ~= "0" and school ~= "" then
+		return school
+	end
+	school = nx_string(player:QueryProp("School"))
+	if school ~= "0" and school ~= "" then
+		return school
+	end
+	school = nx_string(player:QueryProp("NewSchool"))
+	if school ~= "0" and school ~= "" then
+		return school
+	end
+	return "wumenpai"
+end
+
 -- Public
+function TeleToSchoolHomePoint()
+	if isCurseLoading() then
+		return
+	end
+	StopFindPath()
+	local hp = nx_execute("form_stage_main\\form_homepoint\\home_point_data", "get_type_homepoint", getPlayerSchool())
+	sendHomePointMsgToServer(1, hp, 2)
+end
+
 function TeleToHomePoint(homePoint)
 	if isCurseLoading() then
 		return
