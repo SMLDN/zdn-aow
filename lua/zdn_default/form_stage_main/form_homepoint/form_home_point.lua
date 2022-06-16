@@ -1,3 +1,21 @@
+function old_auto_show_hide_point_form()
+    local form = nx_value(FORM_HOME_POINT)
+    if nx_is_valid(form) then
+      if not form.Visible then
+        ShowHomePointForm()
+      else
+        reset_homepoint_timedown(form)
+        form.pbar_timedown.Value = 0
+        form.lbl_time.Text = ""
+        form.Visible = false
+        reset_hire_timedown(form)
+        form:Close()
+      end
+    else
+      ShowHomePointForm()
+    end
+  end
+
 function auto_show_hide_point_form()
     local timerForm = nx_value("form_stage_main\\form_homepoint\\form_home_point")
     local showForm = nx_value("form_zdn_tele")

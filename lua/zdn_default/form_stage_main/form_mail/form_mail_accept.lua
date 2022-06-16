@@ -1,3 +1,4 @@
+require("zdn_util")
 local Recv_rec_name = "RecvLetterRec"
 local LETTER_SYSTEM_TYPE_MIN = 100
 local LETTER_SYSTEM_TYPE_MAX = 199
@@ -41,7 +42,7 @@ function zdnAddBtn(form)
     btn.TabStop = "true"
     btn.AutoSize = "true"
     btn.DrawMode = "ExpandH"
-    btn.Text = nx_widestr("Xóa thư trống")
+    btn.Text = Utf8ToWstr("Xóa thư trống")
     nx_bind_script(btn, nx_current())
     nx_callback(btn, "on_click", "onZdnDeleteEmptyBtnClick")
 end

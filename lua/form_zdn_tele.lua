@@ -153,3 +153,13 @@ function getHomePointList(map)
 	end
 	return list
 end
+
+function onBtnOpenOriginFormClick(btn)
+	local form = nx_value("form_stage_main\\form_homepoint\\form_home_point")
+	form.Width = 670
+    form.Height = 508
+	nx_execute("form_stage_main\\form_homepoint\\form_home_point", "center_for_screen", form)
+end
+
+function onBtnSchoolHomePointClick()
+end

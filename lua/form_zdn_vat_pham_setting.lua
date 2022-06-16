@@ -177,7 +177,7 @@ function createDeleteButton()
 	btn.TabStop = "true"
 	btn.AutoSize = "true"
 	btn.DrawMode = "FitWindow"
-	btn.HintText = nx_widestr("Xóa")
+	btn.HintText = Utf8ToWstr("Xóa")
 	nx_bind_script(btn, nx_current())
 	nx_callback(btn, "on_click", "onBtnDeleteRowClick")
 	return groupbox
