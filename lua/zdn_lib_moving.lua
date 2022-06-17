@@ -885,7 +885,6 @@ function WalkToPosInstantly(x, y, z)
 	if nx_number(y) > nx_number(900000) then
 		return
 	end
-	Console(y)
 	local role = nx_value("role")
 	local game_visual = nx_value("game_visual")
 	if not nx_is_valid(role) or not nx_is_valid(game_visual) then
@@ -911,6 +910,9 @@ function WalkToPosInstantly(x, y, z)
 	game_visual:SwitchPlayerState(role, 1, 103)
 	local scene = nx_value("game_scene")
 	local player = getPlayer()
+	if not nx_is_valid(player) then
+		return
+	end
 	local dx = player.DestX
 	local dz = player.DestZ
 	while (nx_is_valid(scene) and not scene.terrain.LoadFinish) or
