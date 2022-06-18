@@ -3,6 +3,7 @@ require("zdn_util")
 require("zdn_define\\task_define")
 local Running = false
 local TodoList = {}
+local TimerInterruptCheck = 0
 
 function IsRunning()
     return Running
@@ -154,6 +155,10 @@ function onTaskInterrupt(source)
     if not Running then
         return
     end
+    if TimerDiff(TimerInterruptCheck) < 6 then
+        return
+    end
+    TimerInterruptCheck = TimerInit()
     local cnt = #TodoList
     for i = 1, cnt do
         local logic = TASK_LIST[TodoList[i]][2]

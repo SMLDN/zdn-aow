@@ -93,7 +93,7 @@ function createCheckboxButton(checked, txt)
 	btn.DisableColor = "0,0,0,0"
 	btn.PushBlendColor = "255,255,255,255"
 	btn.DisableBlendColor = "255,255,255,255"
-	btn.Width = 126
+	btn.Width = 135
 	btn.Height = 22
 	btn.BackColor = "255,192,192,192"
 	btn.ForeColor = "255,255,255,255"

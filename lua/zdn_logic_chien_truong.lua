@@ -1,3 +1,4 @@
+require("util_functions")
 require("zdn_util")
 require("zdn_lib_moving")
 local PRIZE_FORM_PATH = "form_stage_main\\form_xmqy_detail"
@@ -57,16 +58,23 @@ local FIX_FIND_PATH_POINT = {
     }
 }
 
+local Mode = 0
+local ProcessMailFlg = true
+local MaxTurn = 20
+local FinishTurn = 0
+local ResetTime = 0
+
 function IsRunning()
     return Running
 end
 
 function CanRun()
-    local resetTimeStr = IniReadUserConfig("ChienTruong", "ResetTime", "")
-    if resetTimeStr == "" then
-        return true
+    loadConfig()
+    if Mode == 0 then
+        return nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") >= ResetTime
+    else
+        return FinishTurn < MaxTurn
     end
-    return nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") >= nx_number(resetTimeStr)
 end
 
 function IsTaskDone()
@@ -75,6 +83,10 @@ end
 
 function Start()
     if Running then
+        return
+    end
+    if not CanRun() then
+        Stop()
         return
     end
     Running = true
@@ -93,10 +105,6 @@ end
 
 -- private
 function loopChienTruong()
-    if not CanRun() then
-        Stop()
-        return
-    end
     if isDead(nx_execute("zdn_logic_base", "GetPlayer")) then
         if (nx_execute("zdn_logic_skill", "IsRunning")) then
             nx_execute("zdn_logic_skill", "PauseAttack")
@@ -221,6 +229,7 @@ function leaveBattle()
     nx_execute("zdn_logic_skill", "StopAutoAttack")
     nx_pause(1)
     nx_execute("form_stage_main\\form_battlefield\\form_battlefield_join", "request_leave_battlefield")
+    onOneTurnFinish()
     nx_pause(30)
 end
 
@@ -247,8 +256,8 @@ end
 function processItem()
     local i = nx_execute("zdn_logic_vat_pham", "FindItemIndexFromVatPham", ITEM_DICH_CAN_DAN)
     if i ~= 0 then
-        nx_execute("Listener", "addListen", nx_current(), "8014", "onTaskDone", 2)
-        nx_execute("Listener", "addListen", nx_current(), "power_redeem_4", "onTaskDone", 2)
+        nx_execute("Listener", "addListen", nx_current(), "8014", "onUseItemDone", 2)
+        nx_execute("Listener", "addListen", nx_current(), "power_redeem_4", "onUseItemDone", 2)
         nx_execute("zdn_logic_vat_pham", "UseItem", 2, i)
         return true
     end
@@ -308,6 +317,9 @@ function getDropItemName(i)
 end
 
 function processMail()
+    if not ProcessMailFlg then
+        return false
+    end
     local client = nx_value("game_client")
     local player = client:GetPlayer()
     local hasMail = false
@@ -387,8 +399,9 @@ function distance3d(bx, by, bz, dx, dy, dz)
     return math.sqrt((dx - bx) * (dx - bx) + (dy - by) * (dy - by) + (dz - bz) * (dz - bz))
 end
 
-function onTaskDone()
+function onUseItemDone()
     IniWriteUserConfig("ChienTruong", "ResetTime", nx_execute("zdn_logic_base", "GetNextDayStartTimestamp"))
+    deleteItemByConfig(ITEM_DICH_CAN_DAN)
 end
 
 function deleteItemByConfig(config)
@@ -410,4 +423,35 @@ function isAttackable(obj)
         return false
     end
     return fight:CanAttackTarget(player, obj)
+end
+
+function onOneTurnFinish()
+    FinishTurn = FinishTurn + 1
+    IniWriteUserConfig(
+        "ChienTruong",
+        "Turn",
+        nx_widestr(nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp")) ..
+            nx_widestr(",") .. nx_widestr(FinishTurn)
+    )
+end
+
+function loadConfig()
+    Mode = nx_number(IniReadUserConfig("ChienTruong", "Mode", 0))
+    ProcessMailFlg = nx_string(IniReadUserConfig("ChienTruong", "ProcessMailFlg", "1")) == "1" and true or false
+    MaxTurn = nx_number(IniReadUserConfig("ChienTruong", "MaxTurn", "20"))
+
+    local str = nx_string(IniReadUserConfig("ChienTruong", "Turn", ""))
+    if str ~= "" then
+        local a = util_split_string(str, ",")
+        if nx_number(a[1]) == nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") then
+            FinishTurn = nx_number(a[2])
+        end
+    end
+
+    local resetTimeStr = IniReadUserConfig("ChienTruong", "ResetTime", "")
+    if resetTimeStr == "" then
+        ResetTime = 0
+    else
+        ResetTime = nx_number(resetTimeStr)
+    end
 end

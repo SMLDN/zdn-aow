@@ -1,20 +1,60 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <form>
     <control name="main_form" entity="Form" script="form_zdn_chien_truong" init="formInit">
-        <prop LimitInScreen="true" ShowGrid="true" Width="100" Height="100" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
+        <prop LimitInScreen="true" ShowGrid="true" Width="200" Height="275" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
         <event on_open="formOpen" on_close="formClose" />
 
         <control name="btn_close" entity="Button" script="" init="">
-            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="70" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
+            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="170" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
             <event on_click="onBtnCloseClick" />
         </control>
 
         <control name="lbl_title" entity="Label" script="" init="">
-            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="100" Height="35" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Chiến trường" Font="font_title" />
+            <prop Align="Center" RefCursor="WIN_HELP" Width="200" Height="35" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Chiến trường" Font="font_title" />
+        </control>
+		
+		<control name="lbl_mode" entity="Label" script="" init="">
+            <prop Top="35" Left="10" RefCursor="WIN_HELP" Height="35" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Chế độ" Font="font_title" />
+        </control>
+		
+		<control name="groupbox_mode" entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="10" Top="68" Width="168" Height="100" ForeColor="0,0,0,0" BackColor="0,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text" DrawMode="Expand"  />
+            <control name="rbtn_auto" entity="RadioButton" script="" init="">
+                <prop Checked="true" HintText="Tự động mở thư, cắn Dịch cân đan. Dừng khi cắn hết lượng giới hạn trong ngày." Left="2" Top="2" Width="18" Height="18" BoxSize="12" NormalImage="gui\common\checkbutton\cbtn_4_off.png" FocusImage="gui\common\checkbutton\cbtn_4_on.png" CheckedImage="gui\common\checkbutton\cbtn_4_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" DrawMode="ExpandH"/>
+            </control>
+            <control entity="Label" script="" init="">
+                <prop RefCursor="WIN_HELP" Left="22" Top="4" Width="30" Height="13" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Tự động" Font="font_text" />
+            </control>
+            <control name="rbtn_manual" entity="RadioButton" script="" init="">
+                <prop Left="2" Top="30" Width="18" Height="18" BoxSize="18" NormalImage="gui\common\checkbutton\cbtn_4_off.png" FocusImage="gui\common\checkbutton\cbtn_4_on.png" CheckedImage="gui\common\checkbutton\cbtn_4_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" DrawMode="ExpandH"/>
+            </control>
+            <control entity="Label" script="" init="">
+                <prop RefCursor="WIN_HELP" Left="22" Top="32" Width="30" Height="13" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Thủ công" Font="font_text" />
+            </control>
+        </control>
+
+        <control entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="8" Top="68" Width="180" Height="21" ForeColor="0,0,0,0" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text" DrawMode="Expand" BackImage="gui\common\form_back\bg_text.png" />
+        </control>
+		<control entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="8" Top="95" Width="180" Height="115" ForeColor="0,0,0,0" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text" DrawMode="Expand" BackImage="gui\common\form_back\bg_text.png" />
+        </control>
+		
+		<control name="groupbox_manual_setting" entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="24" Top="80" Width="168" Height="100" ForeColor="0,0,0,0" BackColor="0,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text" DrawMode="Expand"  />
+			<control name="cbtn_get_mail" entity="CheckButton" script="" init="">
+				<prop Left="0" Top="40" Width="155" Height="22" Text="Tự động mở thư" Checked="true" BoxSize="12" NormalImage="gui\common\checkbutton\cbtn_out_4.png" FocusImage="gui\common\checkbutton\cbtn_on_4.png" CheckedImage="gui\common\checkbutton\cbtn_down_4.png" DisableImage="gui\common\checkbutton\cbtn_2_forbid.png" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" TabStop="true" DrawMode="ExpandH" Font="font_name_guild"/>
+			</control>
+			<control entity="Label" script="" init="">
+				<prop Left="62" Top="75" Width="160" Height="22" Text="lượt" Checked="true" BoxSize="12" NormalImage="gui\common\checkbutton\cbtn_out_4.png" FocusImage="gui\common\checkbutton\cbtn_on_4.png" CheckedImage="gui\common\checkbutton\cbtn_down_4.png" DisableImage="gui\common\checkbutton\cbtn_2_forbid.png" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" TabStop="true" DrawMode="ExpandH" Font="font_name_guild"/>
+			</control>
+			<control name="input_max_turn" entity="Float_Edit" script="" init="">
+				<prop Left="0" Top="70" Width="55" Height="30" Format="%.0f" DragStep="1.000000" Max="150.000000" OnlyDigit="true" ChangedEvent="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="20" Font="font_main" Cursor="WIN_IBEAM" TabStop="true" DrawMode="ExpandH" BackImage="gui\common\form_line\ibox_1.png" />
+			</control>
         </control>
 
         <control name="btn_submit" entity="Button" script="" init="">
-            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="20" Top="40" Width="60" Height="30" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Start" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <prop Left="20" Top="225" Width="154" Height="34" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Start" Font="font_btn" HintText="" DrawMode="ExpandH" />
             <event on_click="onBtnSubmitClick" />
         </control>
     </control>
