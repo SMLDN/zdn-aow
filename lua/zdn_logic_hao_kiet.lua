@@ -72,7 +72,7 @@ function loopHaoKiet()
         local boss = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isBoss", "isNotInBlackList")
         if not nx_is_valid(boss) then
             quitBossScene()
-            nx_pause(0.5)
+            nx_pause(3)
         end
         return
     end
