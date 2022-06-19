@@ -86,9 +86,9 @@ function startQuest()
             return
         end
         XuongNgua()
-        TalkToNpc(npc,0)
-        TalkToNpc(npc,0)
-        TalkToNpc(npc,0)
+        TalkToNpc(npc, 0)
+        TalkToNpc(npc, 0)
+        TalkToNpc(npc, 0)
         return
     end
 
@@ -108,8 +108,8 @@ function startQuest()
             return
         end
         XuongNgua()
-        TalkToNpc(npc,0)
-        TalkToNpc(npc,0)
+        TalkToNpc(npc, 0)
+        TalkToNpc(npc, 0)
         onTaskDone()
         return
     end
@@ -131,11 +131,11 @@ function throwStone(stone)
     TalkToNpc(stone, 0)
     WalkToPosInstantly(THROW_POS[1], THROW_POS[2], THROW_POS[3])
     local throwObj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThrowObj")
-    while Running and not nx_is_valid(throwObj) do
+    while Running and isInQuestScene() and not nx_is_valid(throwObj) do
         throwObj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThrowObj")
         nx_pause(0.1)
     end
-    while Running and nx_execute("zdn_logic_skill", "HaveBuff", "buf_6n_wyhs_cd_01") do
+    while Running and isInQuestScene() and nx_execute("zdn_logic_skill", "HaveBuff", "buf_6n_wyhs_cd_01") do
         nx_pause(0.1)
     end
     if not nx_is_valid(throwObj) then
