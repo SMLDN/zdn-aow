@@ -297,7 +297,7 @@ function doAutoAttack()
                 loopAttack()
             end
         end
-        nx_pause(0)
+        nx_pause(0.1)
     end
 end
 
