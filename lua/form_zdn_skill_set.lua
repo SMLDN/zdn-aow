@@ -1,7 +1,6 @@
 require("shortcut_game")
 require("util_gui")
 require("zdn_lib\\util_functions")
-require("zdn_util")
 require("zdn_form_common")
 
 local MAX_SET = 3

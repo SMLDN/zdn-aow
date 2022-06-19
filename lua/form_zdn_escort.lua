@@ -1,4 +1,3 @@
-require("zdn_util")
 require("zdn_form_common")
 
 local ZdnText = nil

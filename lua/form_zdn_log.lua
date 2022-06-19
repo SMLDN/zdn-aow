@@ -1,5 +1,3 @@
-require("zdn_util")
-
 function formOpen(form)
 	Form = form
 	local gui = nx_value("gui")
