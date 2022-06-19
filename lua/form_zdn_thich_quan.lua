@@ -33,8 +33,7 @@ end
 function updateBtnSubmitState(isRunning)
 	if isRunning then
 		Form.btn_submit.Text = Utf8ToWstr("Dừng")
-				Form.btn_submit.ForeColor="255,220,20,60"
-		-- Form.btn_submit.ForeColor = "255,178,34,34"
+		Form.btn_submit.ForeColor = "255,220,20,60"
 	else
 		Form.btn_submit.Text = Utf8ToWstr("Chạy")
 		Form.btn_submit.ForeColor = "255,255,255,255"
