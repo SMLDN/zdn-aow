@@ -93,7 +93,7 @@ local function jumpTo(x, y, z)
 	StopFindPath()
 	setAngle(x, y, z)
 	gameVisual:SwitchPlayerState(role, 1, 9)
-	waitToCollide(x, y, z)
+	nx_execute(nx_current(), "waitToCollide", x, y, z)
 end
 
 local function shortJumpCollide()
