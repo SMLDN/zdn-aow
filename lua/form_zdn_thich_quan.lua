@@ -1,3 +1,4 @@
+require("util_gui")
 require("zdn_form_common")
 
 local Logic = "zdn_logic_thich_quan"
@@ -38,4 +39,8 @@ function updateBtnSubmitState(isRunning)
 		Form.btn_submit.Text = Utf8ToWstr("Chạy")
 		Form.btn_submit.ForeColor = "255,255,255,255"
 	end
+end
+
+function onBtnSettingClick()
+	util_auto_show_hide_form("form_zdn_thich_quan_setting")
 end

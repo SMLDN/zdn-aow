@@ -10,7 +10,7 @@
         </control>
 
         <control name="lbl_title" entity="Label" script="" init="">
-            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="8" Width="640" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Cài đặt bộ kỹ năng" Font="font_title" />
+            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="8" Width="640" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Thiết lập bộ kỹ năng" Font="font_title" />
         </control>
 
         <control name="groupbox_set_1" entity="GroupBox" script="" init="">

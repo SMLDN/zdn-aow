@@ -10,7 +10,7 @@
         </control>
 
         <control name="lbl_title" entity="Label" script="" init="">
-            <prop Text="Cài đặt vật phẩm" Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="300" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Font="font_title" />
+            <prop Text="Thiết lập vật phẩm" Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="300" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Font="font_title" />
         </control>
 		
         <control name="header1" entity="Label" script="" init="">

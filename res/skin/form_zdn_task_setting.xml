@@ -10,7 +10,7 @@
         </control>
 
         <control name="lbl_title" entity="Label" script="" init="">
-            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="315" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Cài đặt trợ lý" Font="font_title" />
+            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="315" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Thiết lập trợ lý" Font="font_title" />
         </control>
 
         <control name="cbx_task_list" entity="ComboBox" script="" init="">
