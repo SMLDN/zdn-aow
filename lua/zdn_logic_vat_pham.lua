@@ -33,16 +33,11 @@ function PickAllDropItem()
     if not IsDroppickShowed() then
         return
     end
-    local gameClient = nx_value("game_client")
-    if not nx_is_valid(gameClient) then
+    local form = nx_value(FORM_DROPPICK_PATH)
+    if not nx_is_valid(form) or not form.Visible then
         return
     end
-    local view = gameClient:GetView(nx_string(80))
-    if not nx_is_valid(view) then
-        return
-    end
-    local list = view:GetViewObjList()
-    local cnt = #list
+    local cnt = form.nMaxIndexCount
     for i = 1, cnt do
         nx_execute("custom_sender", "custom_pickup_single_item", i)
     end
@@ -70,7 +65,7 @@ function loopVatPham()
             local index = FindItemIndexFromVatPham(item.itemId)
             if index ~= 0 then
                 UseItem(2, index)
-                nx_pause(0.1)
+                nx_pause(0.15)
             end
         end
     end
