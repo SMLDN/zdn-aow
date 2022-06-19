@@ -48,7 +48,7 @@ local function setAngleToObj(obj)
 	end
 end
 
-local function waitToCollide(x, y, z, seconds)
+function waitToCollide(x, y, z)
 	nx_pause(1)
 	local role = nx_value("role")
 	if not nx_is_valid(role) then

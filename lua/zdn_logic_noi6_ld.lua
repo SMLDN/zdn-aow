@@ -127,8 +127,10 @@ function throwStone(stone)
     if not nx_is_valid(stone) then
         return
     end
-    WalkToObjInstantly(stone)
-    TalkToNpc(stone, 0)
+    if not holdingStone() then
+        WalkToObjInstantly(stone)
+        TalkToNpc(stone, 0)
+    end
     WalkToPosInstantly(THROW_POS[1], THROW_POS[2], THROW_POS[3])
     local throwObj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThrowObj")
     while Running and isInQuestScene() and not nx_is_valid(throwObj) do
@@ -144,8 +146,12 @@ function throwStone(stone)
     TalkToNpc(throwObj, 0)
 end
 
+function holdingStone()
+    return nx_execute("zdn_logic_skill", "HaveBuff", "buf_6n_wyhs_bst05c")
+end
+
 function doQuest()
-    nx_pause(2)
+    nx_pause(4)
     local lvl4Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl4Stone")
     throwStone(lvl4Stone)
     local lvl3Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl3Stone")
