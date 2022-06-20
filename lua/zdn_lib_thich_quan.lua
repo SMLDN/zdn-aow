@@ -56,10 +56,8 @@ function doBossScene()
             return
         end
         if CanJump then
-            Console("can jump")
             jumpToBoss()
         else
-            Console("find and kill boss")
             findAndKillBoss()
         end
         AttackTimer = TimerInit()
@@ -552,6 +550,5 @@ function isFlying(...)
 end
 
 function onOpenBossScene()
-    Console("set can jump to true")
     CanJump = true
 end
