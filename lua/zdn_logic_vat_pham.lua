@@ -41,7 +41,8 @@ function PickAllDropItem()
     for i = 1, cnt do
         nx_execute("custom_sender", "custom_pickup_single_item", i)
     end
-    while Running and nx_is_valid(form) and form.Visible do
+    local timeOut = TimerInit()
+    while Running and nx_is_valid(form) and form.Visible and TimerDiff(timeOut) < 1.2 do
         nx_pause(0)
     end
     nx_execute("custom_sender", "custom_close_drop_box")
