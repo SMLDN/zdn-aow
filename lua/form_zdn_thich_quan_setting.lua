@@ -7,7 +7,7 @@ local TaskStatusList = {}
 
 function onFormOpen()
     loadConfig()
-    updateTqGridView()
+    initTqGridView()
 end
 
 function loadConfig()
@@ -52,7 +52,7 @@ function loadConfig()
     end
 end
 
-function updateTqGridView()
+function initTqGridView()
     TaskStatusList = {}
 
     if not nx_is_valid(Form) then
@@ -60,16 +60,30 @@ function updateTqGridView()
     end
     for i = 0, #ThichQuanData - 1 do
         local gridIndex = Form.tq_grid.RowCount
-        local cbtn = createCheckboxButton(i, 0)
+        local cbtn = createCheckboxButton(i)
         Form.tq_grid:BeginUpdate()
         Form.tq_grid:InsertRow(gridIndex)
         Form.tq_grid:SetGridControl(gridIndex, 0, cbtn)
         Form.tq_grid:EndUpdate()
         TaskStatusList[ThichQuanData[i + 1].ID] = i
     end
+
+    local disableListStr = nx_string(IniReadUserConfig("ThichQuan", "DisableList", ""))
+    if disableListStr ~= "" then
+        local disableList = util_split_string(disableListStr, ",")
+        for i = 1, #disableList do
+            local cbtn = Form.tq_grid:GetGridControl(nx_int(disableList[i] - 1), 0)
+            if nx_is_valid(cbtn) then
+                local btn = cbtn.btn
+                if nx_is_valid(btn) then
+                    btn.Checked = false
+                end
+            end
+        end
+    end
 end
 
-function createCheckboxButton(row, col)
+function createCheckboxButton(row)
     local data = ThichQuanData[row + 1]
     local gui = nx_value("gui")
     if not nx_is_valid(gui) then
@@ -83,7 +97,6 @@ function createCheckboxButton(row, col)
     groupbox.btn = btn
 
     btn.Top = 0
-    btn.Font = "font_title"
     btn.Left = 0
     btn.Checked = checked
     btn.BoxSize = 12
@@ -93,8 +106,8 @@ function createCheckboxButton(row, col)
     btn.DisableColor = "0,0,0,0"
     btn.PushBlendColor = "255,255,255,255"
     btn.DisableBlendColor = "255,255,255,255"
-    btn.Width = 250
-    btn.Height = 22
+    btn.Width = 240
+    btn.Height = 25
     btn.BackColor = "255,192,192,192"
     btn.ForeColor = "255,255,255,255"
     btn.ShadowColor = "0,0,0,0"
@@ -107,5 +120,51 @@ function createCheckboxButton(row, col)
     btn.FocusImage = "gui\\common\\checkbutton\\cbtn_on_4.png"
     btn.CheckedImage = "gui\\common\\checkbutton\\cbtn_down_4.png"
     btn.DrawMode = "ExpandH"
+    btn.Checked = true
+    btn.ThichQuanIndex = row + 1
     return groupbox
+end
+
+function onBtnSubmitClick()
+    local disableList = ""
+    local cnt = Form.tq_grid.RowCount
+    for i = 1, cnt do
+        local cbtn = Form.tq_grid:GetGridControl(i - 1, 0)
+        if nx_is_valid(cbtn) then
+            local btn = cbtn.btn
+            if nx_is_valid(btn) and not btn.Checked then
+                if disableList ~= "" then
+                    disableList = disableList .. ","
+                end
+                disableList = disableList .. i
+            end
+        end
+    end
+    IniWriteUserConfig("ThichQuan", "DisableList", disableList)
+end
+
+function onHyperCheckAllClick()
+    local cnt = Form.tq_grid.RowCount
+    for i = 1, cnt do
+        local cbtn = Form.tq_grid:GetGridControl(i - 1, 0)
+        if nx_is_valid(cbtn) then
+            local btn = cbtn.btn
+            if nx_is_valid(btn) and not btn.Checked then
+                btn.Checked = true
+            end
+        end
+    end
+end
+
+function onHyperUncheckAllClick()
+    local cnt = Form.tq_grid.RowCount
+    for i = 1, cnt do
+        local cbtn = Form.tq_grid:GetGridControl(i - 1, 0)
+        if nx_is_valid(cbtn) then
+            local btn = cbtn.btn
+            if nx_is_valid(btn) and btn.Checked then
+                btn.Checked = false
+            end
+        end
+    end
 end

@@ -14,7 +14,7 @@
         </control>
 
         <control name="tq_grid" entity="Grid" script="" init="">
-            <prop Left="8" Top="40" Width="380" Height="400" ShowComment="true" HeaderRowHeight="20" HeaderBackColor="0,255,255,255" SelectForeColor="255,78,63,47" SelectBackColor="0,147,123,99" CanSelectRow="true" ColWidth="250" ColWidths="250" RowHeight="35" ColCount="1" ScrollSize="18" HasHScroll="true" AlwaysVScroll="true" AlwaysHScroll="false" Solid="true" ForeColor="255,128,101,74" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
+            <prop Left="8" Top="40" Width="380" Height="400" ShowComment="true" HeaderRowHeight="10" HeaderBackColor="0,255,255,255" SelectForeColor="255,78,63,47" SelectBackColor="0,147,123,99" CanSelectRow="true" ColWidth="250" ColWidths="250" RowHeight="30" ColCount="1" ScrollSize="18" HasHScroll="true" AlwaysVScroll="true" AlwaysHScroll="false" Solid="true" ForeColor="255,128,101,74" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
             <subor name="VScrollBar">
                 <prop FullBarBack="false" SmallChange="2" LargeChange="10" BackColor="0,224,224,224" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" />
                 <subor name="TrackButton">
@@ -27,6 +27,16 @@
 					<prop NormalImage="gui\common\scrollbar\button_1\btn_down_out.png" FocusImage="gui\common\scrollbar\button_1\btn_down_on.png" PushImage="gui\common\scrollbar\button_1\btn_down_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="18" Height="18" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" DrawMode="FitWindow" />
 				</subor>
             </subor>
+        </control>
+		
+		<control name="check_all" entity="MultiTextBox" script="" init="">
+            <prop Left="20" Top="460" Width="80" Height="32" TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Chọn hết</a>' ScrollSize="17" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onHyperCheckAllClick" />
+        </control>
+		
+		<control name="uncheck_all" entity="MultiTextBox" script="" init="">
+            <prop Left="110" Top="460" Width="80" Height="32" TextColor="255,220,20,60" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Bỏ chọn hết</a>' ScrollSize="17" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onHyperUncheckAllClick" />
         </control>
 
         <control name="btn_submit" entity="Button" script="" init="">

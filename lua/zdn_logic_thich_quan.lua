@@ -1,4 +1,4 @@
-require("zdn_lib_moving")
+require("zdn_lib_thich_quan")
 
 local Running = false
 
@@ -29,5 +29,22 @@ function Stop()
 end
 
 function loopThichQuan()
-    Console("lopp thich quan")
+    if isLoading() then
+        nx_pause(1)
+        return
+    end
+
+    if nx_execute("zdn_logic_skill", "IsPlayerDead") then
+        endGame()
+        return
+    end
+
+    if IsInBossScene() then
+        doBossScene()
+    else
+        enterBossScene()
+    end
+end
+
+function enterBossScene()
 end
