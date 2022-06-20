@@ -7,6 +7,7 @@ local Running = false
 local QUEST_ID = "ld"
 local THROW_POS = {0.17558604478836, 20.536001205444, 12.483154296875}
 local CENTER_POS = {-1.5259571075439, 21.753995895386, -24.10789680481}
+local NPC_POS_FIX = {1138.9156494141, -15.235137939453, 657.68249511719}
 
 function IsRunning()
     return Running
@@ -75,14 +76,16 @@ function startQuest()
     -- tim npc
     local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isFirstQuestNpc")
     if not nx_is_valid(npc) then
-        GoToNpc(map, npcConfigId)
+        -- GoToNpc(map, npcConfigId)
+        GoToPosition(NPC_POS_FIX[1], NPC_POS_FIX[2], NPC_POS_FIX[3])
         return
     end
 
     -- trang thai npc:5 nhan Q
     if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(5) then
-        if GetDistanceToObj(npc) > 2 then
-            GoToObj(npc)
+        if GetDistanceToObj(npc) > 6 then
+            -- GoToObj(npc)
+            GoToPosition(NPC_POS_FIX[1], NPC_POS_FIX[2], NPC_POS_FIX[3])
             return
         end
         XuongNgua()
@@ -93,18 +96,20 @@ function startQuest()
     end
 
     if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(3) then
-        if GetDistanceToObj(npc) > 2 then
-            GoToObj(npc)
+        if GetDistanceToObj(npc) > 6 then
+            -- GoToObj(npc)
+            GoToPosition(NPC_POS_FIX[1], NPC_POS_FIX[2], NPC_POS_FIX[3])
             return
         end
         XuongNgua()
-        TalkToNpc(0)
+        TalkToNpc(npc, 0)
         return
     end
 
     if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(2) then
-        if GetDistanceToObj(npc) > 2 then
-            GoToObj(npc)
+        if GetDistanceToObj(npc) > 6 then
+            -- GoToObj(npc)
+            GoToPosition(NPC_POS_FIX[1], NPC_POS_FIX[2], NPC_POS_FIX[3])
             return
         end
         XuongNgua()
@@ -157,25 +162,31 @@ function doQuest()
     local lvl3Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl3Stone")
     throwStone(lvl3Stone)
     while Running and isInQuestScene() do
-        local lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
-        if not nx_is_valid(lvl2Stone) then
-            WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
-            nx_pause(1.5)
+        local lvl2Stone = nil
+        if not holdingStone() then
             lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
             if not nx_is_valid(lvl2Stone) then
-                break
+                WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
+                nx_pause(1.5)
+                lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
+                if not nx_is_valid(lvl2Stone) then
+                    break
+                end
             end
         end
         throwStone(lvl2Stone)
     end
     while Running and isInQuestScene() do
-        local lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
-        if not nx_is_valid(lvl1Stone) then
-            WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
-            nx_pause(1.5)
+        local lvl1Stone = nil
+        if not holdingStone() then
             lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
             if not nx_is_valid(lvl1Stone) then
-                break
+                WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
+                nx_pause(1.5)
+                lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
+                if not nx_is_valid(lvl1Stone) then
+                    break
+                end
             end
         end
         throwStone(lvl1Stone)

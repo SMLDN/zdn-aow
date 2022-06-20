@@ -915,8 +915,10 @@ function WalkToPosInstantly(x, y, z)
 	end
 	local dx = player.DestX
 	local dz = player.DestZ
-	while (nx_is_valid(scene) and not scene.terrain.LoadFinish) or
-		(nx_is_valid(player) and nx_is_valid(visualPlayer) and not isWalkFinished(dx, dz)) do
+	local timeOut = TimerInit()
+	while TimerDiff(timeOut) < 2.5 and
+		((nx_is_valid(scene) and not scene.terrain.LoadFinish) or
+			(nx_is_valid(player) and nx_is_valid(visualPlayer) and not isWalkFinished(dx, dz))) do
 		nx_pause(0)
 	end
 end
