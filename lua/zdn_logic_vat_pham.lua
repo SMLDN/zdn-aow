@@ -64,6 +64,9 @@ function loopVatPham()
     end
 
     for _, item in pairs(ItemList) do
+        if IsDroppickShowed() then
+            PickAllDropItem()
+        end
         if not nx_execute("zdn_logic_skill", "HaveBuff", item.buffId) then
             local index = FindItemIndexFromVatPham(item.itemId)
             if index ~= 0 then
