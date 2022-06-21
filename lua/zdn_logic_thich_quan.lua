@@ -71,12 +71,12 @@ function openThichQuan()
     if not updateThichQuanState() then
         return
     end
-    local temp = getNextThichQuan()
-    if temp == 0 then
+    local nextThichQuan = getNextThichQuan()
+    if nextThichQuan == 0 then
         Stop()
         return
     end
-    ThichQuan = temp
+    ThichQuan = nextThichQuan
     nx_execute("Listener", "addListen", nx_current(), "30301", "onThichQuanFinish", 2, ThichQuan.ID)
 
     if ThichQuan.MapId == GetCurMap() then
@@ -208,6 +208,13 @@ end
 
 function getTodaySuccess(id)
     local form = nx_value("form_stage_main\\form_tvt\\form_tvt_tiguan")
+    if not nx_is_valid(form) or not form.Visible then
+        util_show_form("form_stage_main\\form_tvt\\form_tvt_tiguan", true)
+    end
+    local timeOut = TimerInit()
+    while Running and (not nx_is_valid(form) or not form.Visible) and TimerDiff(timeOut) < 4 do
+        nx_pause(0.1)
+    end
     if not nx_is_valid(form) then
         return -1
     end
