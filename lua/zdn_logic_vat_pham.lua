@@ -38,11 +38,17 @@ function PickAllDropItem()
         return
     end
     local cnt = form.nMaxIndexCount
+    local timeOut = TimerInit()
+    while Running and cnt == 0 and TimerDiff(timeOut) < 1.5 do
+        cnt = form.nMaxIndexCount
+        nx_pause(0)
+    end
     for i = 1, cnt do
         nx_execute("custom_sender", "custom_pickup_single_item", i)
     end
-    local timeOut = TimerInit()
-    while Running and nx_is_valid(form) and form.Visible and TimerDiff(timeOut) < 1.2 do
+    timeOut = TimerInit()
+    while Running and nx_is_valid(form) and form.Visible and cnt > 0 and TimerDiff(timeOut) < 1.5 do
+        cnt = form.nMaxIndexCount
         nx_pause(0)
     end
     nx_execute("custom_sender", "custom_close_drop_box")
@@ -71,7 +77,7 @@ function loopVatPham()
             local index = FindItemIndexFromVatPham(item.itemId)
             if index ~= 0 then
                 UseItem(2, index)
-                nx_pause(0.15)
+                nx_pause(0.1)
             end
         end
     end
