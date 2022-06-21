@@ -244,6 +244,12 @@ function loadUseSkillList(list)
         if skill.ConfigID ~= "null" then
             nx_execute("custom_sender", "custom_set_shortcut", 190 + i, "skill", skill.ConfigID)
         end
+        if isSkillExists("wuji_" .. skill.ConfigID) then
+            -- neu co skill vo ky
+            skill.HasVoKyFlg = true
+        else
+            skill.HasVoKyFlg = false
+        end
     end
 end
 
@@ -340,7 +346,7 @@ function loopAttack()
     end
     if
         getRage() > 50 and not HaveBuff("buf_" .. UseSkillList[9].ConfigID) and UseSkillList[9].ConfigID ~= "null" and
-            not isCooldownType(UseSkillList[9].CoolType)
+            not isSkillOnCooldown(UseSkillList[9])
      then
         useSkill(UseSkillList[9])
     else
@@ -352,10 +358,18 @@ function loopAttack()
     end
 end
 
-function isCooldownType(cool_type)
+function isSkillOnCooldown(skill)
+    local normalSkillType = skill.CoolType
     local gui = nx_value("gui")
-    local cool = gui.CoolManager:IsCooling(nx_int(cool_type), nx_int(-1))
-    return cool
+    local onCooldown = gui.CoolManager:IsCooling(nx_int(normalSkillType), nx_int(-1))
+    if onCooldown then
+        return true
+    end
+    if skill.HasVoKyFlg then
+        local normalSkill = skill.ConfigID
+        local voKySkill = GetSkillCoolDownType("wuji_" .. normalSkill)
+        return gui.CoolManager:IsCooling(nx_int(voKySkill), nx_int(-1))
+    end
 end
 
 function getPlayerState()
@@ -373,7 +387,7 @@ function useSkill(skill)
     if skill.ConfigID == "null" then
         return false
     end
-    if isCooldownType(skill.CoolType) then
+    if isSkillOnCooldown(skill) then
         return false
     end
     local buff = CHANGE_ATTRIBUTE_POINT_SKILL[skill.ConfigID]
