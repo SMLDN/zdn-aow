@@ -5,6 +5,7 @@ local ThichQuanData = {}
 local ThichQuan = {}
 local ThichQuanFinishList = {}
 local TimerCloseFormTVT = 0
+local FollowMode = false
 
 function IsRunning()
     return Running
@@ -50,7 +51,11 @@ function loopThichQuan()
     end
 
     if isInBossScene() then
-        doBossScene()
+        if FollowMode then
+            waitBossScene()
+        else
+            doBossScene()
+        end
     else
         enterBossScene()
     end
@@ -73,7 +78,6 @@ function openThichQuan()
     end
     local nextThichQuan = getNextThichQuan()
     if nextThichQuan == 0 then
-        Stop()
         return
     end
     ThichQuan = nextThichQuan
@@ -165,6 +169,9 @@ function loadConfig()
             table.insert(ThichQuanData, child)
         end
     end
+
+    local checked = nx_string(IniReadUserConfig("ThichQuan", "FollowMode", "0"))
+    FollowMode = (checked == "1")
 end
 
 function isInDisableList(index, list)
@@ -193,7 +200,14 @@ function getNextThichQuan()
             end
         end
     end
+    if checkIsTaskDone() then
+        Stop()
+    end
     return 0
+end
+
+function checkIsTaskDone()
+    return #ThichQuanData == #ThichQuanFinishList
 end
 
 function isThichQuanFinish(id)
@@ -208,13 +222,6 @@ end
 
 function getTodaySuccess(id)
     local form = nx_value("form_stage_main\\form_tvt\\form_tvt_tiguan")
-    if not nx_is_valid(form) or not form.Visible then
-        util_show_form("form_stage_main\\form_tvt\\form_tvt_tiguan", true)
-    end
-    local timeOut = TimerInit()
-    while Running and (not nx_is_valid(form) or not form.Visible) and TimerDiff(timeOut) < 4 do
-        nx_pause(0.1)
-    end
     if not nx_is_valid(form) then
         return -1
     end
@@ -274,20 +281,23 @@ function rollThichQuanBoss(npcInfo, menuInfo)
         end
         form:Close()
         LoadingTimer = TimerInit() - 1.5
-        return 104
+        return
     end
 
     if GetCurMap() == npcInfo.mapId then
         if GetDistance(npcInfo.posX, npcInfo.posY, npcInfo.posZ) < npcInfo.dClick then
-            clickNpc(npcInfo.Name)
-            return 101
+            if not FollowMode then
+                waitForTeamMember()
+                clickNpc(npcInfo.Name)
+            end
+            return
         else
             GoToPosition(npcInfo.posX, npcInfo.posY, npcInfo.posZ, npcInfo.mapId)
-            return 102
+            return
         end
     else
         GoToMapByPublicHomePoint(npcInfo.mapId)
-        return 103
+        return
     end
 end
 
@@ -351,5 +361,63 @@ function createTeam()
     local cn = nx_widestr(player:QueryProp("TeamCaptain"))
     if cn == nx_widestr("0") or cn == nx_widestr("") then
         nx_execute("custom_sender", "custom_team_create")
+    end
+end
+
+function waitBossScene()
+    local form = nx_value("form_stage_main\\form_tvt\\form_tvt_tiguan")
+    if nx_is_valid(form) and form.Visible then
+        nx_execute(nx_current(), "closeTVTForm")
+    end
+    if isComplete() then
+        doComplete()
+    end
+end
+function isMemberNear(name)
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return false
+    end
+    local scene = client:GetScene()
+    if not nx_is_valid(scene) then
+        return false
+    end
+    local npc = ThichQuan.Npc
+    local objList = scene:GetSceneObjList()
+    for _, obj in pairs(objList) do
+        if nx_widestr(name) == nx_widestr(obj:QueryProp("Name")) then
+            return GetDistanceToObj(obj) < 9
+        end
+    end
+    return false
+end
+
+function isTeamMemberReady()
+    local TEAM_REC = "team_rec"
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return false
+    end
+    local player = client:GetPlayer()
+    if not nx_is_valid(player) then
+        return false
+    end
+    local me = nx_widestr(player:QueryProp("Name"))
+    local cnt = player:GetRecordRows(TEAM_REC)
+    for r = 0, cnt - 1 do
+        local name = player:QueryRecord(TEAM_REC, r, 0)
+        if nx_widestr(me) ~= nx_widestr(name) then
+            if not isMemberNear(name) then
+                return false
+            end
+        end
+    end
+    return true
+end
+
+function waitForTeamMember()
+    local timeOut = TimerInit()
+    while Running and not isTeamMemberReady() and TimerDiff(timeOut) < 20 do
+        nx_pause(0.1)
     end
 end

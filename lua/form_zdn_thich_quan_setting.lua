@@ -81,6 +81,9 @@ function initTqGridView()
             end
         end
     end
+
+    local checked = nx_string(IniReadUserConfig("ThichQuan", "FollowMode", "0"))
+    Form.follow_mode_cbtn.Checked = (checked == "1")
 end
 
 function createCheckboxButton(row)
@@ -141,6 +144,7 @@ function onBtnSubmitClick()
         end
     end
     IniWriteUserConfig("ThichQuan", "DisableList", disableList)
+    IniWriteUserConfig("ThichQuan", "FollowMode", Form.follow_mode_cbtn.Checked and "1" or "0")
 end
 
 function onHyperCheckAllClick()

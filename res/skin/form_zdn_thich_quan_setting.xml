@@ -14,7 +14,7 @@
         </control>
 
         <control name="tq_grid" entity="Grid" script="" init="">
-            <prop Left="8" Top="40" Width="380" Height="400" ShowComment="true" HeaderRowHeight="10" HeaderBackColor="0,255,255,255" SelectForeColor="255,78,63,47" SelectBackColor="0,147,123,99" CanSelectRow="true" ColWidth="250" ColWidths="250" RowHeight="30" ColCount="1" ScrollSize="18" HasHScroll="true" AlwaysVScroll="true" AlwaysHScroll="false" Solid="true" ForeColor="255,128,101,74" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
+            <prop Left="10" Top="45" Width="380" Height="390" ShowComment="true" HeaderRowHeight="0" HeaderBackColor="0,255,255,255" SelectForeColor="255,78,63,47" SelectBackColor="0,147,123,99" CanSelectRow="true" ColWidth="250" ColWidths="250" RowHeight="30" ColCount="1" ScrollSize="18" HasHScroll="true" AlwaysVScroll="true" AlwaysHScroll="false" Solid="true" ForeColor="255,128,101,74" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
             <subor name="VScrollBar">
                 <prop FullBarBack="false" SmallChange="2" LargeChange="10" BackColor="0,224,224,224" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" />
                 <subor name="TrackButton">
@@ -30,13 +30,19 @@
         </control>
 		
 		<control name="check_all" entity="MultiTextBox" script="" init="">
-            <prop Left="20" Top="460" Width="80" Height="32" TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Chọn hết</a>' ScrollSize="17" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <prop Left="10" Top="40" Width="80" Height="32" TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Chọn hết</a>' ScrollSize="17" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
             <event on_click_hyperlink="onHyperCheckAllClick" />
         </control>
-		
 		<control name="uncheck_all" entity="MultiTextBox" script="" init="">
-            <prop Left="110" Top="460" Width="80" Height="32" TextColor="255,220,20,60" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Bỏ chọn hết</a>' ScrollSize="17" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <prop Left="110" Top="40" Width="80" Height="32" TextColor="255,220,20,60" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Bỏ chọn hết</a>' ScrollSize="17" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
             <event on_click_hyperlink="onHyperUncheckAllClick" />
+        </control>
+		
+		<control name="follow_mode_cbtn" entity="CheckButton" script="" init="">
+            <prop Left="30" Top="460" Width="16" Height="16" Checked="false" BoxSize="12" NormalImage="gui\common\checkbutton\cbtn_2_out.png" FocusImage="gui\common\checkbutton\cbtn_2_on.png" CheckedImage="gui\common\checkbutton\cbtn_2_down.png" DisableImage="gui\common\checkbutton\cbtn_2_forbid.png" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" InSound="MouseOn_20" ClickSound="ok_7" />
+        </control>
+        <control name="follow_mode_lbl" entity="Label" script="" init="">
+            <prop RefCursor="WIN_HELP" Left="55" Top="460" Width="140" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Chỉ đi theo" Font="font_text" />
         </control>
 
         <control name="btn_submit" entity="Button" script="" init="">
