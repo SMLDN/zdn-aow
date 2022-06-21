@@ -53,9 +53,11 @@ function updateView()
 	local times = nx_execute(Logic, "GetCompleteTimes")
 	Form.lbl_times.Text = nx_widestr(times)
 	if nx_execute(Logic, "IsRunning") and times < nx_number(Form.max_turn.Text) then
-		Form.btn_submit.Text = nx_widestr("Stop")
+		Form.btn_submit.Text = Utf8ToWstr("Dừng")
+		Form.btn_submit.ForeColor = "255,220,20,60"
 	else
-		Form.btn_submit.Text = nx_widestr("Start")
+		Form.btn_submit.Text = Utf8ToWstr("Chạy")
+		Form.btn_submit.ForeColor = "255,255,255,255"
 	end
 end
 

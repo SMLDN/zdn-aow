@@ -31,16 +31,6 @@ function onFormClose()
 	nx_execute("zdn_logic_common_listener", "Unsubscribe", Logic, "on-task-stop", nx_current())
 end
 
-function updateBtnSubmitState(isRunning)
-	if isRunning then
-		Form.btn_submit.Text = Utf8ToWstr("Dừng")
-		Form.btn_submit.ForeColor = "255,220,20,60"
-	else
-		Form.btn_submit.Text = Utf8ToWstr("Chạy")
-		Form.btn_submit.ForeColor = "255,255,255,255"
-	end
-end
-
 function onBtnSettingClick()
 	util_auto_show_hide_form("form_zdn_thich_quan_setting")
 end

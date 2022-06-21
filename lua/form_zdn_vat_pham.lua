@@ -5,19 +5,19 @@ local Logic = "zdn_logic_vat_pham"
 
 function onFormOpen()
 	if nx_execute(Logic, "IsRunning") then
-		Form.btn_submit.Text = nx_widestr("Stop")
+		updateBtnSubmitState(true)
 	else
-		Form.btn_submit.Text = nx_widestr("Start")
+		updateBtnSubmitState(false)
 	end
 end
 
 function onBtnSubmitClick()
 	if not nx_execute(Logic, "IsRunning") then
 		nx_execute(Logic, "Start")
-		Form.btn_submit.Text = nx_widestr("Stop")
+		updateBtnSubmitState(true)
 	else
 		nx_execute(Logic, "Stop")
-		Form.btn_submit.Text = nx_widestr("Start")
+		updateBtnSubmitState(false)
 	end
 end
 

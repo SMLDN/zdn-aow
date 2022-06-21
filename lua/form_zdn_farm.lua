@@ -7,24 +7,24 @@ function onFormOpen()
     loadConfig()
     if nx_execute(Logic, "IsRunning") then
         nx_execute("zdn_logic_common_listener", "Subscribe", Logic, "on-task-stop", nx_current(), "onTaskStop")
-        Form.btn_submit.Text = nx_widestr("Stop")
+        updateBtnSubmitState(true)
     else
-        Form.btn_submit.Text = nx_widestr("Start")
+        updateBtnSubmitState(false)
     end
 end
 
 function onBtnSubmitClick()
     if not nx_execute(Logic, "IsRunning") then
-        Form.btn_submit.Text = nx_widestr("Stop")
+        updateBtnSubmitState(true)
         nx_execute(Logic, "Start")
     else
         nx_execute(Logic, "Stop")
-        Form.btn_submit.Text = nx_widestr("Start")
+        updateBtnSubmitState(false)
     end
 end
 
 function onTaskStop()
-    Form.btn_submit.Text = nx_widestr("Start")
+    updateBtnSubmitState(false)
 end
 
 function onBtnAddItemClick()

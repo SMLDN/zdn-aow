@@ -45,15 +45,16 @@
             </subor>
         </control>
 
-        <control name="btn_submit" entity="Button" script="" init="">
-            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="20" Top="110" Width="60" Height="30" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Start" Font="font_btn" HintText="" DrawMode="ExpandH" />
-            <event on_click="onBtnSubmitClick" />
-        </control>
-        <control name="max_turn" entity="Float_Edit" script="" init="">
-            <prop Format="%.0f" DragStep="1.000000" Max="150.000000" OnlyDigit="true" ChangedEvent="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" Left="85" Top="110" Width="50" Height="30" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="10" Font="font_main" Cursor="WIN_IBEAM" TabStop="true" DrawMode="ExpandH" BackImage="gui\common\form_line\ibox_1.png" />
+		<control name="max_turn" entity="Float_Edit" script="" init="">
+            <prop Left="20" Top="115" Width="50" Height="30" Format="%.0f" DragStep="1.000000" Max="150.000000" OnlyDigit="true" ChangedEvent="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="10" Font="font_main" Cursor="WIN_IBEAM" TabStop="true" DrawMode="ExpandH" BackImage="gui\common\form_line\ibox_1.png" />
         </control>
         <control entity="Label" script="" init="">
-            <prop RefCursor="WIN_HELP" Left="140" Top="120" Width="40" Height="13" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Lần" Font="font_text" />
+            <prop RefCursor="WIN_HELP" Left="75" Top="125" Width="40" Height="13" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Lần" Font="font_text" />
+        </control>
+		
+		<control name="btn_submit" entity="Button" script="" init="">
+            <prop Left="120" Top="110" Width="100" Height="35" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Chạy" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <event on_click="onBtnSubmitClick" />
         </control>
     </control>
 </form>

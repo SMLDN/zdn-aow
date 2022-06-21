@@ -4,9 +4,9 @@ require("zdn_form_common")
 
 function onFormOpen(form)
 	if nx_execute("zdn_logic_skill", "IsRunning") then
-		form.btn_submit.Text = nx_widestr("Stop")
+		updateBtnSubmitState(true)
 	else
-		form.btn_submit.Text = nx_widestr("Start")
+		updateBtnSubmitState(false)
 	end
 	loadFormData(form)
 end
@@ -20,10 +20,10 @@ function onBtnSubmitClick(btn)
 	saveFormData(form)
 	if not nx_execute("zdn_logic_skill", "IsRunning") then
 		nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
-		btn.Text = nx_widestr("Stop")
+		updateBtnSubmitState(true)
 	else
 		nx_execute("zdn_logic_skill", "StopAutoAttack")
-		btn.Text = nx_widestr("Start")
+		updateBtnSubmitState(false)
 	end
 end
 
