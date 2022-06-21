@@ -136,17 +136,20 @@ function throwStone(stone)
         WalkToObjInstantly(stone)
         TalkToNpc(stone, 0)
     end
-    WalkToPosInstantly(THROW_POS[1], THROW_POS[2], THROW_POS[3])
+    if GetDistance(THROW_POS[1], THROW_POS[2], THROW_POS[3]) > 2 then
+        WalkToPosInstantly(THROW_POS[1], THROW_POS[2], THROW_POS[3])
+    end
     local throwObj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThrowObj")
     while Running and isInQuestScene() and not nx_is_valid(throwObj) do
-        throwObj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThrowObj")
+        if GetDistance(THROW_POS[1], THROW_POS[2], THROW_POS[3]) > 2 then
+            WalkToPosInstantly(THROW_POS[1], THROW_POS[2], THROW_POS[3])
+        else
+            throwObj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThrowObj")
+        end
         nx_pause(0.1)
     end
     while Running and isInQuestScene() and nx_execute("zdn_logic_skill", "HaveBuff", "buf_6n_wyhs_cd_01") do
         nx_pause(0.1)
-    end
-    if not nx_is_valid(throwObj) then
-        return
     end
     TalkToNpc(throwObj, 0)
 end
@@ -162,31 +165,25 @@ function doQuest()
     local lvl3Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl3Stone")
     throwStone(lvl3Stone)
     while Running and isInQuestScene() do
-        local lvl2Stone = nil
-        if not holdingStone() then
+        local lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
+        if not holdingStone() and not nx_is_valid(lvl2Stone) then
+            WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
+            nx_pause(1.5)
             lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
             if not nx_is_valid(lvl2Stone) then
-                WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
-                nx_pause(1.5)
-                lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
-                if not nx_is_valid(lvl2Stone) then
-                    break
-                end
+                break
             end
         end
         throwStone(lvl2Stone)
     end
     while Running and isInQuestScene() do
-        local lvl1Stone = nil
-        if not holdingStone() then
+        local lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
+        if not holdingStone() and not nx_is_valid(lvl1Stone) then
+            WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
+            nx_pause(1.5)
             lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
             if not nx_is_valid(lvl1Stone) then
-                WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
-                nx_pause(1.5)
-                lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
-                if not nx_is_valid(lvl1Stone) then
-                    break
-                end
+                break
             end
         end
         throwStone(lvl1Stone)

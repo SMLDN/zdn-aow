@@ -1,5 +1,3 @@
-local UserConfigFile = nil
-
 function IniRead(file, section, key, default)
   key = nx_string(key)
   local ini = nx_create("IniDocument")
@@ -142,12 +140,12 @@ end
 
 -- private
 function getUserConfigFile()
-  if UserConfigFile == nil then
-    local gameConfig = nx_value("game_config")
-    local loginId = gameConfig.login_account
-    if loginId ~= nil then
-      UserConfigFile = nx_resource_path() .. "zdn\\user\\" .. loginId .. ".ini"
-    end
+  local gameConfig = nx_value("game_config")
+  if not nx_is_valid(gameConfig) then
+    return nil
   end
-  return UserConfigFile
+  local loginId = gameConfig.login_account
+  if loginId ~= nil then
+    return nx_resource_path() .. "zdn\\user\\" .. loginId .. ".ini"
+  end
 end
