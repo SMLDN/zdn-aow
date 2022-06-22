@@ -95,6 +95,12 @@ function goToLadder()
 end
 
 function doLttScene()
+    local itemForm = nx_value("form_stage_main\\form_give_item")
+    if nx_is_valid(itemForm) and itemForm.Visible and nx_find_custom(itemForm, "btn_mail") then
+        local btn = itemForm.btn_mail
+        nx_execute("form_stage_main\\form_give_item", "on_btn_mail_click", btn)
+        return
+    end
     local map = "scene25"
     local npcConfigId = "newworld_lingxia_biwunpc_001"
     local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLttScenceNpc")

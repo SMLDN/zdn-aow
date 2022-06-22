@@ -3,6 +3,7 @@
 ### Tính năng mới
 - Do thám(đã chạy được cho Tinh Miễu Các, Thiên Sơn. Chưa có điều kiện test kỹ, nên có gì báo lại mình)
 - Thêm tính năng kết nối lại khi afk quá lâu ở màn hình đăng nhập
+- Lăng Tiêu Thành: tự nhận quà về thư
 
 ### Sửa lỗi
 - Tự động đánh: chiêu Nhảy lên để đánh chỉ nhảy lên mà không đánh
