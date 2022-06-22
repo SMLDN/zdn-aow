@@ -1,3 +1,15 @@
+# Release Note
+## v1.0.0
+### Tính năng mới
+- Do thám(đã chạy được cho Tinh Miễu Các, Thiên Sơn. Chưa có điều kiện test kỹ, nên có gì báo lại mình)
+- Thêm tính năng kết nối lại khi afk quá lâu ở màn hình đăng nhập
+
+### Sửa lỗi
+- Tự động đánh: chiêu Nhảy lên để đánh chỉ nhảy lên mà không đánh
+- Tung hoành tứ hải: hiện lỗi khi mở thích quán cấp 2
+
+
+-----------
 # zdn-aow
 Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
 
@@ -12,35 +24,19 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
 3). Vào game như bình thường
 
 ## Các lệnh cơ bản
-
  /tl : trợ lý
-
  /skill
-
  /atk : đánh
-
  /vt
-
  /tn
-
  /lc
-
  /shop
-
  /ct
-
  /hk
-
  /vp : sử dụng vật phẩm
-
  /thth
-
  /farm
-
  /n6
-
  /tt : thiên thê
-
  /ltt : lăng tiêu
- 
- /tq : thích quán
+  /tq : thích quán

@@ -47,6 +47,7 @@ end
 
 function Stop()
     Running = false
+    StopFindPath()
     nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-stop")
 end
 
@@ -95,7 +96,8 @@ end
 function setSpyInfoList()
     local SPY_INFO_FILE = nx_resource_path() .. "zdn\\data\\dotham.ini"
     local setNum = nx_number(IniRead(SPY_INFO_FILE, "list", "set", 0))
-    for i = 1, 9 do
+    local schoolCnt = nx_number(IniRead(SPY_INFO_FILE, "list", "school", 10))
+    for i = 1, schoolCnt do
         local npc_noi_ung = IniRead(SPY_INFO_FILE, "npc_noi_ung", i, "0")
         local menuNoiUng = IniRead(SPY_INFO_FILE, "npc_noi_ung", "menu", "0")
         local info = IniRead(SPY_INFO_FILE, "info", i, "0")
@@ -158,7 +160,7 @@ function setSpyInfoList()
         }
     end
 
-    setNum = nx_number(IniRead(SPY_INFO_FILE, "auto", "anthe", 0))
+    setNum = nx_number(IniRead(SPY_INFO_FILE, "list", "anthe", 0))
     for i = 1, setNum do
         local temp = IniRead(SPY_INFO_FILE, "an_the", i, "0")
         temp = util_split_wstring(temp, ",")
@@ -498,6 +500,7 @@ function veAnThe(anThe)
     if GetCurMap() == anThe.mapId then
         doiThoai(anThe.npc, anThe.menu)
     else
+        TeleToHomePoint(getMyHome())
     end
 end
 
