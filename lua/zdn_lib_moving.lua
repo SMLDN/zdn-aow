@@ -915,6 +915,7 @@ function WalkToPosInstantly(x, y, z)
 	if role.state == "locked" then
 		return
 	end
+	XuongNgua()
 	setAngle(x, y, z)
 	game_visual:SwitchPlayerState(role, 1, 77)
 	role.move_dest_orient = role.AngleY
