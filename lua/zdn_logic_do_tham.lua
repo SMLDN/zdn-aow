@@ -9,7 +9,18 @@ local SPY_HOME_POINT_LIST = {}
 local SPY_INFO = {}
 local MY_SCHOOL = {}
 local AN_THE_INFO = {}
-local TASK_INDEX_LIST
+local TASK_INDEX_LIST = {
+    [578] = 1, --CYV
+    [579] = 2, --CB
+    [580] = 3, --QTD
+    [581] = 4, --CLC
+    [582] = 5, -- DM
+    [583] = 6, --NM
+    [584] = 7, --VD
+    [585] = 8, --TL
+    [1335] = 9, --MG
+    [1388] = 10 -- TS
+}
 local curPoint = 1
 local myInfo = {}
 local spyMap = {}
@@ -73,17 +84,6 @@ function loopDoTham()
 end
 
 function loadData()
-    TASK_INDEX_LIST = {
-        [578] = 1, --CYV
-        [579] = 2, --CB
-        [580] = 3, --QTD
-        [581] = 4, --CLC
-        [582] = 5, -- DM
-        [583] = 6, --NM
-        [584] = 7, --VD
-        [585] = 8, --TL
-        [1335] = 9 --MG
-    }
     SPY_INFO = {}
     MY_SCHOOL = {}
     AN_THE_INFO = {}
