@@ -194,7 +194,7 @@ function getArrestBoss(guanID, level)
     if boss_id == "" then
         return 0
     end
-    local boss_list = ThichQuanData[guanID].bossList
+    local boss_list = getThichQuanBossList(guanID)
     if boss_list == nil then
         return 0
     end

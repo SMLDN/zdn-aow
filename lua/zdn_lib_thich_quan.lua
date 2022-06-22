@@ -552,3 +552,7 @@ end
 function onOpenBossScene()
     CanJump = true
 end
+
+function getThichQuanBossList(guanId)
+    return ThichQuanData[guanId].bossList
+end

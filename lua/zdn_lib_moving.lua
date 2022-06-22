@@ -687,6 +687,28 @@ local function getPlayerSchool()
 	return "wumenpai"
 end
 
+local function canWalk()
+	local role = nx_value("role")
+	if not nx_is_valid(role) then
+		return false
+	end
+	if nx_string(role.state) == "locked" or nx_string(role.state) == "jump" then
+		return false
+	end
+	local gameClient = nx_value("game_client")
+	if not nx_is_valid(gameClient) then
+		return false
+	end
+	clientPlayer = gameClient:GetPlayer()
+	if not nx_is_valid(clientPlayer) then
+		return false
+	end
+	if nx_string(clientPlayer:QueryProp("CantMove")) == nx_string("1") then
+		return false
+	end
+	return true
+end
+
 -- Public
 function TeleToSchoolHomePoint()
 	if isCurseLoading() then
@@ -870,7 +892,7 @@ function WalkToPosition(x, y, z)
 	game_visual:SwitchPlayerState(role, 1, 44)
 	game_visual:SwitchPlayerState(role, 1, 3)
 	while TimerDiff(TimerWalking) < 1.2 and GetDistance(x, y, z) > 2 do
-		if nx_string(clientPlayer:QueryProp("CantMove")) == nx_string("1") then
+		if not canWalk() then
 			break
 		end
 		nx_pause(0)
