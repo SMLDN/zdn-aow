@@ -416,7 +416,7 @@ function useSkill(skill)
         nx_execute("custom_sender", "custom_send_ride_skill", nx_string("riding_dismount"))
     end
 
-    if skill.SkillStyle == "2" then
+    if skill.SkillStyle == "2" and not isFlying() then
         Fly()
         return true
     end
