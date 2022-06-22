@@ -302,34 +302,11 @@ function rollThichQuanBoss(npcInfo, menuInfo)
 end
 
 function clickNpc(npcName)
-    local npcIdent = getNpcIdentByName(npcName)
+    local npcIdent = nx_execute("zdn_logic_base", "GetNpcIdentByName", npcName)
     if npcIdent == nil then
         return false
     end
     nx_execute("custom_sender", "custom_select", nx_string(npcIdent))
-end
-
-function getNpcIdentByName(npc_name)
-    local game_client = nx_value("game_client")
-    local game_scene = game_client:GetScene()
-    if not (nx_is_valid(game_scene)) then
-        return nil
-    end
-    local client_obj_lst = game_scene:GetSceneObjList()
-    for i = 1, #client_obj_lst do
-        local obj_type = client_obj_lst[i]:QueryProp("NpcType")
-        local obj_dead = client_obj_lst[i]:QueryProp("Dead")
-        if obj_type ~= 0 and obj_dead ~= 1 then
-            local obj_id = client_obj_lst[i]:QueryProp("ConfigID")
-            if nx_string(obj_id) ~= nx_string("0") then
-                local obj_name = util_text(nx_string(obj_id))
-                if obj_name == npc_name then
-                    return client_obj_lst[i].Ident
-                end
-            end
-        end
-    end
-    return nil
 end
 
 function updateThichQuanState()
