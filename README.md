@@ -8,9 +8,11 @@
 
 ### Thay đổi
 - Thống nhất, tinh chỉnh thời gian chờ chuyển map
+- Thụ nghiệp: đợi form nhảy mất đi mới tính hoàn thành task
+- Thụ nghiệp: mặc định Thụ nghiệp tại Lạc Dương trong trường hợp không có thông tin môn phái của nhân vật
 
 ### Sửa lỗi
-- Thụ Nghiệp: ẩn thế Tinh Miểu Các, Minh Giáo, Thiên Sươn k tự động thụ nghiệp dc.
+- Thụ Nghiệp: ẩn thế Tinh Miểu Các, Minh Giáo, Thiên Sơn k tự động thụ nghiệp dc.
 - Q nội 6 Lạc dương lúc xong Q map k load được
 
 

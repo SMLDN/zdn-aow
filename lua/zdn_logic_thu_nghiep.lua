@@ -22,7 +22,10 @@ function IsTaskDone()
     end
     local progress = player:QueryProp("SchoolDanceDayScore")
     if nx_int(progress) == nx_int(60) then
-        return true
+        local form = nx_value("form_stage_main\\form_school_dance\\form_school_dance_member")
+        if not nx_is_valid(form) or not form.Visible then
+            return true
+        end
     end
     return false
 end
@@ -34,8 +37,8 @@ function Start()
     if ThuNghiepMap == "" then
         ThuNghiepMap = "city04"
         ThuNghiepNpc = "SMSY_School10"
-        local d = IniReadSection(nx_resource_path() .. "zdn\\data\\thunghiep.ini", getSchool(), "")
-        if d ~= "" then
+        local d = IniReadSection(nx_resource_path() .. "zdn\\data\\thunghiep.ini", getSchool())
+        if d["map"] ~= nil then
             ThuNghiepMap = d["map"]
             ThuNghiepNpc = d["npc"]
         end
