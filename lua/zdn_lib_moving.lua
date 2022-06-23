@@ -875,7 +875,8 @@ function WalkToPosition(x, y, z)
 	if not nx_is_valid(role) or not nx_is_valid(game_visual) then
 		return
 	end
-	if role.state ~= "static" and role.state ~= "link_stop" then
+	XuongNgua()
+	if role.state ~= "static" and role.state ~= "path_finding" then
 		return
 	end
 	local gameClient = nx_value("game_client")
@@ -889,9 +890,8 @@ function WalkToPosition(x, y, z)
 	role.move_dest_orient = role.AngleY
 	game_visual:SetRoleMoveDistance(role, 50)
 	game_visual:SetRoleMaxMoveDistance(role, 50)
-	game_visual:SwitchPlayerState(role, 1, 44)
-	game_visual:SwitchPlayerState(role, 1, 3)
-	while TimerDiff(TimerWalking) < 1.2 and GetDistance(x, y, z) > 2 do
+	game_visual:SwitchPlayerState(role, 1, 77)
+	while TimerDiff(TimerWalking) < 1.2 and GetDistance(x, y, z) >= 2.8 do
 		if not canWalk() then
 			break
 		end
