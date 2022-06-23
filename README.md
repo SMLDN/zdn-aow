@@ -3,13 +3,15 @@
 ### Tính năng mới
 - Do thám: tự động dùng Ma khí tung hoành để tự sát
 - Do thám: thêm chế độ tự sát nhanh(không nên dùng nếu không muốn bị report)
+- Thiên thê: tự động dời Thiên thê khi xong trận
+- Thiên thê: thêm lựa chọn vào Thiên thê xong dời luôn
 
 ### Thay đổi
 - Thống nhất, tinh chỉnh thời gian chờ chuyển map
 
 ### Sửa lỗi
-- Thụ Nghiệp: ẩn thế Tinh Miêu Các, Minh Giáo, Thiên Sươn k tự động thụ nghiệp dc.
-- Q nội 6 Lạc dương lúc sang Q map k load được
+- Thụ Nghiệp: ẩn thế Tinh Miểu Các, Minh Giáo, Thiên Sươn k tự động thụ nghiệp dc.
+- Q nội 6 Lạc dương lúc xong Q map k load được
 
 
 ## v1.0.0

@@ -17,7 +17,7 @@
             <prop HintText="Khi dùng tính năng này bạn sẽ có khả năng bị tố cáo dùng auto" Left="16" Top="42" Width="16" Height="16" Checked="false" BoxSize="12" NormalImage="gui\common\checkbutton\cbtn_2_out.png" FocusImage="gui\common\checkbutton\cbtn_2_on.png" CheckedImage="gui\common\checkbutton\cbtn_2_down.png" DisableImage="gui\common\checkbutton\cbtn_2_forbid.png" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" InSound="MouseOn_20" ClickSound="ok_7" />
         </control>
         <control name="instant_die_lbl" entity="Label" script="" init="">
-            <prop HintText="Khi dùng tính năng này bạn sẽ có khả năng bị tố cáo dùng auto" RefCursor="WIN_HELP" Left="35" Top="42" Width="140" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Tự sát nhanh" Font="font_text" />
+            <prop RefCursor="WIN_HELP" Left="35" Top="42" Width="140" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Tự sát nhanh" Font="font_text" />
         </control>
 
         <control name="btn_submit" entity="Button" script="" init="">

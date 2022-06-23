@@ -1,9 +1,14 @@
+require("zdn_lib\\util_functions")
+require("util_gui")
 require("zdn_lib_moving")
+require("zdn_util")
 
 local Running = false
 local PRIZE_FORM_PATH = "form_stage_main\\form_xmqy_detail"
 local FACULTY_BACK_FORM_PATH = "form_stage_main\\form_wuxue\\form_faculty_back"
 local MAIN_REQUEST_FORM_PATH = "form_stage_main\\form_main\\form_main_request"
+local InstantLeaveFlg = false
+local TimerLeaveMatch = 0
 
 function IsRunning()
     return Running
@@ -25,6 +30,7 @@ function Start()
     if Running then
         return
     end
+    loadConfig()
     nx_execute("Listener", "addListen", nx_current(), "1000272", "onTaskDone", -1)
     Running = true
     while Running do
@@ -56,6 +62,9 @@ function doMatchScene()
         return
     end
     if needPressStartMatch() then
+        return
+    end
+    if needLeaveMatchScene() then
         return
     end
     local obj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isAttackable")
@@ -189,4 +198,54 @@ function isInTaskTime()
         return false
     end
     return true
+end
+
+function leaveMatchScene()
+    if TimerDiff(TimerLeaveMatch) < 10 then
+        return
+    end
+    TimerLeaveMatch = TimerInit()
+    nx_execute("custom_sender", "custom_egwar_trans", nx_number(9))
+    local ready_form = util_get_form("form_stage_main\\form_match\\form_war_ready", false, true)
+    if nx_is_valid(ready_form) then
+        ready_form.Visible = false
+        ready_form:Close()
+    end
+    local confirm_form = util_get_form("form_stage_main\\form_match\\form_taolu_confirm_new", false, true)
+    if nx_is_valid(confirm_form) then
+        confirm_form.Visible = false
+        confirm_form:Close()
+    end
+    local bantl_form = util_get_form("form_stage_main\\form_match\\form_banxuan_taolu", false, true)
+    if nx_is_valid(bantl_form) then
+        bantl_form.Visible = false
+        bantl_form:Close()
+    end
+end
+
+function needLeaveMatchScene()
+    local form = nx_value("form_stage_main\\form_main\\form_notice_shortcut")
+    if not nx_is_valid(form) then
+        return false
+    end
+    if not nx_find_custom(form, "single_notice") then
+        return false
+    end
+    local noticeList = util_split_string(form.single_notice, ",")
+    for i = 1, #noticeList do
+        if noticeList[i] == "36" then
+            leaveMatchScene()
+            return true
+        end
+        if InstantLeaveFlg and noticeList[i] == "35" then
+            leaveMatchScene()
+            return true
+        end
+    end
+    return false
+end
+
+function loadConfig()
+    local instantLeaveStr = nx_string(IniReadUserConfig("ThienThe", "InstantLeave", "0"))
+    InstantLeaveFlg = instantLeaveStr == "1" and true or false
 end
