@@ -3,8 +3,8 @@ require("zdn_util")
 require("zdn_lib_moving")
 
 local Running = false
-local ThuNghiepMap = ""
-local ThuNghiepNpc = ""
+local ThuNghiepMap = "city04"
+local ThuNghiepNpc = "SMSY_School10"
 
 function IsRunning()
     return Running
@@ -34,15 +34,6 @@ function Start()
     if Running then
         return
     end
-    if ThuNghiepMap == "" then
-        ThuNghiepMap = "city04"
-        ThuNghiepNpc = "SMSY_School10"
-        local d = IniReadSection(nx_resource_path() .. "zdn\\data\\thunghiep.ini", getSchool())
-        if d["map"] ~= nil then
-            ThuNghiepMap = d["map"]
-            ThuNghiepNpc = d["npc"]
-        end
-    end
     Running = true
     while Running do
         loopThuNghiep()
@@ -53,30 +44,6 @@ end
 function Stop()
     Running = false
     nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-stop")
-end
-
-function getSchool()
-    local client = nx_value("game_client")
-    if not nx_is_valid(client) then
-        return ""
-    end
-    local player = client:GetPlayer()
-    if not nx_is_valid(player) then
-        return ""
-    end
-    local school = nx_string(player:QueryProp("Force"))
-    if school ~= "0" and school ~= "" then
-        return school
-    end
-    school = nx_string(player:QueryProp("School"))
-    if school ~= "0" and school ~= "" then
-        return school
-    end
-    school = nx_string(player:QueryProp("NewSchool"))
-    if school ~= "0" and school ~= "" then
-        return school
-    end
-    return "wumenpai"
 end
 
 function talkToNpc()

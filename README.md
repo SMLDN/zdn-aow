@@ -1,4 +1,9 @@
 # Release Note
+## v1.0.2
+### Thay đổi
+- Thụ nghiệp: cho hết về Lạc Dương
+
+
 ## v1.0.1
 ### Tính năng mới
 - Do thám: tự động dùng Ma khí tung hoành để tự sát
