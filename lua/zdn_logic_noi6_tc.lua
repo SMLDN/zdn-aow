@@ -48,7 +48,6 @@ end
 -- private
 function loopNoi6()
     if IsMapLoading() then
-        nx_pause(2)
         return
     end
     if isInQuestScene() then

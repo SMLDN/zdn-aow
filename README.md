@@ -1,7 +1,12 @@
 # Release Note
 ## v1.0.1
+### Thay đổi
+- Thống nhất, tinh chỉnh thời gian chờ chuyển map
+
 ### Sửa lỗi
-- Thụ Nghiệp: ẩn thế Tinh Miêu Các k tự động thụ nghiệp dc
+- Thụ Nghiệp: ẩn thế Tinh Miêu Các, Minh Giáo, Thiên Sươn k tự động thụ nghiệp dc.
+- Q nội 6 Lạc dương lúc sang Q map k load được
+
 
 ## v1.0.0
 ### Tính năng mới

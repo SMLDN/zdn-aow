@@ -53,7 +53,6 @@ end
 
 function loopDoTham()
     if IsMapLoading() then
-        nx_pause(1)
         return
     end
     local times = nx_execute("form_stage_main\\form_tvt\\form_tvt_main", "get_tvt_times", 0)

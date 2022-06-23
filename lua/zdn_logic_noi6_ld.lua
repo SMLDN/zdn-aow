@@ -51,7 +51,6 @@ end
 -- private
 function loopNoi6()
     if IsMapLoading() then
-        nx_pause(2)
         return
     end
     if isInQuestScene() then
@@ -164,7 +163,10 @@ function doQuest()
     throwStone(lvl4Stone)
     local lvl3Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl3Stone")
     throwStone(lvl3Stone)
-    while Running and isInQuestScene() do
+    while Running do
+        if IsMapLoading() or not isInQuestScene() then
+            return
+        end
         local lvl2Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl2Stone")
         if not holdingStone() and not nx_is_valid(lvl2Stone) then
             WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])
@@ -176,7 +178,10 @@ function doQuest()
         end
         throwStone(lvl2Stone)
     end
-    while Running and isInQuestScene() do
+    while Running do
+        if IsMapLoading() or not isInQuestScene() then
+            return
+        end
         local lvl1Stone = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLvl1Stone")
         if not holdingStone() and not nx_is_valid(lvl1Stone) then
             WalkToPosInstantly(CENTER_POS[1], CENTER_POS[2], CENTER_POS[3])

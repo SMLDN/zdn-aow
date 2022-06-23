@@ -168,6 +168,9 @@ function checkLoop()
     if TimerDiff(TimerSend) < 1 then
         return false
     end
+    if IsMapLoading() then
+        return false
+    end
     return true
 end
 

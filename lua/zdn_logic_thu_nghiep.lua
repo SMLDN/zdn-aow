@@ -32,9 +32,13 @@ function Start()
         return
     end
     if ThuNghiepMap == "" then
-        local d = IniReadSection(nx_resource_path() .. "zdn\\data\\thunghiep.ini", getSchool(), false)
-        ThuNghiepMap = d["map"]
-        ThuNghiepNpc = d["npc"]
+        ThuNghiepMap = "city04"
+        ThuNghiepNpc = "SMSY_School10"
+        local d = IniReadSection(nx_resource_path() .. "zdn\\data\\thunghiep.ini", getSchool(), "")
+        if d ~= "" then
+            ThuNghiepMap = d["map"]
+            ThuNghiepNpc = d["npc"]
+        end
     end
     Running = true
     while Running do
@@ -98,6 +102,9 @@ function talkToNpc()
 end
 
 function loopThuNghiep()
+    if IsMapLoading() then
+        return
+    end
     if not CanRun() then
         Stop()
         return

@@ -4,6 +4,7 @@ require("zdn_util")
 local PublicHomePointList = {}
 local TimerFindPath = 0
 local TimerTele = 0
+local TimerMapLoading = 0
 
 local function isCurseLoading()
 	if TimerDiff(TimerTele) < 3 then
@@ -854,8 +855,11 @@ end
 
 function IsMapLoading()
 	local form = nx_value("form_common\\form_loading")
-	if nx_is_valid(form) and form.Visible then
-		nx_pause(1)
+	if (nx_is_valid(form) and form.Visible) then
+		TimerMapLoading = TimerInit()
+		return true
+	end
+	if TimerDiff(TimerMapLoading) < 7 then
 		return true
 	end
 	return false

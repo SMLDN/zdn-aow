@@ -50,7 +50,6 @@ function loopLtt()
         return
     end
     if IsMapLoading() then
-        nx_pause(2)
         return
     end
     if isInBossScene() then
