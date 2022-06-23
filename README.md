@@ -1,4 +1,8 @@
 # Release Note
+## v1.0.1
+### Sửa lỗi
+- Thụ Nghiệp: ẩn thế Tinh Miêu Các k tự động thụ nghiệp dc
+
 ## v1.0.0
 ### Tính năng mới
 - Do thám(đã chạy được cho Tinh Miễu Các, Thiên Sơn. Chưa có điều kiện test kỹ, nên có gì báo lại mình)
