@@ -80,8 +80,7 @@ function TuSat()
 end
 
 function DungTuSat()
-    local dangTuSat = HaveBuff("buf_CS_jh_tmjt06")
-    if dangTuSat then
+    if HaveBuff("buf_CS_jh_tmjt06") then
         useSkillById("CS_jh_tmjt06")
     end
 end

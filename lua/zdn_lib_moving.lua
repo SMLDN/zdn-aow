@@ -999,3 +999,7 @@ function SwitchPlayerStateToFly()
 	end
 	game_visual:SwitchPlayerState(role, 1, 5)
 end
+
+function DieInstantly()
+	sendDie()
+end

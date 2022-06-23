@@ -1,5 +1,9 @@
 # Release Note
 ## v1.0.1
+### Tính năng mới
+- Do thám: tự động dùng Ma khí tung hoành để tự sát
+- Do thám: thêm chế độ tự sát nhanh(không nên dùng nếu không muốn bị report)
+
 ### Thay đổi
 - Thống nhất, tinh chỉnh thời gian chờ chuyển map
 

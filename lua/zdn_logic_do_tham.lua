@@ -24,6 +24,7 @@ local TASK_INDEX_LIST = {
 local curPoint = 1
 local myInfo = {}
 local spyMap = {}
+local InstantDieFlg = false
 
 function IsRunning()
     return Running
@@ -37,6 +38,7 @@ function Start()
     if Running then
         return
     end
+    loadConfig()
     loadData()
     Running = true
     while Running do
@@ -381,7 +383,6 @@ function doiThoaiNpc(npcName, posX, posY, posZ, mapId, ...)
         end
     else
         TeleToHomePoint(getHomePoint(mapId))
-        nx_pause(10)
         return 103
     end
 end
@@ -472,7 +473,7 @@ function veMonPhai()
     if anTheInfo ~= nil then
         veAnThe(anTheInfo)
     else
-        TeleToHomePoint(getMyHome())
+        veSuMon()
     end
 end
 
@@ -499,7 +500,7 @@ function veAnThe(anThe)
     if GetCurMap() == anThe.mapId then
         doiThoai(anThe.npc, anThe.menu)
     else
-        TeleToHomePoint(getMyHome())
+        veSuMon()
     end
 end
 
@@ -656,4 +657,35 @@ function getcurSpyIndex()
         end
     end
     return 1
+end
+
+function veSuMon()
+    if not isTeleOnCooldown() then
+        nx_execute("zdn_logic_skill", "DungTuSat")
+        nx_pause(2)
+        TeleToHomePoint(getMyHome())
+    else
+        if InstantDieFlg then
+            DieInstantly()
+        end
+        nx_execute("zdn_logic_skill", "TuSat")
+    end
+end
+
+function isTeleOnCooldown()
+    nx_execute("form_stage_main\\form_homepoint\\form_home_point", "ShowHomePointForm")
+    local form = nx_value("form_stage_main\\form_homepoint\\form_home_point")
+    if nx_is_valid(form) then
+        local cd = 600000 - form.pbar_timedown.Value
+        if cd == 0 then
+            return false
+        end
+        return true
+    end
+    return false
+end
+
+function loadConfig()
+    local instantDieStr = nx_string(IniReadUserConfig("DoTham", "InstantDie", "0"))
+    InstantDieFlg = instantDieStr == "1" and true or false
 end
