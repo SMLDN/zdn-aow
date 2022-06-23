@@ -32,7 +32,7 @@ function Start()
     schoolIndex = 0
     while Running do
         loopLtt()
-        nx_pause(0.2)
+        nx_pause(0.1)
     end
 end
 

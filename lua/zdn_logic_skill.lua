@@ -311,10 +311,13 @@ function checkNearTarget()
     if not UseSkillProp.GoNearFlg then
         return true
     end
+
     local o = getTargetObj()
     if nx_is_valid(o) and not isDead(o) then
-        if GetDistanceToObj(o) > 3 then
-            GoToObj(o)
+        if GetDistanceToObj(o) > 2.8 then
+            if not nx_execute("zdn_logic_thien_the", "IsRunning") and not nx_execute("zdn_logic_ltt", "IsRunning") then
+                GoToObj(o)
+            end
             return false
         end
     end

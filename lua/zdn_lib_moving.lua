@@ -890,8 +890,9 @@ function WalkToPosition(x, y, z)
 	role.move_dest_orient = role.AngleY
 	game_visual:SetRoleMoveDistance(role, 50)
 	game_visual:SetRoleMaxMoveDistance(role, 50)
-	game_visual:SwitchPlayerState(role, 1, 77)
-	while TimerDiff(TimerWalking) < 1.2 and GetDistance(x, y, z) >= 2.8 do
+	game_visual:SwitchPlayerState(role, 1, 44)
+	game_visual:SwitchPlayerState(role, 1, 3)
+	while TimerDiff(TimerWalking) < 1.2 and GetDistance(x, y, z) > 2.8 do
 		if not canWalk() then
 			break
 		end
