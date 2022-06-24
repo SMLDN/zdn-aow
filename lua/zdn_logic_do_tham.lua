@@ -31,7 +31,15 @@ function IsRunning()
 end
 
 function CanRun()
-    return true
+    return not IsTaskDone()
+end
+
+function IsTaskDone()
+    local resetTimeStr = IniReadUserConfig("DoTham", "ResetTime", "")
+    if resetTimeStr == "" then
+        return false
+    end
+    return nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") < nx_number(resetTimeStr)
 end
 
 function Start()
@@ -63,8 +71,8 @@ function loopDoTham()
         return
     end
     spyIndex = getTaskSpy()
-    if spyIndex == 0 then
-        Stop()
+    if spyIndex == 999 then
+        onTaskDone()
         return
     end
     spyMap = SPY_INFO[spyIndex].mapId
@@ -197,8 +205,10 @@ function setSpyHomePointList()
 end
 
 function onTaskDone()
+    IniWriteUserConfig("DoTham", "ResetTime", nx_execute("zdn_logic_base", "GetNextDayStartTimestamp"))
     Stop()
 end
+
 function getTaskSpy()
     local client = nx_value("game_client")
     local player = client:GetPlayer()
@@ -210,9 +220,11 @@ function getTaskSpy()
     if nx_int(rows) <= nx_int(0) then
         return 1
     end
+    local hasDoThamQuest = false
     for i = 0, rows - 1 do
         local taskIndex = player:QueryRecord(rec, i, 2)
         if nx_int(taskIndex) == nx_int(303) then
+            hasDoThamQuest = true
             local taskCurNum = player:QueryRecord(rec, i, 4)
             local taskMaxNum = player:QueryRecord(rec, i, 5)
             if nx_int(taskCurNum) < nx_int(taskMaxNum) then
@@ -221,6 +233,9 @@ function getTaskSpy()
                     return TASK_INDEX_LIST[taskKey]
                 end
             end
+        end
+        if hasDoThamQuest and i == rows - 1 then
+            return 999
         end
     end
     local school = player:QueryProp("School")
@@ -374,6 +389,7 @@ function doiThoaiNpc(npcName, posX, posY, posZ, mapId, ...)
         selectFirstMenu()
     end
     if GetCurMap() == mapId then
+        nx_execute("zdn_logic_skill", "DungTuSat")
         if GetDistance(posX, posY, posZ) < 4 then
             clickNpc(npcName)
             return 101
@@ -667,6 +683,7 @@ function veSuMon()
     else
         if InstantDieFlg then
             DieInstantly()
+            return
         end
         nx_execute("zdn_logic_skill", "TuSat")
     end

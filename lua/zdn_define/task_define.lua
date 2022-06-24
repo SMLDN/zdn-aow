@@ -33,5 +33,10 @@ TASK_LIST = {
 		"Thiên Thê",
 		"zdn_logic_thien_the",
 		"form_zdn_thien_the"
+	},
+	{
+		"Do Thám",
+		"zdn_logic_do_tham",
+		"form_zdn_do_tham"
 	}
 }

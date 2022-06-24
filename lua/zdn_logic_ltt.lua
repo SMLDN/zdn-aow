@@ -45,10 +45,6 @@ function Stop()
 end
 
 function loopLtt()
-    if not CanRun() then
-        Stop()
-        return
-    end
     if IsMapLoading() then
         return
     end

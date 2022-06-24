@@ -1,4 +1,13 @@
 # Release Note
+*Update 6/24/2022*
+*v1.1.0*
+**Tính năng mới**
+- Trợ lý: thêm Do thám
+
+**Sửa lỗi**
+- Do thám: Nhân vật thuộc Thần cơ doanh không do thám được
+
+
 ## v1.0.2
 ### Thay đổi
 - Thụ nghiệp: cho hết về Lạc Dương
