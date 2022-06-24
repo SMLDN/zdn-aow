@@ -6,6 +6,7 @@
 
 **Sửa lỗi**
 - Do thám: Nhân vật thuộc Thần cơ doanh không do thám được
+- Q nội 6 Lạc dương: làm mới lại, sửa hẳn lỗi xong Q k load đc map
 
 
 ## v1.0.2
