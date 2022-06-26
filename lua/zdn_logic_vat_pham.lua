@@ -22,6 +22,7 @@ end
 
 function Stop()
     Running = false
+    nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-stop")
 end
 
 function IsDroppickShowed()

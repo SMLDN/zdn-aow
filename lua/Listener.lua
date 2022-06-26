@@ -58,4 +58,8 @@ function Resolve(msg, ...)
 			end
 		end
 	end
+
+	if nx_string(msg) == "Sysinfo_qyoptalk_000" then
+		nx_execute("zdn_logic_ky_ngo", "OnReceiveKyNgo", nx_string(arg[1]))
+	end
 end

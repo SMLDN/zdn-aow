@@ -1,8 +1,11 @@
 require("zdn_lib\\util_functions")
 require("zdn_util")
 require("zdn_define\\task_define")
+require("zdn_define\\logic_define")
+
 local Running = false
 local TodoList = {}
+local currentRunningTask = ""
 
 function IsRunning()
     return Running
@@ -30,6 +33,34 @@ function Stop()
         nx_execute(logic, "Stop")
     end
     nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-stop")
+end
+
+function ContinueGlobalTask()
+    if currentRunningTask ~= "" then
+        if nx_find_script(CAN_RUN_LOGIC_LIST[i], "Start") then
+            nx_execute(currentRunningTask, "Start")
+        end
+    end
+end
+
+function StopGlobalTask()
+    if Running then
+        currentRunningTask = nx_current()
+        Stop()
+        return
+    end
+    local cnt = #CAN_RUN_LOGIC_LIST
+    for i = 1, cnt do
+        if nx_find_script(CAN_RUN_LOGIC_LIST[i], "IsRunning") then
+            if nx_execute(CAN_RUN_LOGIC_LIST[i], "IsRunning") then
+                currentRunningTask = CAN_RUN_LOGIC_LIST[i]
+                nx_execute(CAN_RUN_LOGIC_LIST[i], "Stop")
+                Console("Stop " .. CAN_RUN_LOGIC_LIST[i])
+                return
+            end
+        end
+    end
+    currentRunningTask = ""
 end
 
 --private

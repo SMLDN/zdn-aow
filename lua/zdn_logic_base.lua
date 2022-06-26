@@ -71,6 +71,19 @@ function GetCurrentHourHuman()
     return hourStr .. ":" .. minuteStr
 end
 
+function GetCurrentFullDayHuman()
+    local msgDelay = nx_value("MessageDelay")
+    local currentDateTime = msgDelay:GetServerDateTime()
+    local year, month, day, hour, mins, sec = nx_function("ext_decode_date", nx_double(currentDateTime))
+    if nx_int(day) < nx_int(10) then
+        day = "0" .. nx_string(day)
+    end
+    if nx_int(month) < nx_int(10) then
+        month = "0" .. nx_string(month)
+    end
+    return nx_string(day) .. "-" .. nx_string(month) .. "-" .. nx_string(year) .. "_" .. GetCurrentHourHuman()
+end
+
 function GetNextDayStartTimestamp()
     local timeStamp = GetCurrentTimestamp()
     return timeStamp - (timeStamp % 86400) + (7 * 3600) + 86400
@@ -166,4 +179,40 @@ function GetNpcIdentByName(npcName)
         end
     end
     return nil
+end
+
+function GetMovieTalkList(...)
+    local list = {}
+    list.npc_id = ""
+    local form = nx_value("form_stage_main\\form_talk_movie")
+    if not nx_is_valid(form) then
+        return list
+    end
+    local npc_id = form.npcid
+    list.npc_id = npc_id
+    if npc_id == "" or (arg[1] ~= nil and arg[1] ~= npc_id) then
+        return list
+    end
+    local menus = form.menus
+    local line_data = {}
+    menus = util_split_wstring(menus, "|")
+    for _, line in pairs(menus) do
+        line_data = util_split_wstring(line, "`")
+        if #line_data == 2 then
+            local data = {}
+            data.func_id = nx_number(line_data[1])
+            data.text = line_data[2]
+            table.insert(list, data)
+        end
+    end
+    return list
+end
+
+function TalkToNpcByMenuId(npc_ident, menu_id)
+    local sock = nx_value("game_sock")
+    if not nx_is_valid(sock) then
+        return
+    end
+    sock.Sender:Select(nx_string(npc_ident), nx_int(menu_id))
+    return
 end

@@ -150,6 +150,7 @@ function onBtnSaveClick()
 		end
 	end
 	IniWriteUserConfig("KyNgo", "ChangeList", kyNgoStr)
+	nx_execute("zdn_logic_ky_ngo", "LoadConfig")
 end
 
 function isKyNgoCheckedChanged(checked, npcId)

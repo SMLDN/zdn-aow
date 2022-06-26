@@ -1,4 +1,12 @@
 # Release Note
+*Update 6/26/2022*
+*v1.2.0*
+**Tính năng mới**
+- Kỳ ngộ - có một số hạn chế sau:
+  Chưa có test nên không biết chạy ok k ^.^
+  Hiện tại để check kỳ ngộ đã nhận được nhờ auto thì vào file tênacc.ini check phần [KyNgo]
+  Chưa bật tắt được nhận Kỳ ngộ(mặc định là chạy suốt)
+
 *Update 6/24/2022*
 *v1.1.0*
 **Tính năng mới**
