@@ -53,6 +53,9 @@ function Stop()
 end
 
 function loopLuyenCong()
+    if IsMapLoading() then
+        return
+    end
     if not CanRun() then
         Stop()
         return
