@@ -37,7 +37,7 @@ end
 
 function ContinueGlobalTask()
     if currentRunningTask ~= "" then
-        if nx_find_script(CAN_RUN_LOGIC_LIST[i], "Start") then
+        if nx_find_script(currentRunningTask, "Start") then
             nx_execute(currentRunningTask, "Start")
         end
     end
