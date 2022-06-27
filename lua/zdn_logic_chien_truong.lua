@@ -78,6 +78,10 @@ function Start()
         return
     end
     Running = true
+    if not CanRun() then
+        Stop()
+        return
+    end
     nx_execute("zdn_logic_skill", "LeaveTeam")
     while Running do
         loopChienTruong()
@@ -93,8 +97,7 @@ end
 
 -- private
 function loopChienTruong()
-    if not CanRun() then
-        Stop()
+    if IsMapLoading() then
         return
     end
     if isDead(nx_execute("zdn_logic_base", "GetPlayer")) then
@@ -389,6 +392,7 @@ end
 
 function onTaskDone()
     IniWriteUserConfig("ChienTruong", "ResetTime", nx_execute("zdn_logic_base", "GetNextDayStartTimestamp"))
+    Stop()
 end
 
 function deleteItemByConfig(config)
