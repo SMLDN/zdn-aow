@@ -50,6 +50,9 @@ local function setAngleToObj(obj)
 end
 
 function waitToCollide(x, y, z)
+	if IsMapLoading() then
+		return
+	end
 	nx_pause(1)
 	local role = nx_value("role")
 	if not nx_is_valid(role) then
