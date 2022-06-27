@@ -50,6 +50,9 @@ end
 
 -- private
 function loopHaoKiet()
+    if IsMapLoading() then
+        return
+    end
     if GetCurMap() ~= Position.Map then
         nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-interrupt")
         GoToMapByPublicHomePoint(Position.Map)
