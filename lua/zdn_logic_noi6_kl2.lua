@@ -139,7 +139,10 @@ function startQuest()
     end
 
     if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
-        nx_pause(2)
+        nx_pause(3)
+        if not nx_is_valid(npc) then
+            return
+        end
         if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
             onTaskDone()
         end
@@ -149,23 +152,23 @@ end
 function acceptQuest(npc)
     XuongNgua()
     StopFindPath()
-    TalkToNpc(npc,0)
-    TalkToNpc(npc,0)
+    TalkToNpc(npc, 0)
+    TalkToNpc(npc, 0)
     nx_pause(0.5)
 end
 
 function finishQuest(npc)
     XuongNgua()
     StopFindPath()
-    TalkToNpc(npc,0)
-    TalkToNpc(npc,0)
+    TalkToNpc(npc, 0)
+    TalkToNpc(npc, 0)
 end
 
 function enterQuestScene(npc)
     XuongNgua()
     StopFindPath()
-    TalkToNpc(npc,0)
-    TalkToNpc(npc,0)
+    TalkToNpc(npc, 0)
+    TalkToNpc(npc, 0)
     nx_pause(4)
 end
 
@@ -190,9 +193,9 @@ end
 function exitQuestScene(npc)
     XuongNgua()
     StopFindPath()
-    TalkToNpc(npc,0)
-    TalkToNpc(npc,0)
-    TalkToNpc(npc,0)
+    TalkToNpc(npc, 0)
+    TalkToNpc(npc, 0)
+    TalkToNpc(npc, 0)
     nx_pause(4)
 end
 

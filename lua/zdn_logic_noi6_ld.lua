@@ -126,7 +126,10 @@ function startQuest()
     end
 
     if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
-        nx_pause(2)
+        nx_pause(3)
+        if not nx_is_valid(npc) then
+            return
+        end
         if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
             onTaskDone()
             return
