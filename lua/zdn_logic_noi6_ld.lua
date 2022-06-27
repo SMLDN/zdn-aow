@@ -143,7 +143,6 @@ end
 
 function doQuest()
     if holdingStone() then
-        Console("dang cam da")
         throwStone()
         return
     end
