@@ -12,5 +12,7 @@ CAN_RUN_LOGIC_LIST = {
     "zdn_logic_thien_the",
     "zdn_logic_thth",
     "zdn_logic_thu_nghiep",
-    "zdn_logic_vat_pham"
+    "zdn_logic_vat_pham",
+    "zdn_logic_an_the",
+    "zdn_logic_on_tuyen"
 }

@@ -86,6 +86,14 @@ function FilterCommand(chatStr)
     util_show_form("form_zdn_an_the", true)
     return true
   end
+  if nx_widestr(chatStr) == nx_widestr("/ot") then
+    util_show_form("form_zdn_on_tuyen", true)
+    return true
+  end
+  if nx_widestr(chatStr) == nx_widestr("/tho") then
+    util_show_form("form_zdn_bat_tho", true)
+    return true
+  end
 
   -- for debug
   if nx_widestr(chatStr) == nx_widestr("/l") then

@@ -3,6 +3,8 @@
 *v1.4.0*
 **Tính năng mới**
 - Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần Tra Hòn Đảo
+- Ôn tuyền(bản đơn giản)
+- Bắt thỏ(bản đơn giản)
 **Sửa lỗi**
 - Vật phẩm: thỉnh thoảng hiện bảng báo lỗi
 - Kỳ ngộ: không nói chuyện với NPC(chưa có điều kiện test)
@@ -105,3 +107,5 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /tq : thích quán
  /kn : thiết lập nhận, bỏ kỳ ngộ
  /anthe : q ẩn thế Tinh Miễu Các
+ /ot : ôn tuyền
+ /tho : bắt thỏ
