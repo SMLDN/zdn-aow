@@ -1052,3 +1052,23 @@ function TalkToNpcByMenuId(npc, menu_id)
 	sock.Sender:Select(nx_string(npc.Ident), nx_int(menu_id))
 	nx_pause(1)
 end
+
+function TalkIsFuncIdAvailable(npc, func_id)
+	local timerStart = TimerInit()
+	local form = nx_value("form_stage_main\\form_talk_movie")
+	while TimerDiff(timerStart) < 3 and (not nx_is_valid(form) or not form.Visible) do
+		if not nx_is_valid(npc) then
+			return
+		end
+		nx_execute("custom_sender", "custom_select", npc.Ident)
+		form = nx_value("form_stage_main\\form_talk_movie")
+		nx_pause(0.1)
+	end
+	local lst = GetMovieTalkList()
+	for i = 1, #lst do
+		if lst[i].func_id == nx_number(func_id) then
+			return true
+		end
+	end
+	return false
+end

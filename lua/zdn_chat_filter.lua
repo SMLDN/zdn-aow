@@ -132,6 +132,17 @@ function FilterCommand(chatStr)
     end
     return true
   end
+
+  if nx_widestr(chatStr) == nx_widestr("/npc") then
+    local obj = nx_execute("zdn_logic_skill", "getTargetObj")
+    if not nx_is_valid(obj) then
+      return true
+    end
+    local cId = obj:QueryProp("ConfigID")
+    Console(cId)
+    nx_function("ext_copy_wstr", nx_widestr(cId))
+    return true
+  end
   -- for debug
 
   return false

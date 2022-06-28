@@ -2,7 +2,8 @@ require("zdn_util")
 
 local Running = false
 local TodoList = {
-    {"Trầm Mặc Thả Câu", "zdn_logic_an_the_tmc_tmtc"}
+    {"Trầm Mặc Thả Câu", "zdn_logic_an_the_tmc_tmtc"},
+    {"Tuần Tra Hòn Đảo", "zdn_logic_an_the_tmc_tthd"}
 }
 
 function IsRunning()

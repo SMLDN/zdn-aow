@@ -2,7 +2,7 @@
 *Update 6/28/2022*
 *v1.4.0*
 **Tính năng mới**
-- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu
+- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần Tra Hòn Đảo
 **Sửa lỗi**
 - Vật phẩm: thỉnh thoảng hiện bảng báo lỗi
 - Kỳ ngộ: không nói chuyện với NPC(chưa có điều kiện test)
