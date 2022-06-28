@@ -2,7 +2,7 @@
 *Update 6/28/2022*
 *v1.4.0*
 **Tính năng mới**
-- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần Tra Hòn Đảo
+- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần tra hòn đảo
 - Ôn tuyền(bản đơn giản)
 - Bắt thỏ(bản đơn giản)
 **Sửa lỗi**

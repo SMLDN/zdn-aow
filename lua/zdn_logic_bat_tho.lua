@@ -1,4 +1,3 @@
-require("zdn_util")
 require("zdn_lib_moving")
 
 local Running = false
@@ -46,6 +45,7 @@ function loopBatTho()
         if not nx_is_valid(fight) then
             return
         end
+        XuongNgua()
         fight:TraceUseSkill("cfslguj_skill_01", false, false)
     end
 end
