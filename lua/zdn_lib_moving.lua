@@ -1006,3 +1006,49 @@ end
 function DieInstantly()
 	sendDie()
 end
+
+function GetMovieTalkList(...)
+	local list = {}
+	list.npc_id = ""
+	local form = nx_value("form_stage_main\\form_talk_movie")
+	if not nx_is_valid(form) then
+		return list
+	end
+	local npc_id = form.npcid
+	list.npc_id = npc_id
+	if npc_id == "" or (arg[1] ~= nil and arg[1] ~= npc_id) then
+		return list
+	end
+	local menus = form.menus
+	local line_data = {}
+	menus = util_split_wstring(menus, "|")
+	for _, line in pairs(menus) do
+		line_data = util_split_wstring(line, "`")
+		if #line_data == 2 then
+			local data = {}
+			data.func_id = nx_number(line_data[1])
+			data.text = line_data[2]
+			table.insert(list, data)
+		end
+	end
+	return list
+end
+
+function TalkToNpcByMenuId(npc, menu_id)
+	local timerStart = TimerInit()
+	local form = nx_value("form_stage_main\\form_talk_movie")
+	while TimerDiff(timerStart) < 3 and (not nx_is_valid(form) or not form.Visible) do
+		if not nx_is_valid(npc) then
+			return
+		end
+		nx_execute("custom_sender", "custom_select", npc.Ident)
+		form = nx_value("form_stage_main\\form_talk_movie")
+		nx_pause(0.1)
+	end
+	local sock = nx_value("game_sock")
+	if not nx_is_valid(sock) then
+		return
+	end
+	sock.Sender:Select(nx_string(npc.Ident), nx_int(menu_id))
+	nx_pause(1)
+end

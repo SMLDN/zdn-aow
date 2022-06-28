@@ -599,6 +599,7 @@ function goToSpyIndex(index)
 end
 
 function nhanNhiemVu()
+    nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-interrupt")
     if GetCurMap() == spyMap then
         curPoint = 1
         StopFindPath()

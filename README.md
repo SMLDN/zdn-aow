@@ -1,8 +1,11 @@
 # Release Note
-*Update 6/27/2022*
+*Update 6/28/2022*
 *v1.4.0*
+**Tính năng mới**
+- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu
 **Sửa lỗi**
 - Vật phẩm: thỉnh thoảng hiện bảng báo lỗi
+- Kỳ ngộ: không nói chuyện với NPC(chưa có điều kiện test)
 
 *Update 6/27/2022*
 *v1.3.1*
@@ -54,7 +57,7 @@
 - Thụ nghiệp: mặc định Thụ nghiệp tại Lạc Dương trong trường hợp không có thông tin môn phái của nhân vật
 
 ### Sửa lỗi
-- Thụ Nghiệp: ẩn thế Tinh Miểu Các, Minh Giáo, Thiên Sơn k tự động thụ nghiệp dc.
+- Thụ Nghiệp: ẩn thế Tinh Miễu Các, Minh Giáo, Thiên Sơn k tự động thụ nghiệp dc.
 - Q nội 6 Lạc dương lúc xong Q map k load được
 
 
@@ -99,4 +102,6 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /n6
  /tt : thiên thê
  /ltt : lăng tiêu
-  /tq : thích quán
+ /tq : thích quán
+ /kn : thiết lập nhận, bỏ kỳ ngộ
+ /anthe : q ẩn thế Tinh Miễu Các

@@ -107,13 +107,13 @@ function doAcceptByTalk(npcId)
 end
 
 function doTalkToNpc(obj)
-    local lst = nx_execute("zdn_logic_base", "GetMovieTalkList", obj.Ident)
+    local lst = GetMovieTalkList(obj.Ident)
     if #lst > 0 then
         if lst[1].func_id == 898000023 or lst[1].func_id == 898000000 or lst[1].func_id == 898000024 then
-            nx_execute("zdn_logic_base", "TalkToNpcByMenuId", obj.Ident, 600000000)
+            TalkToNpcByMenuId(obj, 600000000)
             return true
         end
-        nx_execute("zdn_logic_base", "TalkToNpcByMenuId", obj.Ident, lst[1].func_id)
+        TalkToNpcByMenuId(obj, lst[1].func_id)
         return false
     end
     if GetDistanceToObj(obj) > 1.8 then
