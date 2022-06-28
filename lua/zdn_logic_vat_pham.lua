@@ -41,6 +41,9 @@ function PickAllDropItem()
     local cnt = form.nMaxIndexCount
     local timeOut = TimerInit()
     while Running and cnt == 0 and TimerDiff(timeOut) < 1.5 do
+        if not nx_is_valid(form) or not form.Visible or not nx_find_custom(form, "nMaxIndexCount") then
+            break
+        end
         cnt = form.nMaxIndexCount
         nx_pause(0)
     end

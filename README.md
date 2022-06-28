@@ -2,6 +2,11 @@
 *Update 6/27/2022*
 *v1.3.1*
 **Sửa lỗi**
+- Vật phẩm: thỉnh thoảng hiện bảng báo lỗi
+
+*Update 6/27/2022*
+*v1.3.1*
+**Sửa lỗi**
 - Q nội 6 Lạc dương: hiện lỗi khi chuyển vào map ném đá
 
 *Update 6/26/2022*
