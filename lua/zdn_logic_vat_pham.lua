@@ -52,9 +52,6 @@ function PickAllDropItem()
     end
     timeOut = TimerInit()
     while Running and nx_is_valid(form) and form.Visible and cnt > 0 and TimerDiff(timeOut) < 1.5 do
-        if not nx_find_custom(form, "nMaxIndexCount") then
-            break
-        end
         cnt = form.nMaxIndexCount
         nx_pause(0)
     end
