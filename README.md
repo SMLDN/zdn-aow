@@ -2,8 +2,10 @@
 *Update 6/29/2022*
 *v1.5.0*
 **Tính năng mới**
-- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần tra hòn đảo, Cốc trung ngộ kiếm
+- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần tra hòn đảo, Cốc trung ngộ kiếm, Quan Tinh Đài Luyện Kiếm
 - Tự bấm phím nhảy 1 số game: Q Tinh Miễu Các, skill Tu la song đao này nọ
+**Sửa lỗi**
+- Bắt thỏ: không target vào thỏ :D
 
 *Update 6/28/2022*
 *v1.4.0*

@@ -40,7 +40,6 @@ function Start()
         return
     end
     Running = true
-    onDoingQuest = false
     while Running do
         loopAnThe()
         nx_pause(0.2)
@@ -109,18 +108,6 @@ function loopAnThe()
         TalkToNpc(npc, 0)
         return
     end
-
-    -- tra Q
-    if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(2) then
-        if GetDistanceToObj(npc) > 3 then
-            GoToObj(npc)
-            return
-        end
-        TalkToNpc(npc, 0)
-        TalkToNpc(npc, 0)
-        onTaskDone()
-        return
-    end
 end
 
 function isQuestNpc(obj)
@@ -152,7 +139,7 @@ function isReceiveQuest()
 end
 
 function getTaskOrder()
-    return nx_execute("zdn_logic_base", "GetTaskInfoById", 74252, task_rec_order)
+    return nx_execute("zdn_logic_base", "GetTaskInfoById", TASK_INDEX, task_rec_order)
 end
 
 function isOnCaoTuongCoc()

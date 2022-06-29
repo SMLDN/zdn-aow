@@ -45,6 +45,7 @@ function loopBatTho()
         if not nx_is_valid(fight) then
             return
         end
+        nx_execute("zdn_logic_base", "SelectTarget", obj)
         XuongNgua()
         fight:TraceUseSkill("cfslguj_skill_01", false, false)
     end
