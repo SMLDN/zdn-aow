@@ -2,10 +2,11 @@ require("zdn_util")
 
 local Running = false
 local TodoList = {
-    -- {"Trầm Mặc Thả Câu", "zdn_logic_an_the_tmc_tmtc"},
-    -- {"Tuần Tra Hòn Đảo", "zdn_logic_an_the_tmc_tthd"},
-    -- {"Cốc Trung Ngộ Kiếm", "zdn_logic_an_the_tmc_ctnk"},
-    {"Quan Tinh Đài Luyện Kiếm", "zdn_logic_an_the_tmc_qtdlk"}
+    {"Trầm Mặc Thả Câu", "zdn_logic_an_the_tmc_tmtc"},
+    {"Tuần Tra Hòn Đảo", "zdn_logic_an_the_tmc_tthd"},
+    {"Cốc Trung Ngộ Kiếm", "zdn_logic_an_the_tmc_ctnk"},
+    {"Quan Tinh Đài Luyện Kiếm", "zdn_logic_an_the_tmc_qtdlk"},
+    {"Tạp Vụ Môn Phái", "zdn_logic_an_the_tmc_tvmp"}
 }
 
 function IsRunning()

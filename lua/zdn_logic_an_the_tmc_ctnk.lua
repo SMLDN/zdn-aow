@@ -12,6 +12,8 @@ local CAO_TUONG_COC_TELE_POINT = "GotoDoorxmg_gujxmg01"
 local PHA_BAI_DI_TICH_TELE_POINT = "GotoDoorxmg_gujxmg02"
 local NPC_THOI_DONG_CONFIG_ID = "npcmp_lzy_xmg_drrc_002"
 local TimerFlyingToCaoTuongCoc = 0
+local TimerCheckWeapon = 0
+local ITEMTYPE_WEAPON_SSWORD = 105
 
 function IsRunning()
     return Running
@@ -108,6 +110,17 @@ function loopAnThe()
         TalkToNpc(npc, 0)
         return
     end
+
+    if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
+        nx_pause(3)
+        if not nx_is_valid(npc) then
+            return
+        end
+        if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
+            onTaskDone()
+            return
+        end
+    end
 end
 
 function isQuestNpc(obj)
@@ -132,9 +145,6 @@ end
 
 function isReceiveQuest()
     local ord = getTaskOrder()
-    if nx_is_valid(ord) then
-        return false
-    end
     return nx_int(ord) == nx_int(1)
 end
 
@@ -159,6 +169,7 @@ function isPhaBaiDiTichTelepoint(obj)
 end
 
 function doCaoTuongCoc()
+    checkWeapon()
     local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isThoiDong")
     if not nx_is_valid(npc) then
         return
@@ -208,4 +219,16 @@ function leaveCaoTuongCoc()
         return
     end
     GoToNpc(NPC_MAP, PHA_BAI_DI_TICH_TELE_POINT)
+end
+
+function checkWeapon()
+    if TimerDiff(TimerCheckWeapon) < 3 then
+        return
+    end
+    TimerCheckWeapon = TimerInit()
+    local currentWeapon = nx_execute("zdn_logic_vat_pham", "GetCurrentWeapon")
+    if not nx_is_valid(currentWeapon) or nx_number(currentWeapon:QueryProp("ItemType")) ~= ITEMTYPE_WEAPON_SSWORD then
+        local i = nx_execute("zdn_logic_vat_pham", "FindFirstBoundItemIndexByItemType", 121, ITEMTYPE_WEAPON_SSWORD)
+        nx_execute("zdn_logic_vat_pham", "UseWeapon", i)
+    end
 end

@@ -38,5 +38,10 @@ TASK_LIST = {
 		"Do Thám",
 		"zdn_logic_do_tham",
 		"form_zdn_do_tham"
+	},
+	{
+		"Nhiệm Vụ Ẩn Thế",
+		"zdn_logic_an_the",
+		"form_zdn_an_the"
 	}
 }

@@ -199,3 +199,17 @@ function GetTaskInfoById(id, task_rec_key)
         end
     end
 end
+
+function CanTaskSubmit(id)
+    local client = nx_value("game_client")
+    local player = client:GetPlayer()
+    if not nx_is_valid(player) then
+        return false
+    end
+    local row = player:FindRecordRow("Task_Accepted", 0, nx_int(id), 0)
+    if row > -1 then
+        local flg = player:QueryRecord("Task_Accepted", row, 6)
+        return nx_int(flg) == nx_int(2)
+    end
+    return false
+end

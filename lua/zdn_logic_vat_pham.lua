@@ -52,6 +52,9 @@ function PickAllDropItem()
     end
     timeOut = TimerInit()
     while Running and nx_is_valid(form) and form.Visible and cnt > 0 and TimerDiff(timeOut) < 1.5 do
+        if not nx_find_custom(form, "nMaxIndexCount") then
+            break
+        end
         cnt = form.nMaxIndexCount
         nx_pause(0)
     end
@@ -62,8 +65,54 @@ function FindItemIndexFromVatPham(configId)
     return findItemIndexFromBag(2, configId)
 end
 
+function FindItemIndexFromNhiemVu(configId)
+    return findItemIndexFromBag(125, configId)
+end
+
 function UseItem(viewPort, index)
-    nx_execute("custom_sender", "custom_use_item", viewPort, index)
+    if index ~= 0 then
+        nx_execute("custom_sender", "custom_use_item", viewPort, index)
+    end
+end
+
+function UseWeapon(index)
+    if index ~= 0 then
+        local grid = nx_value("GoodsGrid")
+        if not nx_is_valid(grid) then
+            return
+        end
+        grid:ViewUseItem(121, index, "", "")
+    end
+end
+
+function FindFirstBoundItemIndexByItemType(viewPort, itemType)
+    local client = nx_value("game_client")
+    local view = client:GetView(nx_string(viewPort))
+    if not nx_is_valid(view) then
+        return 0
+    end
+    for i = 1, 70 do
+        local obj = view:GetViewObj(nx_string(i))
+        if
+            nx_is_valid(obj) and nx_string(obj:QueryProp("BindStatus")) == "1" and
+                nx_number(obj:QueryProp("ItemType")) == nx_number(itemType)
+         then
+            return i
+        end
+    end
+    return 0
+end
+
+function GetCurrentWeapon()
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return
+    end
+    local equip = client:GetView("1")
+    if not nx_is_valid(equip) then
+        return
+    end
+    return equip:GetViewObj("22")
 end
 
 -- private
@@ -79,10 +128,8 @@ function loopVatPham()
         end
         if not nx_execute("zdn_logic_skill", "HaveBuff", item.buffId) then
             local index = FindItemIndexFromVatPham(item.itemId)
-            if index ~= 0 then
-                UseItem(2, index)
-                nx_pause(0.1)
-            end
+            UseItem(2, index)
+            nx_pause(0.1)
         end
     end
 end

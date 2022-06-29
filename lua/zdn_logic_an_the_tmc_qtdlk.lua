@@ -12,7 +12,10 @@ local NPC_HUA_BAN_THOI2_CONFIG_ID = "npcmp_lzy_xmg_drrc_004_a"
 local TASK_INDEX = 74250
 local QUAN_TINH_DAO_TELE_POINT = "GotoDoorxmg_jch01"
 local TINH_MIEU_CAC_TELE_POINT = "GotoDoorxmg_jch02"
+local ITEMTYPE_WEAPON_SSWORD = 105
 local TimerStartThiLuyen = 0
+local TimerCheckWeapon = 0
+local TimerSpecialSkill = 0
 
 function IsRunning()
     return Running
@@ -110,6 +113,17 @@ function loopAnThe()
         TalkToNpc(npc, 0)
         return
     end
+
+    if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
+        nx_pause(3)
+        if not nx_is_valid(npc) then
+            return
+        end
+        if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
+            onTaskDone()
+            return
+        end
+    end
 end
 
 function isQuestNpc(obj)
@@ -118,9 +132,6 @@ end
 
 function isReceiveQuest()
     local ord = getTaskOrder()
-    if nx_is_valid(ord) then
-        return false
-    end
     return nx_int(ord) == nx_int(1)
 end
 
@@ -178,7 +189,7 @@ function doQuanTinhDao()
             return
         end
     end
-
+    checkWeapon()
     if nx_is_valid(npc2) then
         doThiLuyen(npc2)
     end
@@ -200,7 +211,11 @@ function doThiLuyen(npc2)
 end
 
 function getHuaBanThoiSpecialSkill(npc)
+    if TimerDiff(TimerSpecialSkill) < 6 then
+        return "0"
+    end
     if nx_execute("zdn_logic_skill", "ObjHaveBuff", npc, "buf_CS_xmg_pyj02") then
+        TimerSpecialSkill = TimerInit()
         return "CS_xmg_pyj02"
     end
     return "0"
@@ -261,4 +276,16 @@ function isSkillExists(config)
         return false
     end
     return nx_is_valid(fight:FindSkill(config))
+end
+
+function checkWeapon()
+    if TimerDiff(TimerCheckWeapon) < 3 then
+        return
+    end
+    TimerCheckWeapon = TimerInit()
+    local currentWeapon = nx_execute("zdn_logic_vat_pham", "GetCurrentWeapon")
+    if not nx_is_valid(currentWeapon) or nx_number(currentWeapon:QueryProp("ItemType")) ~= ITEMTYPE_WEAPON_SSWORD then
+        local i = nx_execute("zdn_logic_vat_pham", "FindFirstBoundItemIndexByItemType", 121, ITEMTYPE_WEAPON_SSWORD)
+        nx_execute("zdn_logic_vat_pham", "UseWeapon", i)
+    end
 end

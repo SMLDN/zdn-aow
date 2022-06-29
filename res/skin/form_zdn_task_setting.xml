@@ -14,7 +14,7 @@
         </control>
 
         <control name="cbx_task_list" entity="ComboBox" script="" init="">
-            <prop ButtonWidth="20" DropDownWidth="170" DropDownHeight="130" OnlySelect="true" Left="20" Top="39" Width="170" Height="26" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text_figure" NoFrame="true" BackImage="gui\common\form_line\ibox_2.png" DrawMode="Expand" />
+            <prop ButtonWidth="20" DropDownWidth="170" DropDownHeight="160" OnlySelect="true" Left="20" Top="39" Width="170" Height="26" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text_figure" NoFrame="true" BackImage="gui\common\form_line\ibox_2.png" DrawMode="Expand" />
             <subor name="InputEdit">
                 <prop ReadOnly="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,76,61,44" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,20,0,0" Font="font_main" Cursor="WIN_IBEAM" DrawMode="ExpandH" />
             </subor>

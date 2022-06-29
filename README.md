@@ -2,7 +2,7 @@
 *Update 6/29/2022*
 *v1.5.0*
 **Tính năng mới**
-- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần tra hòn đảo, Cốc trung ngộ kiếm, Quan Tinh Đài Luyện Kiếm
+- Q ẩn thế Tinh Miễu Các: xong hết Q ngày, đã hộ trợ Trợ lý. Lưu ý có 2 Q cần dùng song kiếm. Yêu cầu có Song kiếm sử dụng được(cố định) ở ô trang bị hoặc mang sẵn trên người.
 - Tự bấm phím nhảy 1 số game: Q Tinh Miễu Các, skill Tu la song đao này nọ
 **Sửa lỗi**
 - Bắt thỏ: không target vào thỏ :D
