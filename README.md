@@ -2,8 +2,8 @@
 *Update 6/29/2022*
 *v1.5.0*
 **Tính năng mới**
-- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần tra hòn đảo
-- Tự bấm phím nhảy 1 số game(chịu chưa test)
+- Q ẩn thế Tinh Miễu Các: Trầm mặc thả câu, Tuần tra hòn đảo, Cốc trung ngộ kiếm
+- Tự bấm phím nhảy 1 số game: Q Tinh Miễu Các, skill Tu la song đao này nọ
 
 *Update 6/28/2022*
 *v1.4.0*

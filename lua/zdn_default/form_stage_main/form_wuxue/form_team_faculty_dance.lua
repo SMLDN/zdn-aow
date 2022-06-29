@@ -14,5 +14,10 @@ function on_main_form_open(self)
     nx_execute("form_stage_main\\form_main\\form_main_chat", "hide_chat_edit", form_chat)
   end
   on_refresh_picture(self)
-  nx_execute("custom_sender", "custom_team_faculty", 20)
+  local memberForm = nx_value("form_stage_main\\form_wuxue\\form_team_faculty_member")
+  if nx_is_valid(memberForm) and memberForm.Visible then
+    nx_execute("custom_sender", "custom_team_faculty", 20)
+  else
+    nx_execute("custom_sender", "custom_send_skill_general_result", 20)
+  end
 end

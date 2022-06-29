@@ -180,3 +180,22 @@ function GetNpcIdentByName(npcName)
     end
     return nil
 end
+
+function GetTaskInfoById(id, task_rec_key)
+    local client = nx_value("game_client")
+    local player = client:GetPlayer()
+    if not nx_is_valid(player) then
+        return
+    end
+    local rec = "Task_Record"
+    local rows = player:GetRecordRows(rec)
+    if nx_int(rows) <= nx_int(0) then
+        return
+    end
+    for i = 0, rows - 1 do
+        local taskIndex = player:QueryRecord(rec, i, 2)
+        if nx_int(taskIndex) == nx_int(id) then
+            return player:QueryRecord(rec, i, task_rec_key)
+        end
+    end
+end
