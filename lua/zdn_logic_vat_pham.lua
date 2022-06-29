@@ -12,7 +12,7 @@ function Start()
     Running = true
     while Running do
         loopVatPham()
-        nx_pause(0.2)
+        nx_pause(0.1)
     end
 end
 
@@ -126,7 +126,6 @@ function loopVatPham()
         if not nx_execute("zdn_logic_skill", "HaveBuff", item.buffId) then
             local index = FindItemIndexFromVatPham(item.itemId)
             UseItem(2, index)
-            nx_pause(0.1)
         end
     end
 end
