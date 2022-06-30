@@ -106,6 +106,7 @@ function loopAnThe()
             return
         end
         if not TalkIsFuncIdAvailable(npc, 100074250) then
+            TalkToNpcByMenuId(npc, 600000000)
             onTaskDone()
             return
         end

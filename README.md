@@ -1,5 +1,10 @@
 # Release Note
 *Update 6/29/2022*
+*v1.5.1*
+**Sửa lỗi**
+- Q ẩn thế Tinh Miễu Các: bị dừng khi xong Q Cốc Trung Ngộ Kiếm, Q Tạp vụ môn phái k chạy được
+
+*Update 6/29/2022*
 *v1.5.0*
 **Tính năng mới**
 - Q ẩn thế Tinh Miễu Các: xong hết Q ngày, đã hộ trợ Trợ lý. Lưu ý có 2 Q cần dùng song kiếm. Yêu cầu có Song kiếm sử dụng được(cố định) ở ô trang bị hoặc mang sẵn trên người.

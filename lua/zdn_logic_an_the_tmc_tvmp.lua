@@ -6,8 +6,8 @@ local Running = false
 local QUEST_ID = "tmc_tvmp"
 local NPC_CONFIG_ID = "npcmp_lzy_xmg_drrc_003"
 local TU_TAM_CAC_POS = {-44.75, 285.21484375, -303.75}
--- local TASK_INDEX = 74251
 local NPC_MAP = "school23"
+local TASK_INDEX = 74251
 
 function IsRunning()
     return Running
@@ -77,8 +77,7 @@ function loopAnThe()
         TeleToSchoolHomePoint()
         return
     end
-
-    if not nx_execute("zdn_logic_base", "CanTaskSubmit", 74251) and isReceiveQuest() then
+    if not nx_execute("zdn_logic_base", "CanTaskSubmit", TASK_INDEX) and isReceiveQuest() then
         doQuest()
         return
     end
@@ -128,17 +127,19 @@ function isQuestNpc(obj)
 end
 
 function isReceiveQuest()
-    local ord = getTaskOrder()
-    return nx_int(ord) == nx_int(74251)
+    local scn = getQuestScene()
+    return string.find(nx_string(scn), "EventNpc_lzy_xmg_")
 end
 
-function getTaskOrder()
-    return nx_execute("zdn_logic_base", "GetTaskInfoById", 74253, 0)
+function getQuestScene()
+    return nx_execute("zdn_logic_base", "GetTaskInfoById", TASK_INDEX, 7)
 end
 
 function doQuest()
-    if GetDistance(TU_TAM_CAC_POS[1], TU_TAM_CAC_POS[2], TU_TAM_CAC_POS[3]) > 2 then
-        GoToPosition(TU_TAM_CAC_POS[1], TU_TAM_CAC_POS[2], TU_TAM_CAC_POS[3])
+    local scn = getQuestScene()
+    local x, y, z = GetNpcPostion(NPC_MAP, scn)
+    if GetDistance(x, y, z) > 2 then
+        GoToNpc(NPC_MAP, scn)
         return
     end
     local id = nx_execute("zdn_logic_vat_pham", "FindItemIndexFromNhiemVu", "useitem_lzy_xmgrc002")

@@ -557,7 +557,7 @@ local function isFinding(x, y, z)
 	 then
 		return false
 	end
-	return distance3d(x, y, z, role.FindPathX, role.FindPathY, role.FindPathZ) < 6
+	return distance3d(x, y, z, role.FindPathX, role.FindPathY, role.FindPathZ) < 2
 end
 
 local function isFindPathStuck()

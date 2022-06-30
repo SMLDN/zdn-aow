@@ -193,7 +193,7 @@ function GetTaskInfoById(id, task_rec_key)
         return
     end
     for i = 0, rows - 1 do
-        local taskIndex = player:QueryRecord(rec, i, 2)
+        local taskIndex = player:QueryRecord(rec, i, 0)
         if nx_int(taskIndex) == nx_int(id) then
             return player:QueryRecord(rec, i, task_rec_key)
         end

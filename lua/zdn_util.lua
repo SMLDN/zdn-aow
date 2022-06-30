@@ -132,7 +132,7 @@ end
 -- for debug
 function Console(text)
   local form = nx_value("form_zdn_log")
-  if nx_is_valid(form) and form.Visible then
+  if nx_is_valid(form) then
     nx_execute("form_zdn_log", "Log", text)
   end
 end
