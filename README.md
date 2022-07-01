@@ -22,7 +22,7 @@
 *Update 6/29/2022*  
 *v1.5.0*  
 **Tính năng mới**
-- Q ẩn thế Tinh Miễu Các: xong hết Q ngày, đã hộ trợ Trợ lý. Lưu ý có 2 Q cần dùng song kiếm. Yêu cầu có Song kiếm sử dụng được(cố định) ở ô trang bị hoặc mang sẵn trên người.
+- Q ẩn thế Tinh Miễu Các: xong hết Q ngày, đã hỗ trợ Trợ lý. Lưu ý có 2 Q cần dùng song kiếm. Yêu cầu có Song kiếm sử dụng được(cố định) ở ô trang bị hoặc mang sẵn trên người.
 - Tự bấm phím nhảy 1 số game: Q Tinh Miễu Các, skill Tu la song đao này nọ
 
 **Sửa lỗi**
@@ -50,10 +50,10 @@
 *Update 6/26/2022*  
 *v1.3.0*  
 **Tính năng mới**
-- Gợi ý Đào bảo Lỗ ban: nhìn hướng mũi tên để biết vị trí cần đánh
-  (Thiên →): bên phải ngang NPC
-  (_| Địa): đằng sau bên trái
-  (Huyền |_): đằng sau bên phải
+- Gợi ý Đào bảo Lỗ ban: nhìn hướng mũi tên để biết vị trí cần đánh  
+  (Thiên →): bên phải ngang NPC  
+  (_| Địa): đằng sau bên trái  
+  (Huyền |_): đằng sau bên phải  
   (← Hoàng): bên trái ngang NPC
 
 ---
