@@ -68,7 +68,7 @@ function startQuest()
     local npc1ConfigId = "npc_6n_cc_sxsl_007"
     local npc2ConfigId = "npc_6n_cc_sxsl_004"
     if GetCurMap() ~= map then
-        GoToMapByPublicHomePoint(map)
+        TeleToHomePoint("HomePointcity03C")
         return
     end
 

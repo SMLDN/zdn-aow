@@ -1,5 +1,10 @@
 # Release Note
-*Update 6/29/2022*
+*Update 7/2/2022*
+*v1.6.0*
+**Thay đổi**
+- Q nội 6 Kim Lăng 1: tele về Kim lăng Tây giao cho gần
+
+*Update 6/30/2022*
 *v1.5.1*
 **Sửa lỗi**
 - Q ẩn thế Tinh Miễu Các: bị dừng khi xong Q Cốc Trung Ngộ Kiếm, Q Tạp vụ môn phái k chạy được
