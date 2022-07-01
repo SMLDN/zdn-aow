@@ -1,13 +1,9 @@
+require("zdn_lib\\util_functions")
 require("zdn_util")
+require("zdn_define\\an_the_define")
 
 local Running = false
-local TodoList = {
-    {"Trầm Mặc Thả Câu", "zdn_logic_an_the_tmc_tmtc"},
-    {"Tuần Tra Hòn Đảo", "zdn_logic_an_the_tmc_tthd"},
-    {"Cốc Trung Ngộ Kiếm", "zdn_logic_an_the_tmc_ctnk"},
-    {"Quan Tinh Đài Luyện Kiếm", "zdn_logic_an_the_tmc_qtdlk"},
-    {"Tạp Vụ Môn Phái", "zdn_logic_an_the_tmc_tvmp"}
-}
+local TodoList = {}
 
 function IsRunning()
     return Running
@@ -19,8 +15,11 @@ function CanRun()
         return false
     end
     local cnt = #TodoList
+    if cnt == 0 then
+        loadConfig()
+    end
     for i = 1, cnt do
-        local logic = TodoList[i][2]
+        local logic = TodoList[i][3]
         if nx_execute(logic, "CanRun") then
             return true
         end
@@ -37,6 +36,7 @@ function Start()
         return
     end
     Running = true
+    loadConfig()
     startAnThe()
 end
 
@@ -44,7 +44,7 @@ function Stop()
     Running = false
     local cnt = #TodoList
     for i = 1, cnt do
-        local logic = TodoList[i][2]
+        local logic = TodoList[i][3]
         nx_execute("zdn_logic_common_listener", "Unsubscribe", logic, "on-task-stop", nx_current())
         nx_execute(logic, "Stop")
     end
@@ -65,19 +65,19 @@ function isSpecificNewSchool(ns)
 end
 
 function checkNextTask()
-    Console("Check next quest")
+    Console("Ẩn thế - Check next quest")
     stopAllTaskSilently()
 
     local cnt = #TodoList
     for i = 1, cnt do
-        local logic = TodoList[i][2]
+        local logic = TodoList[i][3]
         if nx_execute(logic, "CanRun") then
-            Console("Next quest: " .. TodoList[i][1])
+            Console("Ẩn thế - Next quest: " .. TodoList[i][2])
             nx_execute(logic, "Start")
             return
         end
     end
-    Console("All quest is done.")
+    Console("Ẩn thế - All quest is done.")
     Stop()
 end
 
@@ -85,7 +85,7 @@ function stopAllTaskSilently()
     local cnt = #TodoList
     unsubscribeAllTaskEvent()
     for i = 1, cnt do
-        local logic = TodoList[i][2]
+        local logic = TodoList[i][3]
         if nx_execute(logic, "IsRunning") then
             nx_execute(logic, "Stop")
         end
@@ -96,7 +96,7 @@ end
 function unsubscribeAllTaskEvent()
     local cnt = #TodoList
     for i = 1, cnt do
-        local logic = TodoList[i][2]
+        local logic = TodoList[i][3]
         nx_execute("zdn_logic_common_listener", "Unsubscribe", logic, "on-task-stop", nx_current())
     end
 end
@@ -104,7 +104,7 @@ end
 function subscribeAllTaskEvent()
     local cnt = #TodoList
     for i = 1, cnt do
-        local logic = TodoList[i][2]
+        local logic = TodoList[i][3]
         nx_execute("zdn_logic_common_listener", "Subscribe", logic, "on-task-stop", nx_current(), "onTaskStop")
     end
 end
@@ -117,14 +117,41 @@ function onTaskStop(logic)
     local logicName = logic
     local cnt = #TodoList
     for i = 1, cnt do
-        local l = TodoList[i][2]
+        local l = TodoList[i][3]
         if l == logic then
-            logicName = TodoList[i][1]
+            logicName = TodoList[i][2]
             break
         end
     end
 
-    Console(logicName .. " stopped")
+    Console("Ẩn thế - " .. logicName .. " stopped")
     nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-interrupt")
     checkNextTask()
+end
+
+function loadConfig()
+    TodoList = {}
+    local disableListStr = nx_string(IniReadUserConfig("AnThe", "DisableList", ""))
+    if disableListStr == "" then
+        TodoList = TASK_LIST
+        return
+    end
+    local disableList = util_split_string(disableListStr, ",")
+    if #disableList == 0 then
+        TodoList = TASK_LIST
+        return
+    end
+
+    for i = 1, #TASK_LIST do
+        local addFlg = true
+        for j = 1, #disableList do
+            if i == nx_number(disableList[j]) then
+                addFlg = false
+                break
+            end
+        end
+        if addFlg then
+            table.insert(TodoList, TASK_LIST[i])
+        end
+    end
 end

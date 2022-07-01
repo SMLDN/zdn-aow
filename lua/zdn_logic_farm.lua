@@ -159,7 +159,7 @@ function getItemIndex(itemName, bag)
     if not nx_is_valid(view) then
         return 0
     end
-    for i = 1, 70 do
+    for i = 1, 100 do
         local viewobj = view:GetViewObj(nx_string(i))
         if nx_is_valid(viewobj) then
             local ConfigID = viewobj:QueryProp("ConfigID")

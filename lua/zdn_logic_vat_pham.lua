@@ -88,7 +88,7 @@ function FindFirstBoundItemIndexByItemType(viewPort, itemType)
     if not nx_is_valid(view) then
         return 0
     end
-    for i = 1, 70 do
+    for i = 1, 100 do
         local obj = view:GetViewObj(nx_string(i))
         if
             nx_is_valid(obj) and nx_string(obj:QueryProp("BindStatus")) == "1" and
@@ -125,7 +125,10 @@ function loopVatPham()
         end
         if not nx_execute("zdn_logic_skill", "HaveBuff", item.buffId) then
             local index = FindItemIndexFromVatPham(item.itemId)
-            UseItem(2, index)
+            if index ~= 0 then
+                UseItem(2, index)
+                nx_pause(0.1)
+            end
         end
     end
 end
@@ -136,7 +139,7 @@ function findItemIndexFromBag(viewPort, configId)
     if not nx_is_valid(view) then
         return 0
     end
-    for i = 1, 70 do
+    for i = 1, 100 do
         local obj = view:GetViewObj(nx_string(i))
         if nx_is_valid(obj) then
             if nx_string(obj:QueryProp("ConfigID")) == configId then

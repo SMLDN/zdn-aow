@@ -3,19 +3,19 @@ require("zdn_util")
 require("zdn_define\\noi6_define")
 
 local Running = false
-local ToDoList = {}
+local TodoList = {}
 
 function IsRunning()
     return Running
 end
 
 function CanRun()
-    local cnt = #ToDoList
+    local cnt = #TodoList
     if cnt == 0 then
         loadConfig()
     end
     for i = 1, cnt do
-        local logic = ToDoList[i][3]
+        local logic = TodoList[i][3]
         if nx_execute(logic, "CanRun") then
             return true
         end
@@ -38,9 +38,9 @@ end
 
 function Stop()
     Running = false
-    local cnt = #ToDoList
+    local cnt = #TodoList
     for i = 1, cnt do
-        local logic = ToDoList[i][3]
+        local logic = TodoList[i][3]
         nx_execute("zdn_logic_common_listener", "Unsubscribe", logic, "on-task-stop", nx_current())
         nx_execute(logic, "Stop")
     end
@@ -51,11 +51,11 @@ function checkNextTask()
     Console("Nội 6 - Check next quest")
     stopAllTaskSilently()
 
-    local cnt = #ToDoList
+    local cnt = #TodoList
     for i = 1, cnt do
-        local logic = ToDoList[i][3]
+        local logic = TodoList[i][3]
         if nx_execute(logic, "CanRun") then
-            Console("Nội 6 -  Next quest: " .. ToDoList[i][2])
+            Console("Nội 6 -  Next quest: " .. TodoList[i][2])
             nx_execute(logic, "Start")
             return
         end
@@ -65,10 +65,10 @@ function checkNextTask()
 end
 
 function stopAllTaskSilently()
-    local cnt = #ToDoList
+    local cnt = #TodoList
     unsubscribeAllTaskEvent()
     for i = 1, cnt do
-        local logic = ToDoList[i][3]
+        local logic = TodoList[i][3]
         if nx_execute(logic, "IsRunning") then
             nx_execute(logic, "Stop")
         end
@@ -77,17 +77,17 @@ function stopAllTaskSilently()
 end
 
 function unsubscribeAllTaskEvent()
-    local cnt = #ToDoList
+    local cnt = #TodoList
     for i = 1, cnt do
-        local logic = ToDoList[i][3]
+        local logic = TodoList[i][3]
         nx_execute("zdn_logic_common_listener", "Unsubscribe", logic, "on-task-stop", nx_current())
     end
 end
 
 function subscribeAllTaskEvent()
-    local cnt = #ToDoList
+    local cnt = #TodoList
     for i = 1, cnt do
-        local logic = ToDoList[i][3]
+        local logic = TodoList[i][3]
         nx_execute("zdn_logic_common_listener", "Subscribe", logic, "on-task-stop", nx_current(), "onTaskStop")
     end
 end
@@ -98,11 +98,11 @@ end
 
 function onTaskStop(logic)
     local logicName = logic
-    local cnt = #ToDoList
+    local cnt = #TodoList
     for i = 1, cnt do
-        local l = ToDoList[i][3]
+        local l = TodoList[i][3]
         if l == logic then
-            logicName = ToDoList[i][2]
+            logicName = TodoList[i][2]
             break
         end
     end
@@ -113,15 +113,15 @@ function onTaskStop(logic)
 end
 
 function loadConfig()
-    ToDoList = {}
+    TodoList = {}
     local disableListStr = nx_string(IniReadUserConfig("NhiemVuNoi6", "DisableList", ""))
     if disableListStr == "" then
-        ToDoList = TASK_LIST
+        TodoList = TASK_LIST
         return
     end
     local disableList = util_split_string(disableListStr, ",")
     if #disableList == 0 then
-        ToDoList = TASK_LIST
+        TodoList = TASK_LIST
         return
     end
 
@@ -134,7 +134,7 @@ function loadConfig()
             end
         end
         if addFlg then
-            table.insert(ToDoList, TASK_LIST[i])
+            table.insert(TodoList, TASK_LIST[i])
         end
     end
 end

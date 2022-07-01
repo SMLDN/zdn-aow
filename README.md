@@ -1,11 +1,14 @@
 # Release Note
-*Update 7/2/2022*
+*Update 7/1/2022*
 *v1.6.0*
 **Tính năng mới**
-- Q nội 6: tách Q ra, thiết lập đc Q muốn bỏ
-
+- Q nội 6: tách Q ra, thiết lập đc Q không muốn chạy
+- Q ẩn thế: tách Q ra, thiết lập đc Q không muốn chạy
 **Thay đổi**
 - Q nội 6 Kim Lăng 1: tele về Kim lăng Tây giao cho gần
+**Sửa lỗi**
+- Vật phẩm: đồ để ở vài hàng cuối cùng k được sử dụng
+
 
 *Update 6/30/2022*
 *v1.5.1*
