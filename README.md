@@ -76,12 +76,12 @@
 - Q nội 6 Lạc dương: làm mới lại, sửa hẳn lỗi xong Q k load đc map
 
 ---
-*v1.0.2*
+*v1.0.2*  
 **Thay đổi**
 - Thụ nghiệp: cho hết về Lạc Dương
 
 ---
-*v1.0.1*
+*v1.0.1*  
 **Tính năng mới**
 - Do thám: tự động dùng Ma khí tung hoành để tự sát
 - Do thám: thêm chế độ tự sát nhanh(không nên dùng nếu không muốn bị report)
