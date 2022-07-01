@@ -1,6 +1,9 @@
 # Release Note
 *Update 7/2/2022*
 *v1.6.0*
+**Tính năng mới**
+- Q nội 6: tách Q ra, thiết lập đc Q muốn bỏ
+
 **Thay đổi**
 - Q nội 6 Kim Lăng 1: tele về Kim lăng Tây giao cho gần
 

@@ -1,3 +1,4 @@
+require("util_gui")
 require("zdn_form_common")
 
 local Logic = "zdn_logic_noi6"
@@ -28,4 +29,8 @@ end
 
 function onFormClose()
 	nx_execute("zdn_logic_common_listener", "Unsubscribe", Logic, "on-task-stop", nx_current())
+end
+
+function onBtnSettingClick()
+	util_auto_show_hide_form("form_zdn_noi6_setting")
 end
