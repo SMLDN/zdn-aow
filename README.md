@@ -4,10 +4,8 @@
 **Tính năng mới**
 - Q nội 6: tách Q ra, thiết lập đc Q không muốn chạy
 - Q ẩn thế: tách Q ra, thiết lập đc Q không muốn chạy
-
 **Thay đổi**
 - Q nội 6 Kim Lăng 1: tele về Kim lăng Tây giao cho gần
-
 **Sửa lỗi**
 - Vật phẩm: đồ để ở vài hàng cuối cùng k được sử dụng
 
