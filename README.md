@@ -124,23 +124,23 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
 3). Vào game như bình thường
 
 ## Các lệnh cơ bản
- /tl : trợ lý
- /skill
- /atk : đánh
- /vt
- /tn
- /lc
- /shop
- /ct
- /hk
- /vp : sử dụng vật phẩm
- /thth
- /farm
- /n6
- /tt : thiên thê
- /ltt : lăng tiêu
- /tq : thích quán
- /kn : thiết lập nhận, bỏ kỳ ngộ
- /anthe : q ẩn thế Tinh Miễu Các
- /ot : ôn tuyền
- /tho : bắt thỏ
+ /tl : trợ lý  
+ /skill  
+ /atk : đánh  
+ /vt  
+ /tn  
+ /lc  
+ /shop  
+ /ct  
+ /hk  
+ /vp : sử dụng vật phẩm  
+ /thth  
+ /farm  
+ /n6  
+ /tt : thiên thê  
+ /ltt : lăng tiêu  
+ /tq : thích quán  
+ /kn : thiết lập nhận, bỏ kỳ ngộ  
+ /anthe : q ẩn thế Tinh Miễu Các  
+ /ot : ôn tuyền  
+ /tho : bắt thỏ  
