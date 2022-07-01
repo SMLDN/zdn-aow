@@ -1,4 +1,5 @@
 # Release Note
+---
 *Update 7/1/2022*  
 *v1.6.0*  
 **Tính năng mới**
@@ -11,12 +12,13 @@
 **Sửa lỗi**
 - Vật phẩm: đồ để ở vài hàng cuối cùng k được sử dụng
 
-
+---
 *Update 6/30/2022*  
 *v1.5.1*  
 **Sửa lỗi**
 - Q ẩn thế Tinh Miễu Các: bị dừng khi xong Q Cốc Trung Ngộ Kiếm, Q Tạp vụ môn phái k chạy được
 
+---
 *Update 6/29/2022*  
 *v1.5.0*  
 **Tính năng mới**
@@ -26,6 +28,7 @@
 **Sửa lỗi**
 - Bắt thỏ: không target vào thỏ :D
 
+---
 *Update 6/28/2022*  
 *v1.4.0*  
 **Tính năng mới**
@@ -37,11 +40,13 @@
 - Vật phẩm: thỉnh thoảng hiện bảng báo lỗi
 - Kỳ ngộ: không nói chuyện với NPC(chưa có điều kiện test)
 
+---
 *Update 6/27/2022*  
 *v1.3.1*  
 **Sửa lỗi**
 - Q nội 6 Lạc dương: hiện lỗi khi chuyển vào map ném đá
 
+---
 *Update 6/26/2022*  
 *v1.3.0*  
 **Tính năng mới**
@@ -51,6 +56,7 @@
   (Huyền |_): đằng sau bên phải
   (← Hoàng): bên trái ngang NPC
 
+---
 *Update 6/26/2022*  
 *v1.2.0*  
 **Tính năng mới**
@@ -59,6 +65,7 @@
   Hiện tại để check kỳ ngộ đã nhận được nhờ auto thì vào file tênacc.ini check phần [KyNgo]
   Chưa bật tắt được nhận Kỳ ngộ(mặc định là chạy suốt)
 
+---
 *Update 6/24/2022*  
 *v1.1.0*  
 **Tính năng mới**
@@ -68,12 +75,12 @@
 - Do thám: Nhân vật thuộc Thần cơ doanh không do thám được
 - Q nội 6 Lạc dương: làm mới lại, sửa hẳn lỗi xong Q k load đc map
 
-
+---
 *v1.0.2*
 **Thay đổi**
 - Thụ nghiệp: cho hết về Lạc Dương
 
-
+---
 *v1.0.1*
 **Tính năng mới**
 - Do thám: tự động dùng Ma khí tung hoành để tự sát
@@ -90,7 +97,7 @@
 - Thụ Nghiệp: ẩn thế Tinh Miễu Các, Minh Giáo, Thiên Sơn k tự động thụ nghiệp dc.
 - Q nội 6 Lạc dương lúc xong Q map k load được
 
-
+---
 *v1.0.0*  
 **Tính năng mới**
 - Do thám(đã chạy được cho Tinh Miễu Các, Thiên Sơn. Chưa có điều kiện test kỹ, nên có gì báo lại mình)
@@ -102,7 +109,7 @@
 - Tung hoành tứ hải: hiện lỗi khi mở thích quán cấp 2
 
 
------------
+---
 # zdn-aow
 Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
 
