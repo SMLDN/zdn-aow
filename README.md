@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/2/2022*  
+*v1.7.0*  
+**Thay đổi**
+- Q ẩn thế TMC Tuần tra hòn đảo: tối ứu đường chạy cho k vấp đá, tắt giữ chừng k bị chạy lại từ đầu  
+
+---
 *Update 7/1/2022*  
 *v1.6.0*  
 **Tính năng mới**
