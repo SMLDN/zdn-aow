@@ -4,6 +4,7 @@
 *v1.7.0*  
 **Thay đổi**
 - Q ẩn thế TMC Tuần tra hòn đảo: tối ứu đường chạy cho k vấp đá, tắt giữa chừng sẽ k bị chạy lại từ đầu  
+- Hỗ trợ Windows k cài sẵn Microsoft Visual C++ Redistributable
 
 ---
 *Update 7/1/2022*  
@@ -51,7 +52,6 @@
 *v1.3.1*  
 **Sửa lỗi**
 - Q nội 6 Lạc dương: hiện lỗi khi chuyển vào map ném đá
-- Hỗ trợ Windows k cài sẵn Microsoft Visual C++ Redistributable
 
 ---
 *Update 6/26/2022*  
