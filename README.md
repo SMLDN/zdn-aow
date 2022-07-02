@@ -51,6 +51,7 @@
 *v1.3.1*  
 **Sửa lỗi**
 - Q nội 6 Lạc dương: hiện lỗi khi chuyển vào map ném đá
+- Hỗ trợ Windows k cài sẵn Microsoft Visual C++ Redistributable
 
 ---
 *Update 6/26/2022*  
