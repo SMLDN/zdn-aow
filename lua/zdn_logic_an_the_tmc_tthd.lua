@@ -7,15 +7,10 @@ local QUEST_ID = "tmc_tthd"
 local NPC_POS = {-196.96806335449, 249.9920501709, 182.35424804688}
 local NPC_CONFIG_ID = "npcmp_lzy_xmg_drrc_001"
 local NPC_MAP = "school23"
-local TALK_OBJ_LIST = {
-    {"npcmp_lzy_xmg_drrc_001_c", false},
-    {"npcmp_lzy_xmg_drrc_001_a", false},
-    {"npcmp_lzy_xmg_drrc_001_b", false}
-}
 local QUAN_TINH_DAO_TELE_POINT = "GotoDoorxmg_jch01"
 local TINH_MIEU_CAC_TELE_POINT = "GotoDoorxmg_jch02"
-
-local onDoingQuest = false
+local TASK_INDEX = 74253
+local NPC_B_FIX_POS = {-327.05551147461, 211.60801696777, 678.62316894531}
 
 function IsRunning()
     return Running
@@ -44,7 +39,6 @@ function Start()
         return
     end
     Running = true
-    onDoingQuest = false
     while Running do
         loopAnThe()
         nx_pause(0.2)
@@ -85,12 +79,13 @@ function loopAnThe()
         TeleToSchoolHomePoint()
         return
     end
-
-    if onDoingQuest then
-        doQuest()
-        return
+    if isReceiveQuest() then
+        if not nx_execute("zdn_logic_base", "CanTaskSubmit", TASK_INDEX) then
+            doQuest()
+            return
+        end
     elseif isOnQuanTinhDao() then
-        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT_TELE_POINT)
+        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
         return
     end
 
@@ -152,61 +147,38 @@ function isQuestNpc(obj)
 end
 
 function doQuest()
-    for i = 1, #TALK_OBJ_LIST do
-        local state = TALK_OBJ_LIST[i][2]
-        if not state then
-            runToNpcAndTalk(i)
-            return
-        end
+    local targetNpc = nx_execute("zdn_logic_base", "FilterTaskInfoById", 74253, 6, 4, nx_string(0))
+    if targetNpc ~= nil and string.len(targetNpc) > 4 then
+        runToNpcAndTalk(targetNpc)
     end
-    if isOnQuanTinhDao() then
-        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
-        return
-    end
-    onDoingQuest = false
 end
 
-function runToNpcAndTalk(i)
-    if i == 3 then
+function runToNpcAndTalk(npcConfigId)
+    if npcConfigId == "npcmp_lzy_xmg_drrc_001_b" then
         if not isOnQuanTinhDao() then
             GoToNpc(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
             return
+        else
+            local x, y, z = GetNpcPostion(NPC_MAP, npcConfigId)
+            if GetDistance(x, y, z) > 35 then
+                GoToPosition(NPC_B_FIX_POS[1], NPC_B_FIX_POS[2], NPC_B_FIX_POS[3])
+                return
+            end
         end
+    elseif isOnQuanTinhDao() then
+        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+        return
     end
-    local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "is" .. nx_string(i) .. "QuestTalkObj")
+    local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "is_" .. nx_string(npcConfigId))
     if not nx_is_valid(npc) then
-        GoToNpc(NPC_MAP, TALK_OBJ_LIST[i][1])
+        GoToNpc(NPC_MAP, npcConfigId)
         return
     end
     if GetDistanceToObj(npc) > 3 then
         GoToObj(npc)
         return
     end
-    if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
-        nx_pause(3)
-        if not nx_is_valid(npc) then
-            return
-        end
-        if nx_find_custom(npc, "Head_Effect_Flag") and nx_string(npc.Head_Effect_Flag) == nx_string(0) then
-            TALK_OBJ_LIST[i][2] = true
-            return
-        end
-    end
-
     TalkToNpc(npc, 0)
-    TALK_OBJ_LIST[i][2] = true
-end
-
-function is1QuestTalkObj(obj)
-    return obj:QueryProp("ConfigID") == TALK_OBJ_LIST[1][1]
-end
-
-function is2QuestTalkObj(obj)
-    return obj:QueryProp("ConfigID") == TALK_OBJ_LIST[2][1]
-end
-
-function is3QuestTalkObj(obj)
-    return obj:QueryProp("ConfigID") == TALK_OBJ_LIST[3][1]
 end
 
 function isOnQuanTinhDao()
@@ -215,4 +187,20 @@ function isOnQuanTinhDao()
         return true
     end
     return false
+end
+
+function isReceiveQuest()
+    return nx_execute("zdn_logic_base", "GetTaskInfoById", 74253, 0) == 74253
+end
+
+function is_npcmp_lzy_xmg_drrc_001_a(obj)
+    return obj:QueryProp("ConfigID") == "npcmp_lzy_xmg_drrc_001_a"
+end
+
+function is_npcmp_lzy_xmg_drrc_001_b(obj)
+    return obj:QueryProp("ConfigID") == "npcmp_lzy_xmg_drrc_001_b"
+end
+
+function is_npcmp_lzy_xmg_drrc_001_c(obj)
+    return obj:QueryProp("ConfigID") == "npcmp_lzy_xmg_drrc_001_c"
 end
