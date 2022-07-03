@@ -16,6 +16,8 @@ local ITEMTYPE_WEAPON_SSWORD = 105
 local TimerStartThiLuyen = 0
 local TimerCheckWeapon = 0
 local TimerSpecialSkill = 0
+local TimerQuanTinhDao = 0
+local TimerLeaveQuanTinhDao = 0
 
 function IsRunning()
     return Running
@@ -89,7 +91,7 @@ function loopAnThe()
         doQuest()
         return
     elseif isOnQuanTinhDao() then
-        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+        leaveQuanTinhDao()
         return
     end
 
@@ -142,11 +144,7 @@ end
 
 function doQuest()
     if not isOnQuanTinhDao() then
-        local obj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isQuanTinhDaoTelepoint")
-        if nx_is_valid(obj) and GetDistanceToObj(obj) <= 1.5 then
-            return
-        end
-        GoToNpc(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
+        goToQuanTinhDao()
         return
     end
     doQuanTinhDao()
@@ -289,4 +287,35 @@ function checkWeapon()
         local i = nx_execute("zdn_logic_vat_pham", "FindFirstBoundItemIndexByItemType", 121, ITEMTYPE_WEAPON_SSWORD)
         nx_execute("zdn_logic_vat_pham", "UseWeapon", i)
     end
+end
+
+function leaveQuanTinhDao()
+    if TimerDiff(TimerLeaveQuanTinhDao) < 11 then
+        return
+    end
+    if TimerDiff(TimerLeaveQuanTinhDao) >= 11 and TimerDiff(TimerLeaveQuanTinhDao) < 13 then
+        local role = nx_value("role")
+        if nx_is_valid(role) and role.state == "static" then
+            nx_call("player_state\\state_input", "emit_player_input", role, 9)
+        end
+        return
+    end
+    local x, y, z = GetNpcPostion(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+    if GetDistance(x, y, z) <= 1 then
+        TimerLeaveQuanTinhDao = TimerInit()
+        return
+    end
+    GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+end
+
+function goToQuanTinhDao()
+    if TimerDiff(TimerQuanTinhDao) < 7 then
+        return
+    end
+    local x, y, z = GetNpcPostion(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
+    if GetDistance(x, y, z) <= 1 then
+        TimerQuanTinhDao = TimerInit()
+        return
+    end
+    GoToNpc(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
 end

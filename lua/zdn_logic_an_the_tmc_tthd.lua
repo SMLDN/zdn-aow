@@ -11,6 +11,8 @@ local QUAN_TINH_DAO_TELE_POINT = "GotoDoorxmg_jch01"
 local TINH_MIEU_CAC_TELE_POINT = "GotoDoorxmg_jch02"
 local TASK_INDEX = 74253
 local NPC_B_FIX_POS = {-327.05551147461, 211.60801696777, 678.62316894531}
+local TimerQuanTinhDao = 0
+local TimerLeaveQuanTinhDao = 0
 
 function IsRunning()
     return Running
@@ -85,7 +87,7 @@ function loopAnThe()
             return
         end
     elseif isOnQuanTinhDao() then
-        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+        leaveQuanTinhDao()
         return
     end
 
@@ -156,7 +158,7 @@ end
 function runToNpcAndTalk(npcConfigId)
     if npcConfigId == "npcmp_lzy_xmg_drrc_001_b" then
         if not isOnQuanTinhDao() then
-            GoToNpc(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
+            goToQuanTinhDao()
             return
         else
             local x, y, z = GetNpcPostion(NPC_MAP, npcConfigId)
@@ -166,7 +168,7 @@ function runToNpcAndTalk(npcConfigId)
             end
         end
     elseif isOnQuanTinhDao() then
-        GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+        leaveQuanTinhDao()
         return
     end
     local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "is_" .. nx_string(npcConfigId))
@@ -203,4 +205,35 @@ end
 
 function is_npcmp_lzy_xmg_drrc_001_c(obj)
     return obj:QueryProp("ConfigID") == "npcmp_lzy_xmg_drrc_001_c"
+end
+
+function leaveQuanTinhDao()
+    if TimerDiff(TimerLeaveQuanTinhDao) < 11 then
+        return
+    end
+    if TimerDiff(TimerLeaveQuanTinhDao) >= 11 and TimerDiff(TimerLeaveQuanTinhDao) < 13 then
+        local role = nx_value("role")
+        if nx_is_valid(role) and role.state == "static" then
+            nx_call("player_state\\state_input", "emit_player_input", role, 9)
+        end
+        return
+    end
+    local x, y, z = GetNpcPostion(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+    if GetDistance(x, y, z) <= 1 then
+        TimerLeaveQuanTinhDao = TimerInit()
+        return
+    end
+    GoToNpc(NPC_MAP, TINH_MIEU_CAC_TELE_POINT)
+end
+
+function goToQuanTinhDao()
+    if TimerDiff(TimerQuanTinhDao) < 7 then
+        return
+    end
+    local x, y, z = GetNpcPostion(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
+    if GetDistance(x, y, z) <= 1 then
+        TimerQuanTinhDao = TimerInit()
+        return
+    end
+    GoToNpc(NPC_MAP, QUAN_TINH_DAO_TELE_POINT)
 end
