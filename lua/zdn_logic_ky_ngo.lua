@@ -157,9 +157,3 @@ function isTargetingPlayer(obj)
     end
     return nx_string(player.Ident) == nx_string(obj:QueryProp("LastObject"))
 end
-
-function stopGlobalTask()
-end
-
-function continueGlobalTask()
-end
