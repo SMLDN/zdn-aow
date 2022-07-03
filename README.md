@@ -1,9 +1,10 @@
 # Release Note
 ---
 *Update 7/3/2022*  
-*v1.7.0*  
+*v1.6.2*  
 **Thay đổi**
 - Q ẩn thế Tinh Miễu Các: khắc phục tình trạng dịch chuyển từ Quan Tinh Đảo về Tinh Miễu Các thỉnh thoảng bị lag vị trí nhân vật dẫn đến tình trạng nhân vật đứng im. Cái này là do game gốc bị lỗi. Cụ thể thì là do trên server nhân vật mình đã ở phía TMC rồi nhưng client vẫn là ở trên QTĐ. Lúc bị lag vị trí mình chỉ cho nhân vật nhảy lên một cái để game sửa lại vị trí. Game gốc cũng như thế, k phải blink nên mọi người yên tâm nhé. 
+- Kỳ ngộ: không nói chuyện với NPC(vẫn là chưa có điều kiện test)
 
 ---
 *Update 7/2/2022*  

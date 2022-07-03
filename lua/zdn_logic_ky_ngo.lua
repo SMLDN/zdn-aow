@@ -11,7 +11,7 @@ function OnReceiveKyNgo(npcId)
     if not loaded then
         LoadConfig()
     end
-    Console("nhan ky ngo moi: " .. nx_string(npcId))
+    Console("Nhận kỳ ngộ: " .. nx_string(npcId))
     if needAcceptKyNgo(npcId) then
         acceptKyNgo(npcId)
     end
@@ -98,7 +98,7 @@ function doAcceptByMail(npcId)
 end
 
 function doAcceptByTalk(npcId)
-    local lastNpcId = npcId
+    lastNpcId = npcId
     local npc = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLastConfigId", "isTargetingPlayer")
     if nx_is_valid(npc) then
         return doTalkToNpc(npc)
