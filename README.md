@@ -9,7 +9,7 @@
 *Update 7/2/2022*  
 *v1.6.1*  
 **Thay đổi**
-- Q ẩn thế TMC Tuần tra hòn đảo: tối ứu đường chạy cho k vấp đá, tắt giữa chừng sẽ k bị chạy lại từ đầu  
+- Q ẩn thế TMC Tuần tra hòn đảo: tối ưu đường chạy cho k vấp đá, tắt giữa chừng sẽ k bị chạy lại từ đầu  
 - Hỗ trợ Windows k cài sẵn Microsoft Visual C++ Redistributable
 
 ---
