@@ -531,14 +531,15 @@ function useSkillById(skillId)
 end
 
 function getTargetObj()
-    if not nx_is_valid(nx_value("game_client")) then
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
         return
     end
-    local player = nx_value("game_client"):GetPlayer()
+    local player = client:GetPlayer()
     if not nx_is_valid(player) then
         return
     end
-    return nx_value("game_client"):GetSceneObj(nx_string(player:QueryProp("LastObject")))
+    return client:GetSceneObj(nx_string(player:QueryProp("LastObject")))
 end
 
 function isParry()

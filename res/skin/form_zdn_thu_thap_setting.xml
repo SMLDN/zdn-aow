@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+    <control name="main_form" entity="Form" script="form_zdn_thu_thap_setting" init="formInit">
+        <prop LimitInScreen="true" ShowGrid="true" Width="500" Height="400" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
+        <event on_open="formOpen" on_close="formClose" />
+
+        <control name="btn_close" entity="Button" script="" init="">
+            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="470" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
+            <event on_click="onBtnCloseClick" />
+        </control>
+
+        <control name="lbl_title" entity="Label" script="" init="">
+            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="500" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Thiết lập thu thập" Font="font_title" />
+        </control>
+
+        <control name="position_grid" entity="Grid" script="" init="">
+            <prop ShowComment="true" HeaderRowHeight="1" HeaderBackColor="0,255,255,255" SelectForeColor="255,255,255,255" SelectBackColor="0,147,123,99" CanSelectRow="true" ColWidth="150" ColWidths="150,120,80,25,25,37" RowHeight="30" ColCount="6" ScrollSize="17" HasHScroll="true" AlwaysVScroll="false" AlwaysHScroll="false" Solid="true" Left="20" Top="39" Width="470" Height="280" ForeColor="255,255,255,255" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
+             <subor name="VScrollBar">
+                <prop ButtonSize="17" Maximum="10" SmallChange="1" LargeChange="5" BackColor="0,224,224,224" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" />
+                <subor name="DecButton">
+                    <prop NormalImage="gui\common\scrollbar\button_1\btn_up_out.png" FocusImage="gui\common\scrollbar\button_1\btn_up_on.png" PushImage="gui\common\scrollbar\button_1\btn_up_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="18" Height="18" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" />
+                </subor>
+                <subor name="IncButton">
+                    <prop NormalImage="gui\common\scrollbar\button_1\btn_down_out.png" FocusImage="gui\common\scrollbar\button_1\btn_down_on.png" PushImage="gui\common\scrollbar\button_1\btn_down_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="17" Height="17" BackColor="255,192,192,192" ShadowColor="0,0,0,0" />
+                </subor>
+                <subor name="TrackButton">
+                    <prop NormalImage="gui\common\scrollbar\button_1\btn_trace_out.png" FocusImage="gui\common\scrollbar\button_1\btn_trace_on.png" PushImage="gui\common\scrollbar\button_1\btn_trace_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="17" Height="8" BackColor="255,192,192,192" ShadowColor="0,0,0,0" DrawMode="Expand" />
+                </subor>
+            </subor>
+        </control>
+
+        <control name="add_position" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="0,0,206,154" LineHeight="15" HtmlText='<a href="">Thêm đối tượng</a>' ScrollSize="17" Left="20" Top="335" Width="80" Height="24" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnAddPositionClick" />
+        </control>
+
+        <control name="btn_save" entity="Button" script="" init="">
+            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="385" Top="355" Width="100" Height="32" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Lưu" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <event on_click="onBtnSaveClick" />
+        </control>
+    </control>
+</form>
