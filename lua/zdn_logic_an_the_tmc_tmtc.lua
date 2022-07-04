@@ -4,8 +4,7 @@ require("zdn_lib_moving")
 
 local Running = false
 local QUEST_ID = "tmc_tmtc"
-local NPC_POS = {-148.07006835938, 283.802734375, -227.43026733398}
-local QUEST_POS = {-118.70923614502, 280.02740478516, -208.99850463867}
+local QUEST_POS = {-121.50208282471, 279.43301391602, -206.59782409668}
 local QUEST_OBJ_CONFIG_ID = "Gather_xmgguj_001"
 local NPC_CONFIG_ID = "newmp_gujxmg_004"
 local NPC_MAP = "school23"

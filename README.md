@@ -2,6 +2,9 @@
 ---
 *Update 7/4/2022*  
 *v1.6.3*  
+**Thay đổi**
+- Q ẩn thế TMC Trầm mặc thả câu: chỉnh lại vị trí câu cá để đỡ bị vấp đường đi
+
 **Sửa lỗi**
 - Vật phẩm: thỉnh thoảng cắn mãi một vật phẩm cần niệm chú
 
