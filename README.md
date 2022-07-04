@@ -1,6 +1,6 @@
 # Release Note
 ---
-*Update 7/4/2022*  
+*Update 7/xx/2022*  
 *v1.7.0*  
 **Tính năng mới**
 - Bảng Trợ lý: thêm trạng thái của tác vụ
