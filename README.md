@@ -1,5 +1,12 @@
 # Release Note
 ---
+*Update 7/4/2022*  
+*v1.6.3*  
+**Sửa lỗi**
+- Vật phẩm: thỉnh thoảng cắn mãi một vật phẩm cần niệm chú
+
+
+---
 *Update 7/3/2022*  
 *v1.6.2*  
 **Thay đổi**

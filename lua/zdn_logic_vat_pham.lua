@@ -67,9 +67,11 @@ function FindItemIndexFromNhiemVu(configId)
 end
 
 function UseItem(viewPort, index)
-    if index ~= 0 then
+    if index ~= 0 and not isCurseLoading() then
         nx_execute("custom_sender", "custom_use_item", viewPort, index)
+        return true
     end
+    return false
 end
 
 function UseWeapon(index)
@@ -125,8 +127,7 @@ function loopVatPham()
         end
         if not nx_execute("zdn_logic_skill", "HaveBuff", item.buffId) then
             local index = FindItemIndexFromVatPham(item.itemId)
-            if index ~= 0 then
-                UseItem(2, index)
+            if UseItem(2, index) then
                 nx_pause(0.1)
             end
         end
@@ -168,4 +169,12 @@ function loadConfig()
         end
     end
     return loaded
+end
+
+function isCurseLoading()
+    local load = nx_value("form_stage_main\\form_main\\form_main_curseloading")
+    if nx_is_valid(load) and load.Visible then
+        return true
+    end
+    return false
 end
