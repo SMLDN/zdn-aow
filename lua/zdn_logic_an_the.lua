@@ -11,7 +11,6 @@ end
 
 function CanRun()
     if not isSpecificNewSchool("newschool_xingmiao") then
-        ShowText("Hiện chỉ hỗ trợ Tinh Miễu Các")
         return false
     end
     local cnt = #TodoList
@@ -36,6 +35,11 @@ function Start()
         return
     end
     Running = true
+    if not isSpecificNewSchool("newschool_xingmiao") then
+        ShowText("Hiện chỉ hỗ trợ Tinh Miễu Các")
+        Stop()
+        return
+    end
     loadConfig()
     startAnThe()
 end

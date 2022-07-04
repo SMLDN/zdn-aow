@@ -27,7 +27,7 @@ TASK_LIST = {
 	{
 		"Nhiệm Vụ Nội 6",
 		"zdn_logic_noi6",
-		"form_zdn_noi6"
+		"form_zdn_noi6_setting"
 	},
 	{
 		"Thiên Thê",
@@ -42,6 +42,6 @@ TASK_LIST = {
 	{
 		"Nhiệm Vụ Ẩn Thế",
 		"zdn_logic_an_the",
-		"form_zdn_an_the"
+		"form_zdn_an_the_setting"
 	}
 }

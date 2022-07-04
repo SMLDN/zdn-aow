@@ -3,7 +3,6 @@ require("zdn_lib\\util_functions")
 require("zdn_form_common")
 require("zdn_define\\task_define")
 
-
 function onFormOpen()
 	local cnt = #TASK_LIST
 	Form.cbx_task_list.DropListBox:ClearString()
@@ -67,6 +66,7 @@ function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked)
 	Form.task_grid:SetGridControl(gridIndex, 2, downBtn)
 	Form.task_grid:SetGridControl(gridIndex, 3, settingBtn)
 	Form.task_grid:SetGridControl(gridIndex, 4, delBtn)
+	Form.task_grid:SetGridText(gridIndex, 5, getTaskStatus(taskListIndex))
 	Form.task_grid:EndUpdate()
 end
 
@@ -92,7 +92,7 @@ function createCheckboxButton(checked, txt)
 	btn.DisableColor = "0,0,0,0"
 	btn.PushBlendColor = "255,255,255,255"
 	btn.DisableBlendColor = "255,255,255,255"
-	btn.Width = 126
+	btn.Width = 170
 	btn.Height = 22
 	btn.BackColor = "255,192,192,192"
 	btn.ForeColor = "255,255,255,255"
@@ -300,7 +300,7 @@ function onBtnDownRowClick(btn)
 	if gridIndex == cnt then
 		return
 	end
-	local lowerTaskListIndex = Form.task_grid:GetGridControl(gridIndex + 1 , 4).btn.TaskListIndex
+	local lowerTaskListIndex = Form.task_grid:GetGridControl(gridIndex + 1, 4).btn.TaskListIndex
 	local lowerChecked = Form.task_grid:GetGridControl(gridIndex + 1, 0).btn.Checked
 	addRowToPositionGridByGridIndex(gridIndex, lowerTaskListIndex, lowerChecked)
 	Form.task_grid:BeginUpdate()
@@ -326,6 +326,43 @@ function getGridIndex(columnIndex, btn)
 		local b = ctl.btn
 		if nx_id_equal(btn, b) then
 			return i
+		end
+	end
+end
+
+function getTaskStatus(index)
+	local logic = TASK_LIST[index][2]
+	if nx_execute(logic, "IsRunning") then
+		return Utf8ToWstr("Đang chạy...")
+	end
+	if nx_execute(logic, "IsTaskDone") then
+		return Utf8ToWstr("Đã xong")
+	end
+	return nx_widestr("-")
+end
+
+function onHyperCheckAllClick()
+	local cnt = Form.task_grid.RowCount
+	for i = 1, cnt do
+		local cbtn = Form.task_grid:GetGridControl(i - 1, 0)
+		if nx_is_valid(cbtn) then
+			local btn = cbtn.btn
+			if nx_is_valid(btn) and not btn.Checked then
+				btn.Checked = true
+			end
+		end
+	end
+end
+
+function onHyperUncheckAllClick()
+	local cnt = Form.task_grid.RowCount
+	for i = 1, cnt do
+		local cbtn = Form.task_grid:GetGridControl(i - 1, 0)
+		if nx_is_valid(cbtn) then
+			local btn = cbtn.btn
+			if nx_is_valid(btn) and btn.Checked then
+				btn.Checked = false
+			end
 		end
 	end
 end
