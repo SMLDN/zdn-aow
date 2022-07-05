@@ -3,6 +3,7 @@ require("zdn_lib\\util_functions")
 
 local ItemList = {}
 local Running = false
+local TimerCurseLoading = 0
 local FORM_DROPPICK_PATH = "form_stage_main\\form_pick\\form_droppick"
 
 function Start()
@@ -40,7 +41,7 @@ function PickAllDropItem()
     end
     local cnt = form.nMaxIndexCount
     local timeOut = TimerInit()
-    while Running and cnt == 0 and TimerDiff(timeOut) < 1.5 do
+    while cnt == 0 and TimerDiff(timeOut) < 1.5 do
         if not nx_is_valid(form) or not form.Visible or not nx_find_custom(form, "nMaxIndexCount") then
             break
         end
@@ -51,7 +52,7 @@ function PickAllDropItem()
         nx_execute("custom_sender", "custom_pickup_single_item", i)
     end
     timeOut = TimerInit()
-    while Running and nx_is_valid(form) and form.Visible and cnt > 0 and TimerDiff(timeOut) < 1.5 do
+    while nx_is_valid(form) and form.Visible and cnt > 0 and TimerDiff(timeOut) < 1.5 do
         cnt = form.nMaxIndexCount
         nx_pause(0)
     end
@@ -174,7 +175,7 @@ end
 function isCurseLoading()
     local load = nx_value("form_stage_main\\form_main\\form_main_curseloading")
     if nx_is_valid(load) and load.Visible then
-        return true
+        TimerCurseLoading = TimerInit()
     end
-    return false
+    return TimerDiff(TimerCurseLoading) < 0.5
 end

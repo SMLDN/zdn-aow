@@ -3,23 +3,22 @@ require("zdn_util")
 require("zdn_form_common")
 require("zdn_lib_moving")
 
+local SHAPE_DEFINE = {
+	["14"] = "Chặt cây",
+	["6"] = "Đào khoáng"
+}
+
 function onBtnAddPositionClick()
 	local map = GetCurMap()
 	local obj = getTargetObj()
 	if not nx_is_valid(obj) then
 		return
 	end
-	local vObj = getVisualObj(obj)
-	local posX = vObj.PositionX
-	local posY = vObj.PositionY
-	local posZ = vObj.PositionZ
+	local posX, posY, posZ = GetPlayerPosition()
 	local shape = obj:QueryProp("CursorShape")
 	local configId = obj:QueryProp("ConfigID")
 	if isExists(configId, map, posX, posY, posZ) then
 		ShowText("Đối tượng đã được thêm từ trước")
-		return
-	end
-	if nx_string(shape) ~= "14" then
 		return
 	end
 	addRowToPositionGridByGridIndex(Form.position_grid.RowCount, configId, shape, map, posX, posY, posZ, true)
@@ -86,6 +85,10 @@ function addRowToPositionGridByGridIndex(gridIndex, configId, shape, map, posX, 
 	local upBtn = createUpButton()
 	local downBtn = createDownButton()
 	local delBtn = createDeleteButton()
+	local shapeLbl = nx_widestr("-")
+	if SHAPE_DEFINE[nx_string(shape)] ~= nil then
+		shapeLbl = Utf8ToWstr(SHAPE_DEFINE[nx_string(shape)])
+	end
 
 	Form.position_grid:BeginUpdate()
 	Form.position_grid:InsertRow(gridIndex)
@@ -95,7 +98,7 @@ function addRowToPositionGridByGridIndex(gridIndex, configId, shape, map, posX, 
 		1,
 		util_text(map) .. nx_widestr(" ") .. nx_widestr(math.floor(posX) .. "," .. math.floor(posZ))
 	)
-	Form.position_grid:SetGridText(gridIndex, 2, Utf8ToWstr("Chặt cây"))
+	Form.position_grid:SetGridText(gridIndex, 2, shapeLbl)
 	Form.position_grid:SetGridControl(gridIndex, 3, upBtn)
 	Form.position_grid:SetGridControl(gridIndex, 4, downBtn)
 	Form.position_grid:SetGridControl(gridIndex, 5, delBtn)

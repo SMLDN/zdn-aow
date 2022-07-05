@@ -3,7 +3,10 @@
 *Update 7/xx/2022*  
 *v1.7.0*  
 **Tính năng mới**
+- Thu thập(/thuthap): Chặt cây, Đào khoáng (Hái dược khả năng cũng được)  
+  Cách thiết lập: đứng gần vào đối tượng -> target đối tượng -> click Thêm đối tượng
 - Bảng Trợ lý: thêm trạng thái của tác vụ
+
 
 **Thay đổi**
 - Q ẩn thế TMC Trầm mặc thả câu: chỉnh lại vị trí câu cá để đỡ bị vấp đường đi
@@ -160,16 +163,17 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /tn  
  /lc  
  /shop  
- /ct  
- /hk  
+ /ct : chiến trường  
+ /hk : hào kiệt  
  /vp : sử dụng vật phẩm  
- /thth  
- /farm  
- /n6  
- /tt : thiên thê  
+ /thth : tung hoành 4 biển  
+ /farm : nông phu  
+ /n6 : q nội 6  
+ /tt : thiên thê    
  /ltt : lăng tiêu  
  /tq : thích quán  
  /kn : thiết lập nhận, bỏ kỳ ngộ  
  /anthe : q ẩn thế Tinh Miễu Các  
  /ot : ôn tuyền  
  /tho : bắt thỏ  
+ /thuthap : thu thập  
