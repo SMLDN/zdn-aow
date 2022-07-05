@@ -13,6 +13,7 @@ function CanRun()
     local cnt = #TodoList
     if cnt == 0 then
         loadConfig()
+        cnt = #TodoList
     end
     for i = 1, cnt do
         local logic = TodoList[i][3]
