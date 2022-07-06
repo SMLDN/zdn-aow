@@ -2,6 +2,9 @@
 ---
 *Update 7/6/2022*  
 *v1.yy.yy*  
+**Thay đổi**
+- Hào kiệt: làm mới bảng Thiết lập cho tiện hơn
+
 **Sửa lỗi**
 - Thu thập(đào khoáng): tự động đi đến khoáng trong phạm vi gần tọa độ đã cài
 - Hào kiệt: thỉnh thoảng tọa độ dò đường bị sai
