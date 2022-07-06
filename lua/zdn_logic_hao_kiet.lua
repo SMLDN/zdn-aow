@@ -207,9 +207,9 @@ function loadSetting()
             local prop = util_split_string(record, ",")
             if isPositionValid(prop) then
                 Position.Map = prop[1]
-                Position.PosX = prop[2]
-                Position.PosY = prop[3]
-                Position.PosZ = prop[4]
+                Position.PosX = nx_number(prop[2])
+                Position.PosY = nx_number(prop[3])
+                Position.PosZ = nx_number(prop[4])
                 return true
             end
         end

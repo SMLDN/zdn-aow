@@ -4,6 +4,7 @@
 *v1.yy.yy*  
 **Sửa lỗi**
 - Thu thập(đào khoáng): tự động đi đến khoáng trong phạm vi gần tọa độ đã cài
+- Hào kiệt: thỉnh thoảng tọa độ dò đường bị sai
 
 ---
 *Update 7/5/2022*  
