@@ -753,10 +753,11 @@ function GoToMapByPublicHomePoint(map)
 end
 
 function StopFindPath()
-	if not nx_is_valid(nx_value("path_finding")) then
+	local path = nx_value("path_finding")
+	if not nx_is_valid(path) then
 		return
 	end
-	nx_value("path_finding"):StopPathFind(1)
+	path:StopPathFind(1)
 end
 
 function GetCurMap()

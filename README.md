@@ -1,19 +1,23 @@
 # Release Note
 ---
-*Update 7/xx/2022*  
+*Update 7/6/2022*  
+*v1.yy.yy*  
+**Sửa lỗi**
+- Thu thập(đào khoáng): tự động đi đến khoáng trong phạm vi gần tọa độ đã cài
+
+---
+*Update 7/5/2022*  
 *v1.7.0*  
 **Tính năng mới**
 - Thu thập(/thuthap): Chặt cây, Đào khoáng (Hái dược khả năng cũng được)  
   Cách thiết lập: đứng gần vào đối tượng -> target đối tượng -> click Thêm đối tượng
 - Bảng Trợ lý: thêm trạng thái của tác vụ
 
-
 **Thay đổi**
 - Q ẩn thế TMC Trầm mặc thả câu: chỉnh lại vị trí câu cá để đỡ bị vấp đường đi
 
 **Sửa lỗi**
 - Vật phẩm: thỉnh thoảng cắn mãi một vật phẩm cần niệm chú
-
 
 ---
 *Update 7/3/2022*  

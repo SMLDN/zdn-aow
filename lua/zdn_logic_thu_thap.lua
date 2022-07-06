@@ -60,15 +60,18 @@ function loopThuThap()
         return
     end
 
-    if GetDistance(p.x, p.y, p.z) >= 2 then
+    if GetDistance(p.x, p.y, p.z) >= 15 then
         GoToPosition(p.x, p.y, p.z)
         return
     end
 
-    StopFindPath()
     local obj = getObjByConfigId(p.configId)
     if nx_is_valid(obj) then
         XuongNgua()
+        if GetDistanceToObj(obj) >= 2 then
+            GoToObj(obj)
+            return
+        end
         if not nx_execute("zdn_logic_vat_pham", "IsDroppickShowed") then
             nx_execute("custom_sender", "custom_select", obj.Ident)
             TimerObjNotValid = TimerInit()
@@ -79,10 +82,10 @@ function loopThuThap()
 end
 
 function waitTimeOut()
-    if TimerDiff(TimerObjNotValid) < 6 then
+    if TimerDiff(TimerObjNotValid) < 7 then
         return
     end
-    if TimerDiff(TimerObjNotValid) < 7 then
+    if TimerDiff(TimerObjNotValid) < 8 then
         nextPos = nextPos + 1
     end
     TimerObjNotValid = TimerInit()
