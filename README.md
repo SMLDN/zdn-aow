@@ -1,6 +1,6 @@
 # Release Note
 ---
-*Update 7/6/2022*  
+*Update 7/yy/2022*  
 *v1.yy.yy*  
 **Thay đổi**
 - Hào kiệt: làm mới bảng Thiết lập cho tiện hơn
@@ -12,15 +12,15 @@
 ---
 *Update 7/5/2022*  
 *v1.7.0*  
-**Tính năng mới**
+**Tính năng mới**  
 - Thu thập(/thuthap): Chặt cây, Đào khoáng (Hái dược khả năng cũng được)  
   Cách thiết lập: đứng gần vào đối tượng -> target đối tượng -> click Thêm đối tượng
 - Bảng Trợ lý: thêm trạng thái của tác vụ
 
-**Thay đổi**
+**Thay đổi**  
 - Q ẩn thế TMC Trầm mặc thả câu: chỉnh lại vị trí câu cá để đỡ bị vấp đường đi
 
-**Sửa lỗi**
+**Sửa lỗi**  
 - Vật phẩm: thỉnh thoảng cắn mãi một vật phẩm cần niệm chú
 
 ---
