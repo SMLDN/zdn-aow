@@ -1,7 +1,7 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
-*v1.yy.yy*  
+*Update 7/6/2022*  
+*v1.7.1*  
 **Thay đổi**
 - Hào kiệt: làm mới bảng Thiết lập cho tiện hơn
 
