@@ -20,6 +20,7 @@ function onFormOpen(form)
 	for i = 1, cnt do
 		addMapRow(form, MapSection[nx_string(i)])
 	end
+	loadConfig()
 	-- for debug
 	-- dofile("D:\\auto\\debug.lua")
 	-- for debug
@@ -122,7 +123,8 @@ end
 
 function addHomeRow(form, info)
 	local home_grid = form.homegrid
-	local control = createTeleHyperLink(form)
+	local control = createTeleHyperLink()
+	local toBookMarkCtl = createToBookMark(info)
 	if not nx_is_valid(control) then
 		return
 	end
@@ -132,6 +134,44 @@ function addHomeRow(form, info)
 	local row = home_grid.RowCount
 	home_grid:InsertRow(-1)
 	home_grid:SetGridControl(row, 0, control)
+	home_grid:SetGridControl(row, 1, toBookMarkCtl)
+end
+
+function createToBookMark(info)
+	local gui = nx_value("gui")
+	if not nx_is_valid(gui) then
+		return 0
+	end
+	local groupbox = gui:Create("GroupBox")
+	groupbox.BackColor = "0,0,0,0"
+	groupbox.NoFrame = true
+	local btn = gui:Create("Button")
+	groupbox:Add(btn)
+	groupbox.btn = btn
+
+	btn.NormalImage = "gui\\common\\button\\btn_right\\btn_right3_out.png"
+	btn.FocusImage = "gui\\common\\button\\btn_right\\btn_right3_on.png"
+	btn.PushImage = "gui\\common\\button\\btn_right\\btn_right3_down.png"
+	btn.FocusBlendColor = "255,255,255,255"
+	btn.PushBlendColor = "255,255,255,255"
+	btn.DisableBlendColor = "255,255,255,255"
+	btn.NormalColor = "0,0,0,0"
+	btn.FocusColor = "0,0,0,0"
+	btn.PushColor = "0,0,0,0"
+	btn.DisableColor = "0,0,0,0"
+	btn.Left = 0
+	btn.Top = 5
+	btn.Width = 18
+	btn.Height = 18
+	btn.BackColor = "255,192,192,192"
+	btn.ShadowColor = "0,0,0,0"
+	btn.TabStop = "true"
+	btn.AutoSize = "true"
+	btn.DrawMode = "FitWindow"
+	btn.HintText = Utf8ToWstr("Thêm vào Thường dùng")
+	nx_bind_script(btn, nx_current())
+	nx_callback(btn, "on_click", "onBtnToBookMarkClick")
+	return groupbox
 end
 
 function getHomePointList(map)
@@ -165,4 +205,127 @@ end
 
 function onBtnSchoolHomePointClick()
 	TeleToSchoolHomePoint()
+end
+
+function onBtnToBookMarkClick(btn)
+	local gridIndex = getGridIndex(1, btn)
+	local info = Form.homegrid:GetGridControl(gridIndex, 0)
+	if isExists(info) then
+		return
+	end
+	addRowToBookMark(info.HomePointId, info.Name)
+	saveConfig()
+end
+
+function createDeleteButton()
+	local gui = nx_value("gui")
+	if not nx_is_valid(gui) then
+		return 0
+	end
+	local groupbox = gui:Create("GroupBox")
+	groupbox.BackColor = "0,0,0,0"
+	groupbox.NoFrame = true
+	local btn = gui:Create("Button")
+	groupbox:Add(btn)
+	groupbox.btn = btn
+
+	btn.NormalImage = "gui\\common\\button\\btn_del_out.png"
+	btn.FocusImage = "gui\\common\\button\\btn_del_on.png"
+	btn.PushImage = "gui\\common\\button\\btn_del_down.png"
+	btn.FocusBlendColor = "255,255,255,255"
+	btn.PushBlendColor = "255,255,255,255"
+	btn.DisableBlendColor = "255,255,255,255"
+	btn.NormalColor = "0,0,0,0"
+	btn.FocusColor = "0,0,0,0"
+	btn.PushColor = "0,0,0,0"
+	btn.DisableColor = "0,0,0,0"
+	btn.Top = 6
+	btn.Width = 18
+	btn.Height = 18
+	btn.BackColor = "255,192,192,192"
+	btn.ShadowColor = "0,0,0,0"
+	btn.TabStop = "true"
+	btn.AutoSize = "true"
+	btn.DrawMode = "FitWindow"
+	btn.HintText = Utf8ToWstr("Xóa")
+	nx_bind_script(btn, nx_current())
+	nx_callback(btn, "on_click", "onBtnDeleteRowClick")
+	return groupbox
+end
+
+function getGridIndex(columnIndex, btn)
+	local g = Form.homegrid
+	local cnt = g.RowCount - 1
+	for i = 0, cnt do
+		local ctl = g:GetGridControl(i, columnIndex)
+		local b = ctl.btn
+		if nx_id_equal(btn, b) then
+			return i
+		end
+	end
+end
+
+function onBtnDeleteRowClick(btn)
+	local g = Form.bookmark_grid
+	local cnt = g.RowCount - 1
+	for i = 0, cnt do
+		local deleteGroupBox = g:GetGridControl(i, 1)
+		local deleteBtn = deleteGroupBox.btn
+		if nx_id_equal(deleteBtn, btn) then
+			g:BeginUpdate()
+			g:DeleteRow(i)
+			g:EndUpdate()
+			saveConfig()
+			return
+		end
+	end
+end
+
+function saveConfig()
+	local str = ""
+	local g = Form.bookmark_grid
+	local cnt = g.RowCount - 1
+	for i = 0, cnt do
+		local ctl = g:GetGridControl(i, 0)
+		if str ~= "" then
+			str = str .. ";"
+		end
+		str = str .. ctl.HomePointId .. "," .. ctl.Name
+	end
+	IniWriteUserConfig("Tele", "BookMark", str)
+end
+
+function isExists(info)
+	local g = Form.bookmark_grid
+	local cnt = g.RowCount - 1
+	for i = 0, cnt do
+		local ctl = g:GetGridControl(i, 0)
+		if info.HomePointId == ctl.HomePointId then
+			return true
+		end
+	end
+	return false
+end
+
+function loadConfig()
+	local str = nx_string(IniReadUserConfig("Tele", "BookMark", ""))
+	if str ~= "" then
+		local lst = util_split_string(str, ";")
+		for i = 1, #lst do
+			local record = util_split_string(lst[i], ",")
+			addRowToBookMark(record[1], record[2])
+		end
+	end
+end
+
+function addRowToBookMark(homePointId, name)
+	local g = Form.bookmark_grid
+	local teleLink = createTeleHyperLink()
+	teleLink.HomePointId = homePointId
+	teleLink.Name = name
+	teleLink.html.HtmlText = nx_widestr('<a href="">') .. util_text(name) .. nx_widestr("</a>")
+	local delBtn = createDeleteButton()
+	g:InsertRow(-1)
+	g:SetGridControl(g.RowCount - 1, 0, teleLink)
+	g:SetGridControl(g.RowCount - 1, 1, delBtn)
 end
