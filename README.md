@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.8.0*  
+**Tính năng mới**
+- Thần hành: thêm tính năng lưu điểm dừng chân Thường dùng
+
+---
 *Update 7/6/2022*  
 *v1.7.1*  
 **Thay đổi**
