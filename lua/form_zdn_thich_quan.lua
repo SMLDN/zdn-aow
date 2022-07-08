@@ -10,6 +10,7 @@ function onFormOpen()
 	else
 		updateBtnSubmitState(false)
 	end
+	loadConfig()
 end
 
 function onBtnSubmitClick()
@@ -33,4 +34,13 @@ end
 
 function onBtnSettingClick()
 	util_auto_show_hide_form("form_zdn_thich_quan_setting")
+end
+
+function onOpenBoxChanged(btn)
+	IniWriteUserConfig("ThichQuan", "OpenBox", btn.Checked and "1" or "0")
+end
+
+function loadConfig()
+	local checked = nx_string(IniReadUserConfig("ThichQuan", "OpenBox", "0"))
+	Form.cbtn_open_box.Checked = (checked == "1")
 end

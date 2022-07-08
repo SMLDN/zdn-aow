@@ -9,6 +9,7 @@ function onFormOpen()
 	else
 		updateBtnSubmitState(false)
 	end
+	loadConfig()
 end
 
 function onBtnSubmitClick()
@@ -28,4 +29,13 @@ end
 
 function onFormClose()
 	nx_execute("zdn_logic_common_listener", "Unsubscribe", Logic, "on-task-stop", nx_current())
+end
+
+function onOpenBoxChanged(btn)
+	IniWriteUserConfig("Thth", "OpenBox", btn.Checked and "1" or "0")
+end
+
+function loadConfig()
+	local checked = nx_string(IniReadUserConfig("Thth", "OpenBox", "0"))
+	Form.cbtn_open_box.Checked = (checked == "1")
 end

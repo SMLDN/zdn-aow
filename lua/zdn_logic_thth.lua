@@ -30,6 +30,7 @@ function Start()
     nx_execute("zdn_logic_skill", "PauseAttack")
     nx_execute("Listener", "addListen", nx_current(), "dttiaozhanjiemian_3", "onOutOfTime", -1)
     loadThichQuanData()
+    loadConfig()
     while Running do
         loopThth()
         nx_pause(0.2)
@@ -299,4 +300,9 @@ function waitLagTime(delta)
         nx_pause(1)
         leaveBossScene()
     end
+end
+
+function loadConfig()
+    local checked = nx_string(IniReadUserConfig("Thth", "OpenBox", "0"))
+    OpenBoxFlg = (checked == "1")
 end

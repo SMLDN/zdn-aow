@@ -172,6 +172,8 @@ function loadConfig()
 
     local checked = nx_string(IniReadUserConfig("ThichQuan", "FollowMode", "0"))
     FollowMode = (checked == "1")
+    checked = nx_string(IniReadUserConfig("ThichQuan", "OpenBox", "0"))
+    OpenBoxFlg = (checked == "1")
 end
 
 function isInDisableList(index, list)
@@ -338,6 +340,10 @@ function createTeam()
     local cn = nx_widestr(player:QueryProp("TeamCaptain"))
     if cn == nx_widestr("0") or cn == nx_widestr("") then
         nx_execute("custom_sender", "custom_team_create")
+        nx_pause(1)
+    end
+    if cn == nx_widestr(player:QueryProp("Name")) then
+        nx_execute("custom_sender", "custom_set_team_allot_mode", 0)
     end
 end
 
@@ -397,4 +403,11 @@ function waitForTeamMember()
     while Running and not isTeamMemberReady() and TimerDiff(timeOut) < 20 do
         nx_pause(0.1)
     end
+end
+
+function needOpenBox()
+    if not OpenBoxFlg or FollowMode then
+        return false
+    end
+    return true
 end

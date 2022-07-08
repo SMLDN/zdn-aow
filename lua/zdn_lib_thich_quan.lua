@@ -13,6 +13,7 @@ local LastBossId = ""
 local CanJump = false
 AbstructRunning = false
 Map = {}
+OpenBoxFlg = false
 
 function endGame()
     local timer = TimerInit()
@@ -101,10 +102,11 @@ function getBossInfo()
 end
 
 function doComplete()
+    nx_execute("zdn_logic_skill", "PauseAttack")
     if TimerDiff(AttackTimer) < 2 then
         return
     end
-    if needOpenBox() then
+    if processOpenBox() then
         return
     end
     -- TODO get prize box
@@ -554,7 +556,10 @@ function getThichQuanBossList(guanId)
     return ThichQuanData[guanId].bossList
 end
 
-function needOpenBox()
+function processOpenBox()
+    if not needOpenBox() then
+        return false
+    end
     if isCurseLoading() then
         return true
     end
@@ -594,4 +599,11 @@ end
 
 function pickDropItem()
     nx_execute("zdn_logic_vat_pham", "PickItemFromPickItemData")
+end
+
+function needOpenBox()
+    if not OpenBoxFlg then
+        return false
+    end
+    return true
 end
