@@ -4,6 +4,7 @@
 *v1.8.0*  
 **Tính năng mới**
 - Thần hành: thêm tính năng lưu điểm dừng chân Thường dùng
+- Thụ nghiệp: thêm lựa chọn Chạy suốt(chạy cả khi hoàn thành Tiến độ trong ngày)
 - Thích quán: thêm tính năng nhặt đồ (chat /nhatdo để thiết lập)
 - Tung hoành tứ hải: thêm tính năng nhặt đồ (chat /nhatdo để thiết lập)
 
@@ -193,3 +194,4 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /ot : ôn tuyền  
  /tho : bắt thỏ  
  /thuthap : thu thập  
+ /nhatdo : thiết lập nhặt đồ. Có tác dụng cho thích quán, thth

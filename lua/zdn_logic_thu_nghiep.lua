@@ -5,6 +5,7 @@ require("zdn_lib_moving")
 local Running = false
 local ThuNghiepMap = "city04"
 local ThuNghiepNpc = "SMSY_School10"
+local RunAllTheWayFlg = false
 
 function IsRunning()
     return Running
@@ -15,6 +16,10 @@ function CanRun()
 end
 
 function IsTaskDone()
+    loadConfig()
+    if RunAllTheWayFlg then
+        return false
+    end
     local client = nx_value("game_client")
     local player = client:GetPlayer()
     if not nx_is_valid(player) then
@@ -109,4 +114,8 @@ function isInTaskTime()
     else
         return false
     end
+end
+
+function loadConfig()
+    RunAllTheWayFlg = nx_string(IniReadUserConfig("ThuNghiep", "RunAllTheWay", "0")) == "1"
 end

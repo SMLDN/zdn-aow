@@ -35,7 +35,7 @@ function CanRun()
 end
 
 function IsTaskDone()
-    local resetTimeStr = IniReadUserConfig("DoTham", "ResetTime", "")
+    local resetTimeStr = nx_string(IniReadUserConfig("DoTham", "ResetTime", ""))
     if resetTimeStr == "" then
         return false
     end
