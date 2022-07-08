@@ -1,5 +1,10 @@
 # Release Note
 ---
+*Update 7/9/2022*  
+*v1.8.1*  
+**Sửa lỗi**
+- Hệ thống nhận giờ auto: trước 7h sáng không hoạt động đúng
+
 *Update 7/8/2022*  
 *v1.8.0*  
 **Tính năng mới**

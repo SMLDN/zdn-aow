@@ -58,7 +58,7 @@ end
 
 function GetCurrentHourHuman()
     local timeStamp = GetCurrentTimestamp()
-    local hour = nx_int(nx_int(timeStamp % 86400 / 3600) + 7)
+    local hour = nx_int((nx_int(timeStamp % 86400 / 3600) + 7) % 24)
     local minute = nx_int(((timeStamp % 86400) % 3600) / 60)
     local hourStr = nx_string(hour)
     local minuteStr = nx_string(minute)
@@ -85,13 +85,17 @@ function GetCurrentFullDayHuman()
 end
 
 function GetNextDayStartTimestamp()
-    local timeStamp = GetCurrentTimestamp()
-    return timeStamp - (timeStamp % 86400) + (7 * 3600) + 86400
+    return GetCurrentDayStartTimestamp() + 86400
 end
 
 function GetCurrentDayStartTimestamp()
     local timeStamp = GetCurrentTimestamp()
-    return timeStamp - (timeStamp % 86400) + (7 * 3600)
+    local hour = timeStamp % 86400 / 3600
+    local r = timeStamp - (timeStamp % 86400) + (7 * 3600)
+    if hour >= 17 then
+        r = r + 86400
+    end
+    return r
 end
 
 function GetCurrentTimestamp()
@@ -213,7 +217,10 @@ function FilterTaskInfoById(id, task_rec_key, conditionKey, condition)
     end
     for i = 0, rows - 1 do
         local taskIndex = player:QueryRecord(rec, i, 0)
-        if nx_int(taskIndex) == nx_int(id) and nx_string(player:QueryRecord(rec, i, conditionKey)) == nx_string(condition) then
+        if
+            nx_int(taskIndex) == nx_int(id) and
+                nx_string(player:QueryRecord(rec, i, conditionKey)) == nx_string(condition)
+         then
             return player:QueryRecord(rec, i, task_rec_key)
         end
     end
