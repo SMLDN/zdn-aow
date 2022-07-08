@@ -1,9 +1,11 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
+*Update 7/8/2022*  
 *v1.8.0*  
 **Tính năng mới**
 - Thần hành: thêm tính năng lưu điểm dừng chân Thường dùng
+- Thích quán: thêm tính năng nhặt đồ (chat /nhatdo để thiết lập)
+- Tung hoành tứ hải: thêm tính năng nhặt đồ (chat /nhatdo để thiết lập)
 
 ---
 *Update 7/6/2022*  
