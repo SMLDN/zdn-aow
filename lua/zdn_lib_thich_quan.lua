@@ -45,10 +45,6 @@ function isInBossScene()
 end
 
 function doBossScene()
-    if nx_execute("zdn_logic_vat_pham", "IsDroppickShowed") then
-        nx_execute("zdn_logic_vat_pham", "PickAllDropItem")
-        return
-    end
     if isComplete() then
         doComplete()
     else
@@ -108,12 +104,12 @@ function doComplete()
     if TimerDiff(AttackTimer) < 2 then
         return
     end
-    -- TODO get prize box
-    if true then
-        leaveBossScene()
-        LoadingTimer = TimerInit() + 20
+    if needOpenBox() then
         return
     end
+    -- TODO get prize box
+    leaveBossScene()
+    LoadingTimer = TimerInit() + 20
 end
 
 function leaveBossScene()
@@ -314,6 +310,7 @@ function loadThichQuanData()
     loadNpcPosData()
     loadJumpData()
     loadAutoDefData()
+    nx_execute("zdn_logic_vat_pham", "LoadPickItemData")
 end
 
 function loadBossData()
@@ -555,4 +552,46 @@ end
 
 function getThichQuanBossList(guanId)
     return ThichQuanData[guanId].bossList
+end
+
+function needOpenBox()
+    if isCurseLoading() then
+        return true
+    end
+    if nx_execute("zdn_logic_vat_pham", "IsDroppickShowed") then
+        pickDropItem()
+        return true
+    end
+    local box = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isBossChess")
+    if not nx_is_valid(box) then
+        return false
+    end
+    if GetDistanceToObj(box) > 2 then
+        GoToObj(box)
+        return true
+    end
+    StopFindPath()
+    nx_execute("custom_sender", "custom_select", box.Ident)
+    return true
+end
+
+function isBossChess(obj)
+    local isClicked =
+        nx_number(obj:QueryProp("Dead")) == 1 or
+        (nx_find_custom(obj, "ZdnOpenTimer") and TimerDiff(obj.ZdnOpenTimer) > 30)
+    local npcType = nx_number(obj:QueryProp("NpcType"))
+    local isBossChess = nx_string(obj:QueryProp("RotatePara")) == "0"
+    return (not isClicked) and npcType == 161 and isBossChess
+end
+
+function isCurseLoading()
+    local load = nx_value("form_stage_main\\form_main\\form_main_curseloading")
+    if nx_is_valid(load) and load.Visible then
+        TimerCurseLoading = TimerInit()
+    end
+    return TimerDiff(TimerCurseLoading) < 1.5
+end
+
+function pickDropItem()
+    nx_execute("zdn_logic_vat_pham", "PickItemFromPickItemData")
 end

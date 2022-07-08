@@ -5,6 +5,12 @@ local ItemList = {}
 local Running = false
 local TimerCurseLoading = 0
 local FORM_DROPPICK_PATH = "form_stage_main\\form_pick\\form_droppick"
+local PresetPickItemList = {
+    "Hàn Nha Thảo",
+    "Tình báo",
+    "Tình Báo Giang Hồ-II"
+}
+local PickItemData = {}
 
 function Start()
     if not loadConfig() then
@@ -115,6 +121,52 @@ function GetCurrentWeapon()
     return equip:GetViewObj("22")
 end
 
+function LoadPickItemData()
+    local itemStr = IniReadUserConfig("VatPham", "Pick", "")
+    if itemStr ~= "" then
+        local itemList = util_split_string(nx_string(itemStr), ";")
+        for _, item in pairs(itemList) do
+            local prop = util_split_string(item, ",")
+            if prop[1] == "1" then
+                table.insert(PickItemData, util_text(prop[2]))
+            end
+        end
+    end
+end
+
+function PickItemFromPickItemData()
+    if not IsDroppickShowed() then
+        return
+    end
+    local form = nx_value(FORM_DROPPICK_PATH)
+    if not nx_is_valid(form) or not form.Visible then
+        return
+    end
+    local cnt = form.nMaxIndexCount
+    local timeOut = TimerInit()
+    while cnt == 0 and TimerDiff(timeOut) < 1.5 do
+        if not nx_is_valid(form) or not form.Visible or not nx_find_custom(form, "nMaxIndexCount") then
+            break
+        end
+        cnt = form.nMaxIndexCount
+        nx_pause(0)
+    end
+    timeOut = TimerInit()
+    while nx_is_valid(form) and form.Visible and TimerDiff(timeOut) < 1.5 do
+        cnt = form.nMaxIndexCount
+        if cnt == 0 then
+            break
+        end
+        local i = getCanPickItemIndex()
+        if i == 0 then
+            break
+        end
+        nx_execute("custom_sender", "custom_pickup_single_item", i)
+        nx_pause(0)
+    end
+    nx_execute("custom_sender", "custom_close_drop_box")
+end
+
 -- private
 function loopVatPham()
     if IsDroppickShowed() then
@@ -178,4 +230,33 @@ function isCurseLoading()
         TimerCurseLoading = TimerInit()
     end
     return TimerDiff(TimerCurseLoading) < 0.5
+end
+
+function getItemFromViewportById(viewPort, id)
+    local client = nx_value("game_client")
+    local view = client:GetView(nx_string(viewPort))
+    if not nx_is_valid(view) then
+        return
+    end
+    return view:GetViewObj(nx_string(id))
+end
+
+function getCanPickItemIndex()
+    for i = 1, 100 do
+        local obj = getItemFromViewportById(80, i)
+        if nx_is_valid(obj) and isItemInPickItemData(obj:QueryProp("ConfigID")) then
+            return i
+        end
+    end
+    return 0
+end
+
+function isItemInPickItemData(configId)
+    local cnt = #PickItemData
+    for i = 1, cnt do
+        if util_text(configId) == PickItemData[i] then
+            return true
+        end
+    end
+    return false
 end
