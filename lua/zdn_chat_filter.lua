@@ -42,6 +42,10 @@ function FilterCommand(chatStr)
     util_show_form("form_zdn_task", true)
     return true
   end
+  if nx_widestr(chatStr) == nx_widestr("/vatpham") then
+    util_show_form("form_zdn_vat_pham", true)
+    return true
+  end
   if nx_widestr(chatStr) == nx_widestr("/vp") then
     util_show_form("form_zdn_vat_pham", true)
     return true
