@@ -2,10 +2,38 @@ require("util_gui")
 require("zdn_lib\\util_functions")
 require("zdn_form_common")
 
+local PRESET_PICK_ITEM = {
+	"growitem_1", -- hàn nha thảo
+	"TG_item_01", -- tình báo
+	"TG_item_02", -- tình báo 2
+	"qizhen_0101",
+	"qizhen_0102",
+	"qizhen_0103",
+	"qizhen_0104",
+	"qizhen_0105",
+	"qizhen_0106",
+	"qizhen_0107",
+	"qizhen_0108",
+	"qizhen_0109",
+	"qizhen_0110",
+	"qizhen_0111",
+	"qizhen_0112",
+	"qizhen_0113",
+	"qizhen_0114",
+	"qizhen_0115"
+}
+
 function onFormOpen()
 	local gui = nx_value("gui")
 	Form.Left = (gui.Width - Form.Width) / 2
 	Form.Top = (gui.Height - Form.Height) / 2
+	local cnt = #PRESET_PICK_ITEM
+	Form.cbx_preset.DropListBox:ClearString()
+	for i = 1, cnt do
+		Form.cbx_preset.DropListBox:AddString(util_text(PRESET_PICK_ITEM[i]))
+	end
+	Form.cbx_preset.DropListBox.SelectIndex = 0
+	Form.cbx_preset.Text = util_text(PRESET_PICK_ITEM[1])
 	loadConfig()
 end
 
@@ -29,14 +57,14 @@ function onBtnAddItemClick()
 	if itemId == nil then
 		return
 	end
-	if isItemExists(itemId) then
-		ShowText("Vật phẩm này đã được thêm từ trước")
-		return
-	end
 	doAddItem(itemId)
 end
 
 function doAddItem(itemId)
+	if isItemExists(itemId) then
+		ShowText("Vật phẩm này đã được thêm từ trước")
+		return
+	end
 	local item = {}
 	item.itemId = itemId
 	item.name = util_text(itemId)
@@ -246,4 +274,9 @@ function isItemExists(itemId)
 		end
 	end
 	return false
+end
+
+function onBtnAddFromPresetClick()
+	local i = Form.cbx_preset.DropListBox.SelectIndex + 1
+	doAddItem(PRESET_PICK_ITEM[i])
 end

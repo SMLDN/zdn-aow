@@ -5,11 +5,6 @@ local ItemList = {}
 local Running = false
 local TimerCurseLoading = 0
 local FORM_DROPPICK_PATH = "form_stage_main\\form_pick\\form_droppick"
-local PresetPickItemList = {
-    "Hàn Nha Thảo",
-    "Tình báo",
-    "Tình Báo Giang Hồ-II"
-}
 local PickItemData = {}
 
 function Start()

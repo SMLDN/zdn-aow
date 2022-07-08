@@ -13,6 +13,35 @@
             <prop Text="Thiết lập nhặt đồ" Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="300" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Font="font_title" />
         </control>
 		
+        <control name="cbx_preset" entity="ComboBox" script="" init="">
+            <prop ButtonWidth="20" DropDownWidth="190" DropDownHeight="160" OnlySelect="true" Left="10" Top="35" Width="190" Height="30" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text_figure" NoFrame="true" BackImage="gui\common\form_line\ibox_2.png" DrawMode="Expand" />
+            <subor name="InputEdit">
+                <prop ReadOnly="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,76,61,44" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,20,0,0" Font="font_main" Cursor="WIN_IBEAM" DrawMode="ExpandH" />
+            </subor>
+            <subor name="DropButton">
+                <prop NormalImage="gui\common\combobox\btn_down2_out.png" FocusImage="gui\common\combobox\btn_down2_on.png" PushImage="gui\common\combobox\btn_down2_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="30" Height="30" Top="5" Left ="165" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" DrawMode="FitWindow" />
+            </subor>
+            <subor name="DropListBox">
+                <prop MouseSelect="true" ItemHeight="16" TextOffsetX="4" SelectBackImage="gui\common\combobox\bg_select2.png" ScrollSize="14" ForeColor="255,255,255,255" BackColor="176,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_combox_text" NoFrame="true" DrawMode="Expand" BackImage="gui\common\combobox\bg_list2.png" />
+                <subor name="VScrollBar">
+                    <prop ButtonSize="14" FullBarBack="false" Maximum="10" SmallChange="1" LargeChange="5" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="ExpandV" BackImage="gui\common\scrollbar\bg_scrollbar2.png" />
+                    <subor name="DecButton">
+                        <prop NormalImage="gui\common\scrollbar\button_2\btn_up_out.png" FocusImage="gui\common\scrollbar\button_2\btn_up_on.png" PushImage="gui\common\scrollbar\button_2\btn_up_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="14" Height="14" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" DrawMode="Center" />
+                    </subor>
+                    <subor name="IncButton">
+                        <prop NormalImage="gui\common\scrollbar\button_2\btn_down_out.png" FocusImage="gui\common\scrollbar\button_2\btn_down_on.png" PushImage="gui\common\scrollbar\button_2\btn_down_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="14" Height="14" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" />
+                    </subor>
+                    <subor name="TrackButton">
+                        <prop NormalImage="gui\common\scrollbar\button_2\btn_trace_out.png" FocusImage="gui\common\scrollbar\button_2\btn_trace_on.png" PushImage="gui\common\scrollbar\button_2\btn_trace_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="14" Height="81" BackColor="255,192,192,192" ShadowColor="0,0,0,0" DrawMode="ExpandV" />
+                    </subor>
+                </subor>
+            </subor>
+        </control>
+	   <control name="btn_add_from_preset" entity="Button" script="" init="">
+            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="208" Top="37" Width="80" Height="28" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Thêm" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <event on_click="onBtnAddFromPresetClick" />
+        </control>
+		
         <control name="item_grid" entity="Grid" script="" init="">
             <prop Left="20" Top="69" Width="270" Height="300" ShowComment="true" HeaderRowHeight="1" HeaderBackColor="0,255,255,255" SelectForeColor="255,255,255,255" SelectBackColor="0,147,123,99" CanSelectRow="true" ColWidths="30,72,120,30" RowHeight="50" ColCount="4" ScrollSize="17" HasHScroll="true" AlwaysVScroll="false" AlwaysHScroll="false" Solid="true" ForeColor="255,255,255,255" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
              <subor name="VScrollBar">
@@ -30,7 +59,7 @@
         </control>
 
         <control name="btn_add_item" entity="Button" script="" init="">
-            <prop Left="52" Top="380" Width="200" Height="35" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Thêm vật phẩm" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <prop Left="52" Top="380" Width="200" Height="35" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Kéo đồ vào đây để thêm" Font="font_btn" HintText="" DrawMode="ExpandH" />
             <event on_click="onBtnAddItemClick"/>
         </control>
     </control>
