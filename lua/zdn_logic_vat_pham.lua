@@ -6,6 +6,7 @@ local Running = false
 local TimerCurseLoading = 0
 local FORM_DROPPICK_PATH = "form_stage_main\\form_pick\\form_droppick"
 local PickItemData = {}
+local TimerFixEquippedItem = 0
 
 function Start()
     if not loadConfig() then
@@ -162,6 +163,33 @@ function PickItemFromPickItemData()
     nx_execute("custom_sender", "custom_close_drop_box")
 end
 
+function FixEquippedItemHardiness()
+    if TimerDiff(TimerFixEquippedItem) < 5 then
+        ShowText("Đại hiệp xin dừng tay trong ít phút!")
+        return
+    end
+    local client = nx_value("game_client")
+    local threshhold = 50
+    if not nx_is_valid(client) then
+        return
+    end
+    local equip = client:GetView("1")
+    if not nx_is_valid(equip) then
+        return
+    end
+    for i = 1, 100 do
+        local item = equip:GetViewObj(nx_string(i))
+        if nx_is_valid(item) and nx_number(item:QueryProp("Hardiness")) <= threshhold then
+            local fixItemIndex = getFixItemIndex()
+            if fixItemIndex == 0 then
+                return
+            end
+            nx_execute("custom_sender", "custom_use_item_on_item", 2, fixItemIndex, 1, i)
+            nx_pause(0.05)
+        end
+    end
+end
+
 -- private
 function loopVatPham()
     if IsDroppickShowed() then
@@ -254,4 +282,16 @@ function isItemInPickItemData(configId)
         end
     end
     return false
+end
+
+function getFixItemIndex()
+    local i = FindItemIndexFromVatPham("fixitem_004")
+    if i > 0 then
+        return i
+    end
+    i = FindItemIndexFromVatPham("fixitem_003")
+    if i > 0 then
+        return i
+    end
+    return FindItemIndexFromVatPham("fixitem_002")
 end

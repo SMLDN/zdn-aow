@@ -21,9 +21,12 @@ function main_form_open(self)
 end
 
 function zdnAddBtn(form)
+    if nx_find_custom(form, "zdn_delete_empty_mail_btn") then
+        return
+    end
     local gui = nx_value("gui")
     if not nx_is_valid(gui) then
-        return 0
+        return
     end
     local btn = gui:Create("Button")
     form:Add(btn)

@@ -1,5 +1,10 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.9.0*  
+**Tính năng mới**
+- Sửa đồ nhanh(độ bền dưới 50)
+
 *Update 7/9/2022*  
 *v1.8.1*  
 **Sửa lỗi**
