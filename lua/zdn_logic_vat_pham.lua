@@ -177,6 +177,7 @@ function FixEquippedItemHardiness()
     if not nx_is_valid(equip) then
         return
     end
+    TimerFixEquippedItem = TimerInit()
     for i = 1, 100 do
         local item = equip:GetViewObj(nx_string(i))
         if nx_is_valid(item) and nx_number(item:QueryProp("Hardiness")) <= threshhold then
