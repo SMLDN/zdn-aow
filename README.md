@@ -4,7 +4,7 @@
 *v1.9.0*  
 **Tính năng mới**
 - Sửa đồ nhanh(độ bền dưới 50)
-- Dò cóc
+- Dò cóc(/coc)
 
 ---
 *Update 7/9/2022*  
@@ -207,4 +207,5 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /ot : ôn tuyền  
  /tho : bắt thỏ  
  /thuthap : thu thập  
- /nhatdo : thiết lập nhặt đồ. Có tác dụng cho thích quán, thth
+ /nhatdo : thiết lập nhặt đồ. Có tác dụng cho thích quán, thth  
+ /coc : dò cóc
