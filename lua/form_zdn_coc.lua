@@ -84,11 +84,7 @@ function loopCoc()
         local jobId = nx_string(obj:QueryProp("OfflineJobId"))
         local canKidnap = nx_number(obj:QueryProp("IsAbducted")) == 1
         if not isMenPaiJob(jobId) and isOffline and isOfflineWorking then
-            if canKidnap then
-                addToList(obj, true)
-            else
-                addToList(obj, false)
-            end
+            addToList(obj, canKidnap)
         end
     end
     refreshAllList()
@@ -155,11 +151,12 @@ function addToGrid(item, canKidnap)
     local g = Form.coc_grid
     local gridIndex = g.RowCount
     local delBtn = createDeleteButton(item)
+    local posCtl = createPosControl(item, canKidnap)
     g:InsertRow(gridIndex)
     g:SetGridText(gridIndex, 0, nx_widestr(item.startHourHuman))
     g:SetGridText(gridIndex, 1, item.name)
     g:SetGridText(gridIndex, 2, nx_widestr(calculateBuffElapseTime(item.buffEndTime)) .. Utf8ToWstr(" phút"))
-    g:SetGridText(gridIndex, 3, nx_widestr(nx_string(math.floor(item.PosX)) .. "," .. nx_string(math.floor(item.PosZ))))
+    g:SetGridControl(gridIndex, 3, posCtl)
     g:SetGridText(gridIndex, 4, util_text(item.map))
     g:SetGridControl(gridIndex, 5, delBtn)
 end
@@ -373,4 +370,52 @@ function existsInIgnoreList(name)
         end
     end
     return false
+end
+
+function createPosControl(item, canKidnap)
+    local gui = nx_value("gui")
+    if not nx_is_valid(gui) then
+        return 0
+    end
+    local groupbox = gui:Create("GroupBox")
+    groupbox.BackColor = "0,0,0,0"
+    groupbox.NoFrame = true
+    local html = gui:Create("MultiTextBox")
+    groupbox:Add(html)
+    groupbox.html = html
+    html.Top = 7
+    html.Left = 20
+    html.TextColor = "255,255,255,255"
+    if calculateBuffElapseTime(item.buffEndTime) == 0 then
+        html.TextColor = "255,0,180,50"
+    end
+    html.SelectBarColor = "0,0,0,255"
+    html.MouseInBarColor = "0,255,255,0"
+    html.ViewRect = "0,0,100,30"
+    html.LineHeight = 12
+    html.HtmlText =
+        nx_widestr(
+        "<a href=''>" .. nx_string(math.floor(item.PosX)) .. "," .. nx_string(math.floor(item.PosZ)) .. "</a>"
+    )
+    html.ScrollSize = 17
+    html.Width = 100
+    html.ShadowColor = "0,0,0,0"
+    html.Font = "font_text"
+    html.NoFrame = true
+    html.ZdnPosX = item.PosX
+    html.ZdnPosY = item.PosY
+    html.ZdnPosZ = item.PosZ
+    html.ZdnMap = item.map
+    nx_bind_script(html, nx_current())
+    nx_callback(html, "on_click_hyperlink", "onBtnPosClick")
+    return groupbox
+end
+
+function onBtnPosClick(btn)
+    local ctl = btn.Parent.html
+    if GetCurMap() ~= ctl.ZdnMap then
+        GoToMapByPublicHomePoint(ctl.ZdnMap)
+        return
+    end
+    GoToPosition(ctl.ZdnPosX, ctl.ZdnPosY, ctl.ZdnPosZ)
 end
