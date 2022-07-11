@@ -142,7 +142,7 @@ function updateGrid()
 
     cnt = #NormalList
     for i = 1, cnt do
-        addToGrid(CanKidnapList[i], false)
+        addToGrid(NormalList[i], false)
     end
     g:EndUpdate()
 end
@@ -220,7 +220,7 @@ end
 function createDeleteButton(item)
     local gui = nx_value("gui")
     if not nx_is_valid(gui) then
-        return 0
+        return
     end
     local groupbox = gui:Create("GroupBox")
     groupbox.BackColor = "0,0,0,0"

@@ -1,5 +1,14 @@
 # Release Note
 ---
+*Update 7/11/2022*  
+*v1.10.0*  
+**Tính năng mới**
+- Tùy chỉnh FPS tối đa(vào menu setting của game để chỉnh)
+
+**Sửa lỗi**
+- Dò cóc: hiện bảng báo lỗi khi có cóc không hiện buff làm công
+
+---
 *Update 7/10/2022*  
 *v1.9.0*  
 **Tính năng mới**
