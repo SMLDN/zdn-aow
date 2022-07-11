@@ -147,13 +147,5 @@ function isLastConfigId(obj)
 end
 
 function isTargetingPlayer(obj)
-    local client = nx_value("game_client")
-    if not nx_is_valid(client) then
-        return false
-    end
-    local player = client:GetPlayer()
-    if not nx_is_valid(player) then
-        return false
-    end
-    return nx_string(player.Ident) == nx_string(obj:QueryProp("LastObject"))
+    return true
 end

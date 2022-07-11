@@ -163,7 +163,7 @@ end
 
 function calculateBuffElapseTime(endTime)
     if endTime == -1 then
-        return 999
+        return 0
     end
     local msg_delay = nx_value("MessageDelay")
     if not (nx_is_valid(msg_delay)) then
