@@ -207,7 +207,6 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /vt  
  /tn  
  /lc  
- /shop  
  /ct : chiến trường  
  /hk : hào kiệt  
  /vp : sử dụng vật phẩm  
