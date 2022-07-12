@@ -26,10 +26,6 @@ function FilterCommand(chatStr)
     util_show_form("form_zdn_luyen_cong", true)
     return true
   end
-  if nx_widestr(chatStr) == nx_widestr("/shop") then
-    nx_execute("custom_sender", "custom_open_mount_shop", 1)
-    return true
-  end
   if nx_widestr(chatStr) == nx_widestr("/ct") then
     util_show_form("form_zdn_chien_truong", true)
     return true
