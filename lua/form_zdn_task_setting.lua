@@ -30,7 +30,7 @@ function onBtnSaveClick()
 	local taskStr = ""
 	for i = 0, cnt do
 		local cbtn = Form.task_grid:GetGridControl(i, 0).btn
-		local infoNode = Form.task_grid:GetGridControl(i, 4).btn
+		local infoNode = Form.task_grid:GetGridControl(i, 8).btn
 		if i > 0 then
 			taskStr = taskStr .. ";"
 		end
@@ -57,6 +57,8 @@ function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked)
 	local upBtn = createUpButton()
 	local downBtn = createDownButton()
 	local settingBtn = createSettingButton(taskListIndex)
+	local startTime = createTimeInput()
+	local endTime = createTimeInput()
 	local delBtn = createDeleteButton(taskListIndex)
 
 	Form.task_grid:BeginUpdate()
@@ -65,8 +67,11 @@ function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked)
 	Form.task_grid:SetGridControl(gridIndex, 1, upBtn)
 	Form.task_grid:SetGridControl(gridIndex, 2, downBtn)
 	Form.task_grid:SetGridControl(gridIndex, 3, settingBtn)
-	Form.task_grid:SetGridControl(gridIndex, 4, delBtn)
-	Form.task_grid:SetGridText(gridIndex, 5, getTaskStatus(taskListIndex))
+	Form.task_grid:SetGridText(gridIndex, 4, getTaskStatus(taskListIndex))
+	Form.task_grid:SetGridControl(gridIndex, 5, startTime)
+	Form.task_grid:SetGridText(gridIndex, 6, nx_widestr("~"))
+	Form.task_grid:SetGridControl(gridIndex, 7, endTime)
+	Form.task_grid:SetGridControl(gridIndex, 8, delBtn)
 	Form.task_grid:EndUpdate()
 end
 
@@ -82,7 +87,7 @@ function createCheckboxButton(checked, txt)
 	groupbox:Add(btn)
 	groupbox.btn = btn
 
-	btn.Top = 0
+	btn.Top = 7
 	btn.Left = 0
 	btn.Checked = checked
 	btn.BoxSize = 12
@@ -112,7 +117,7 @@ end
 function createDeleteButton(taskListIndex)
 	local gui = nx_value("gui")
 	if not nx_is_valid(gui) then
-		return 0
+		return
 	end
 	local groupbox = gui:Create("GroupBox")
 	groupbox.BackColor = "0,0,0,0"
@@ -132,7 +137,7 @@ function createDeleteButton(taskListIndex)
 	btn.PushColor = "0,0,0,0"
 	btn.DisableColor = "0,0,0,0"
 	btn.Left = 5
-	btn.Top = 5
+	btn.Top = 9
 	btn.Width = 18
 	btn.Height = 18
 	btn.BackColor = "255,192,192,192"
@@ -170,7 +175,7 @@ function createSettingButton(taskListIndex)
 	btn.PushColor = "0,0,0,0"
 	btn.DisableColor = "0,0,0,0"
 	btn.Left = 0
-	btn.Top = 5
+	btn.Top = 9
 	btn.Width = 18
 	btn.Height = 18
 	btn.BackColor = "255,192,192,192"
@@ -206,8 +211,8 @@ function createUpButton()
 	btn.FocusColor = "0,0,0,0"
 	btn.PushColor = "0,0,0,0"
 	btn.DisableColor = "0,0,0,0"
-	btn.Left = 0
-	btn.Top = 5
+	btn.Left = 3
+	btn.Top = 9
 	btn.Width = 18
 	btn.Height = 18
 	btn.BackColor = "255,192,192,192"
@@ -244,7 +249,7 @@ function createDownButton()
 	btn.PushColor = "0,0,0,0"
 	btn.DisableColor = "0,0,0,0"
 	btn.Left = 0
-	btn.Top = 5
+	btn.Top = 9
 	btn.Width = 18
 	btn.Height = 18
 	btn.BackColor = "255,192,192,192"
@@ -261,7 +266,7 @@ end
 function onBtnDeleteRowClick(btn)
 	local cnt = Form.task_grid.RowCount - 1
 	for i = 0, cnt do
-		local deleteGroupBox = Form.task_grid:GetGridControl(i, 4)
+		local deleteGroupBox = Form.task_grid:GetGridControl(i, 8)
 		local deleteBtn = deleteGroupBox.btn
 		if nx_id_equal(deleteBtn, btn) then
 			Form.task_grid:BeginUpdate()
@@ -274,7 +279,7 @@ end
 
 function onBtnSettingRowClick(btn)
 	local gridIndex = getGridIndex(3, btn)
-	local taskListIndex = Form.task_grid:GetGridControl(gridIndex, 4).btn.TaskListIndex
+	local taskListIndex = Form.task_grid:GetGridControl(gridIndex, 8).btn.TaskListIndex
 	local form = TASK_LIST[taskListIndex][3]
 	if form ~= nil then
 		util_show_form(form, true)
@@ -286,7 +291,7 @@ function onBtnUpRowClick(btn)
 	if gridIndex == 0 then
 		return
 	end
-	local upperTaskListIndex = Form.task_grid:GetGridControl(gridIndex - 1, 4).btn.TaskListIndex
+	local upperTaskListIndex = Form.task_grid:GetGridControl(gridIndex - 1, 8).btn.TaskListIndex
 	local upperChecked = Form.task_grid:GetGridControl(gridIndex - 1, 0).btn.Checked
 	addRowToPositionGridByGridIndex(gridIndex + 1, upperTaskListIndex, upperChecked)
 	Form.task_grid:BeginUpdate()
@@ -300,7 +305,7 @@ function onBtnDownRowClick(btn)
 	if gridIndex == cnt then
 		return
 	end
-	local lowerTaskListIndex = Form.task_grid:GetGridControl(gridIndex + 1, 4).btn.TaskListIndex
+	local lowerTaskListIndex = Form.task_grid:GetGridControl(gridIndex + 1, 8).btn.TaskListIndex
 	local lowerChecked = Form.task_grid:GetGridControl(gridIndex + 1, 0).btn.Checked
 	addRowToPositionGridByGridIndex(gridIndex, lowerTaskListIndex, lowerChecked)
 	Form.task_grid:BeginUpdate()
@@ -311,7 +316,7 @@ end
 function taskExists(index)
 	local cnt = Form.task_grid.RowCount - 1
 	for i = 0, cnt do
-		local control = Form.task_grid:GetGridControl(i, 4)
+		local control = Form.task_grid:GetGridControl(i, 8)
 		if control.btn.TaskListIndex == index then
 			return true
 		end
@@ -366,3 +371,67 @@ function onHyperUncheckAllClick()
 		end
 	end
 end
+
+function createTimeInput()
+	local gui = nx_value("gui")
+	if not nx_is_valid(gui) then
+		return
+	end
+	local groupbox = gui:Create("GroupBox")
+	groupbox.BackColor = "0,0,0,0"
+	groupbox.NoFrame = true
+	local inputHr = gui:Create("Float_Edit")
+	groupbox:Add(inputHr)
+	groupbox.input_hour = inputHr
+
+	-- hr
+	inputHr.Top = 7
+	inputHr.Width = 35
+	inputHr.Height = 22
+	inputHr.Format = "%.0f"
+	inputHr.DragStep = "1.000000"
+	inputHr.Max = "24.000000"
+	inputHr.OnlyDigit = "true"
+	inputHr.ChangedEvent = "true"
+	inputHr.TextOffsetX = "2"
+	inputHr.Align = "Center"
+	inputHr.SelectBackColor = "190,190,190,190"
+	inputHr.Caret = "Default"
+	inputHr.ForeColor = "255,255,255,255"
+	inputHr.ShadowColor = "0,0,0,0"
+	inputHr.Font = "font_main"
+	inputHr.Cursor = "WIN_IBEAM"
+	inputHr.TabStop = "true"
+	inputHr.DrawMode = "ExpandH"
+	inputHr.BackImage = "gui\\common\\form_line\\ibox_1.png"
+	inputHr.Text = nx_widestr("00")
+
+	local inputMnt = gui:Create("Float_Edit")
+	groupbox:Add(inputMnt)
+	groupbox.input_minute = inputMnt
+	-- mnt
+	inputMnt.Top = 7
+	inputMnt.Left = 40
+	inputMnt.Width = 35
+	inputMnt.Height = 22
+	inputMnt.Format = "%.0f"
+	inputMnt.DragStep = "1.000000"
+	inputMnt.Max = "24.000000"
+	inputMnt.OnlyDigit = "true"
+	inputMnt.ChangedEvent = "true"
+	inputMnt.TextOffsetX = "2"
+	inputMnt.Align = "Center"
+	inputMnt.SelectBackColor = "190,190,190,190"
+	inputMnt.Caret = "Default"
+	inputMnt.ForeColor = "255,255,255,255"
+	inputMnt.ShadowColor = "0,0,0,0"
+	inputMnt.Font = "font_main"
+	inputMnt.Cursor = "WIN_IBEAM"
+	inputMnt.TabStop = "true"
+	inputMnt.DrawMode = "ExpandH"
+	inputMnt.BackImage = "gui\\common\\form_line\\ibox_1.png"
+	inputMnt.Text = nx_widestr("00")
+
+	return groupbox
+end
+

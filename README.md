@@ -3,7 +3,7 @@
 *Update 7/yy/2022*  
 *v1.11.0*  
 **Thay đổi**
-- \/shop: chuyển về nút Tiệm tạp hóa ở Túi của nhân vật
+- /shop: chuyển về nút Tiệm tạp hóa ở Túi của nhân vật
 
 **Sửa lỗi**
 - Thiên thê: thỉnh thoảng hiện bảng báo lỗi khi chọn võ xong

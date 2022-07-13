@@ -45,7 +45,6 @@ local function zdnAddInput(form)
     input.Caret = "Default"
     input.ForeColor = "255,255,255,255"
     input.ShadowColor = "0,0,0,0"
-    input.Text = "10"
     input.Font = "font_main"
     input.Cursor = "WIN_IBEAM"
     input.TabStop = "true"
