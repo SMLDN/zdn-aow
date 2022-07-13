@@ -98,12 +98,10 @@ end
 function needSelectTaolu()
     local form = nx_value("form_stage_main\\form_match\\form_taolu_confirm_new")
     if nx_is_valid(form) and form.Visible == true then
-        nx_pause(2)
-        if nx_is_valid(form) and form.Visible and nx_find_custom(form, "btn_submit") and form.btn_submit.Enabled then
-            local btn = form.btn_submit
-            nx_execute("form_stage_main\\form_match\\form_taolu_confirm_new", "on_btn_submit_click", btn)
-            return true
+        if nx_find_custom(form, "btn_submit") and form.btn_submit.Enabled then
+            nx_execute("form_stage_main\\form_match\\form_taolu_confirm_new", "on_btn_submit_click", form.btn_submit)
         end
+        return true
     end
     return false
 end

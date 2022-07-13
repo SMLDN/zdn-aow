@@ -5,6 +5,9 @@
 **Thay đổi**
 - \/shop: chuyển về nút Tiệm tạp hóa ở Túi của nhân vật
 
+**Sửa lỗi**
+- Thiên thê: thỉnh thoảng hiện bảng báo lỗi khi chọn võ xong
+
 ---
 *Update 7/11/2022*  
 *v1.10.0*  
