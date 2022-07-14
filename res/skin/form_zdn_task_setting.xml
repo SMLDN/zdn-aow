@@ -14,7 +14,7 @@
         </control>
 
         <control name="cbx_task_list" entity="ComboBox" script="" init="">
-            <prop ButtonWidth="20" DropDownWidth="220" DropDownHeight="160" OnlySelect="true" Left="260" Top="38" Width="220" Height="30" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text_figure" NoFrame="true" BackImage="gui\common\form_line\ibox_2.png" DrawMode="Expand" />
+            <prop ButtonWidth="20" DropDownWidth="220" DropDownHeight="160" OnlySelect="true" Left="260" Top="40" Width="220" Height="30" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text_figure" NoFrame="true" BackImage="gui\common\form_line\ibox_2.png" DrawMode="Expand" />
             <subor name="InputEdit">
                 <prop ReadOnly="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,76,61,44" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,20,0,0" Font="font_main" Cursor="WIN_IBEAM" DrawMode="ExpandH" />
             </subor>
@@ -38,7 +38,7 @@
             </subor>
         </control>
 	   <control name="btn_add_task" entity="Button" script="" init="">
-            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="500" Top="39" Width="100" Height="30" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Thêm" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="500" Top="41" Width="100" Height="30" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Thêm" Font="font_btn" HintText="" DrawMode="ExpandH" />
             <event on_click="onBtnAddTaskClick" />
         </control>
 		
