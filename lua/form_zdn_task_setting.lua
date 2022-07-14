@@ -308,12 +308,23 @@ function onBtnUpRowClick(btn)
 	if gridIndex == 0 then
 		return
 	end
-	local upperTaskListIndex = Form.task_grid:GetGridControl(gridIndex - 1, 8).btn.TaskListIndex
-	local upperChecked = Form.task_grid:GetGridControl(gridIndex - 1, 0).btn.Checked
-	addRowToPositionGridByGridIndex(gridIndex + 1, upperTaskListIndex, upperChecked)
-	Form.task_grid:BeginUpdate()
-	Form.task_grid:DeleteRow(gridIndex - 1)
-	Form.task_grid:EndUpdate()
+	local g = Form.task_grid
+	local upperTaskListIndex = g:GetGridControl(gridIndex - 1, 8).btn.TaskListIndex
+	local upperChecked = g:GetGridControl(gridIndex - 1, 0).btn.Checked
+	local startTime = g:GetGridControl(gridIndex - 1, 5)
+	local endTime = g:GetGridControl(gridIndex - 1, 7)
+	addRowToPositionGridByGridIndex(
+		gridIndex + 1,
+		upperTaskListIndex,
+		upperChecked,
+		startTime.input_hour.Text,
+		startTime.input_minute.Text,
+		endTime.input_hour.Text,
+		endTime.input_minute.Text
+	)
+	g:BeginUpdate()
+	g:DeleteRow(gridIndex - 1)
+	g:EndUpdate()
 end
 
 function onBtnDownRowClick(btn)
@@ -322,12 +333,23 @@ function onBtnDownRowClick(btn)
 	if gridIndex == cnt then
 		return
 	end
-	local lowerTaskListIndex = Form.task_grid:GetGridControl(gridIndex + 1, 8).btn.TaskListIndex
-	local lowerChecked = Form.task_grid:GetGridControl(gridIndex + 1, 0).btn.Checked
-	addRowToPositionGridByGridIndex(gridIndex, lowerTaskListIndex, lowerChecked)
-	Form.task_grid:BeginUpdate()
-	Form.task_grid:DeleteRow(gridIndex + 2)
-	Form.task_grid:EndUpdate()
+	local g = Form.task_grid
+	local lowerTaskListIndex = g:GetGridControl(gridIndex + 1, 8).btn.TaskListIndex
+	local lowerChecked = g:GetGridControl(gridIndex + 1, 0).btn.Checked
+	local startTime = g:GetGridControl(gridIndex + 1, 5)
+	local endTime = g:GetGridControl(gridIndex + 1, 7)
+	addRowToPositionGridByGridIndex(
+		gridIndex,
+		lowerTaskListIndex,
+		lowerChecked,
+		startTime.input_hour.Text,
+		startTime.input_minute.Text,
+		endTime.input_hour.Text,
+		endTime.input_minute.Text
+	)
+	g:BeginUpdate()
+	g:DeleteRow(gridIndex + 2)
+	g:EndUpdate()
 end
 
 function taskExists(index)

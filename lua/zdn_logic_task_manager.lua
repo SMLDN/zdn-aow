@@ -6,6 +6,7 @@ require("zdn_define\\logic_define")
 local Running = false
 local TodoList = {}
 local currentRunningTask = ""
+local TimeManager = {}
 local TimerTaskInterruptCheck = 0
 
 function IsRunning()
@@ -67,12 +68,26 @@ end
 --private
 function loadConfig()
     TodoList = {}
+    TimeManager = {}
     local taskStr = IniReadUserConfig("TroLy", "Task", "")
     if taskStr ~= "" then
         local taskList = util_split_string(nx_string(taskStr), ";")
         for _, task in pairs(taskList) do
             local prop = util_split_string(task, ",")
-            addToTodoList(nx_number(prop[2]), nx_string(prop[1]) == "1" and true or false)
+            if prop[3] == nil then
+                prop[3] = 0
+                prop[4] = 0
+                prop[5] = 23
+                prop[6] = 59
+            end
+            addToTodoList(
+                nx_number(prop[2]),
+                nx_string(prop[1]) == "1" and true or false,
+                prop[3],
+                prop[4],
+                prop[5],
+                prop[6]
+            )
         end
     end
     if #TodoList > 0 then
@@ -81,9 +96,16 @@ function loadConfig()
     return false
 end
 
-function addToTodoList(i, checked)
+function addToTodoList(i, checked, startTimeHr, startTimeMnt, endTimeHr, endTimeMnt)
     if checked then
         table.insert(TodoList, i)
+        local t = {}
+        t.taskIndex = i
+        t.startTimeHr = nx_number(startTimeHr)
+        t.startTimeMnt = nx_number(startTimeMnt)
+        t.endTimeHr = nx_number(endTimeHr)
+        t.endTimeMnt = nx_number(endTimeMnt)
+        table.insert(TimeManager, t)
     end
 end
 
@@ -111,9 +133,10 @@ function checkNextTask()
 
     local cnt = #TodoList
     for i = 1, cnt do
-        local logic = TASK_LIST[TodoList[i]][2]
-        if nx_execute(logic, "CanRun") then
-            Console("Next task: " .. TASK_LIST[TodoList[i]][1])
+        local taskIndex = TodoList[i]
+        if canRunTask(taskIndex) then
+            local logic = TASK_LIST[taskIndex][2]
+            Console("Next task: " .. TASK_LIST[taskIndex][1])
             nx_execute(logic, "Start")
             return
         end
@@ -121,9 +144,10 @@ function checkNextTask()
 
     while Running and needToWait() do
         for i = 1, cnt do
-            local logic = TASK_LIST[TodoList[i]][2]
-            if nx_execute(logic, "CanRun") then
-                Console("Next task: " .. TASK_LIST[TodoList[i]][1])
+            local taskIndex = TodoList[i]
+            if canRunTask(taskIndex) then
+                local logic = TASK_LIST[taskIndex][2]
+                Console("Next task: " .. TASK_LIST[taskIndex][1])
                 nx_execute(logic, "Start")
                 return
             end
@@ -186,20 +210,66 @@ function onTaskInterrupt(source)
     if not Running then
         return
     end
-    if TimerDiff(TimerTaskInterruptCheck) < 5 then
+    if TimerDiff(TimerTaskInterruptCheck) < 4 then
         return
     end
     TimerTaskInterruptCheck = TimerInit()
     local cnt = #TodoList
     for i = 1, cnt do
-        local logic = TASK_LIST[TodoList[i]][2]
+        local taskIndex = TodoList[i]
+        local logic = TASK_LIST[taskIndex][2]
         if source == logic then
+            if not isInTaskTime(taskIndex) then
+                nx_execute(source, "Stop")
+            end
             return
         end
-        if nx_execute(logic, "CanRun") then
+        if canRunTask(taskIndex) then
             Console("Task interrupted")
             nx_execute(source, "Stop")
             return
         end
     end
+end
+
+function isInTaskTime(taskIndex)
+    local cnt = #TimeManager
+    for i = 1, cnt do
+        local t = TimeManager[i]
+        if t.taskIndex == taskIndex then
+            local hr = math.floor(nx_execute("zdn_logic_base", "GetCurrentHour"))
+            local mnt = math.floor(nx_execute("zdn_logic_base", "GetCurrentMinute"))
+            return isBetween(hr, mnt, t.startTimeHr, t.startTimeMnt, t.endTimeHr, t.endTimeMnt)
+        end
+    end
+    return false
+end
+
+function isBetween(hr, mnt, startHr, startMnt, endHr, endMnt)
+    return isBeyondStartTime(hr, mnt, startHr, startMnt) and isBelowEndTime(hr, mnt, endHr, endMnt)
+end
+
+function isBeyondStartTime(hr, mnt, startHr, startMnt)
+    if hr > startHr then
+        return true
+    end
+    if hr == startHr then
+        return mnt >= startMnt
+    end
+    return false
+end
+
+function isBelowEndTime(hr, mnt, endHr, endMnt)
+    if hr < endHr then
+        return true
+    end
+    if hr == endHr then
+        return mnt <= endMnt
+    end
+    return false
+end
+
+function canRunTask(taskIndex)
+    local logic = TASK_LIST[taskIndex][2]
+    return nx_execute(logic, "CanRun") and isInTaskTime(taskIndex)
 end

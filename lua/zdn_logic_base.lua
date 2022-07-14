@@ -53,7 +53,12 @@ end
 
 function GetCurrentHour()
     local timeStamp = GetCurrentTimestamp()
-    return timeStamp % 86400 / 3600 + 7
+    return (timeStamp % 86400 / 3600 + 7) % 24
+end
+
+function GetCurrentMinute()
+    local timeStamp = GetCurrentTimestamp()
+    return (timeStamp % 86400) % 3600 / 60
 end
 
 function GetCurrentHourHuman()
