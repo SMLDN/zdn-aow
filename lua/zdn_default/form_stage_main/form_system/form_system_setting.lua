@@ -26,7 +26,7 @@ local function zdnAddInput(form)
         return
     end
     local maxFps = nx_number(IniReadUserConfig("Zdn", "MaxFps", 60))
-    local input = gui:Create("Float_Edit")
+    local input = gui:Create("Edit")
     form:Add(input)
     form.zdn_max_fps_input = input
 
@@ -34,11 +34,11 @@ local function zdnAddInput(form)
     input.Top = 225
     input.Width = 50
     input.Height = 23
-    input.Format = "%.0f"
     input.DragStep = "1.000000"
-    input.Max = "150.000000"
-    input.OnlyDigit = "true"
-    input.ChangedEvent = "true"
+    input.OnlyDigit = true
+    input.ChangedEvent = true
+    input.MaxLength = 3
+    input.MaxDigit = 999
     input.TextOffsetX = "2"
     input.Align = "Center"
     input.SelectBackColor = "190,190,190,190"

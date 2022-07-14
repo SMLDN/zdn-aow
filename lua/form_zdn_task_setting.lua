@@ -20,7 +20,13 @@ function loadConfig()
 		local taskList = util_split_string(nx_string(taskStr), ";")
 		for _, task in pairs(taskList) do
 			local prop = util_split_string(task, ",")
-			addRowToTaskGrid(nx_number(prop[2]), nx_string(prop[1]) == "1" and true or false)
+			if prop[3] == nil then
+				prop[3] = 0
+				prop[4] = 0
+				prop[5] = 23
+				prop[6] = 59
+			end
+			addRowToTaskGrid(nx_number(prop[2]), nx_string(prop[1]) == "1" and true or false, prop[3], prop[4], prop[5], prop[6])
 		end
 	end
 end
@@ -31,34 +37,45 @@ function onBtnSaveClick()
 	for i = 0, cnt do
 		local cbtn = Form.task_grid:GetGridControl(i, 0).btn
 		local infoNode = Form.task_grid:GetGridControl(i, 8).btn
+		local startTime = Form.task_grid:GetGridControl(i, 5)
+		local endTime = Form.task_grid:GetGridControl(i, 7)
 		if i > 0 then
 			taskStr = taskStr .. ";"
 		end
-		taskStr = taskStr .. (cbtn.Checked and "1" or "0") .. "," .. infoNode.TaskListIndex
+		taskStr =
+			taskStr ..
+			(cbtn.Checked and "1" or "0") ..
+				"," ..
+					infoNode.TaskListIndex ..
+						"," ..
+							nx_string(startTime.input_hour.Text) ..
+								"," ..
+									nx_string(startTime.input_minute.Text) ..
+										"," .. nx_string(endTime.input_hour.Text) .. "," .. nx_string(endTime.input_minute.Text)
 	end
 	IniWriteUserConfig("TroLy", "Task", taskStr)
 end
 
 function onBtnAddTaskClick()
 	local i = Form.cbx_task_list.DropListBox.SelectIndex + 1
-	addRowToTaskGrid(i, true)
+	addRowToTaskGrid(i, true, 0, 0, 23, 59)
 end
 
-function addRowToTaskGrid(i, checked)
+function addRowToTaskGrid(i, checked, startHr, startMnt, endHr, endMnt)
 	if taskExists(i) then
 		ShowText("Tác vụ này đã được thêm từ trước")
 		return
 	end
-	addRowToPositionGridByGridIndex(Form.task_grid.RowCount, i, checked)
+	addRowToPositionGridByGridIndex(Form.task_grid.RowCount, i, checked, startHr, startMnt, endHr, endMnt)
 end
 
-function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked)
+function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked, startHr, startMnt, endHr, endMnt)
 	local cbtn = createCheckboxButton(checked, Utf8ToWstr(TASK_LIST[taskListIndex][1]))
 	local upBtn = createUpButton()
 	local downBtn = createDownButton()
 	local settingBtn = createSettingButton(taskListIndex)
-	local startTime = createTimeInput()
-	local endTime = createTimeInput()
+	local startTime = createTimeInput(startHr, startMnt)
+	local endTime = createTimeInput(endHr, endMnt)
 	local delBtn = createDeleteButton(taskListIndex)
 
 	Form.task_grid:BeginUpdate()
@@ -372,7 +389,7 @@ function onHyperUncheckAllClick()
 	end
 end
 
-function createTimeInput()
+function createTimeInput(hr, mnt)
 	local gui = nx_value("gui")
 	if not nx_is_valid(gui) then
 		return
@@ -380,19 +397,18 @@ function createTimeInput()
 	local groupbox = gui:Create("GroupBox")
 	groupbox.BackColor = "0,0,0,0"
 	groupbox.NoFrame = true
-	local inputHr = gui:Create("Float_Edit")
+	local inputHr = gui:Create("Edit")
 	groupbox:Add(inputHr)
 	groupbox.input_hour = inputHr
-
 	-- hr
 	inputHr.Top = 7
 	inputHr.Width = 35
 	inputHr.Height = 22
-	inputHr.Format = "%.0f"
 	inputHr.DragStep = "1.000000"
-	inputHr.Max = "24.000000"
-	inputHr.OnlyDigit = "true"
-	inputHr.ChangedEvent = "true"
+	inputHr.OnlyDigit = true
+	inputHr.ChangedEvent = true
+	inputHr.MaxLength = 2
+	inputHr.MaxDigit = 23
 	inputHr.TextOffsetX = "2"
 	inputHr.Align = "Center"
 	inputHr.SelectBackColor = "190,190,190,190"
@@ -404,9 +420,9 @@ function createTimeInput()
 	inputHr.TabStop = "true"
 	inputHr.DrawMode = "ExpandH"
 	inputHr.BackImage = "gui\\common\\form_line\\ibox_1.png"
-	inputHr.Text = nx_widestr("00")
+	inputHr.Text = nx_widestr(hr)
 
-	local inputMnt = gui:Create("Float_Edit")
+	local inputMnt = gui:Create("Edit")
 	groupbox:Add(inputMnt)
 	groupbox.input_minute = inputMnt
 	-- mnt
@@ -414,11 +430,11 @@ function createTimeInput()
 	inputMnt.Left = 40
 	inputMnt.Width = 35
 	inputMnt.Height = 22
-	inputMnt.Format = "%.0f"
 	inputMnt.DragStep = "1.000000"
-	inputMnt.Max = "24.000000"
-	inputMnt.OnlyDigit = "true"
-	inputMnt.ChangedEvent = "true"
+	inputMnt.OnlyDigit = true
+	inputMnt.ChangedEvent = true
+	inputMnt.MaxLength = 2
+	inputMnt.MaxDigit = 59
 	inputMnt.TextOffsetX = "2"
 	inputMnt.Align = "Center"
 	inputMnt.SelectBackColor = "190,190,190,190"
@@ -427,11 +443,9 @@ function createTimeInput()
 	inputMnt.ShadowColor = "0,0,0,0"
 	inputMnt.Font = "font_main"
 	inputMnt.Cursor = "WIN_IBEAM"
-	inputMnt.TabStop = "true"
+	inputMnt.TabStop = true
 	inputMnt.DrawMode = "ExpandH"
 	inputMnt.BackImage = "gui\\common\\form_line\\ibox_1.png"
-	inputMnt.Text = nx_widestr("00")
-
+	inputMnt.Text = nx_widestr(mnt)
 	return groupbox
 end
-
