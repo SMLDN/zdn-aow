@@ -20,7 +20,11 @@ function initN6GridView()
         Form.n6_grid:BeginUpdate()
         Form.n6_grid:InsertRow(gridIndex)
         Form.n6_grid:SetGridControl(gridIndex, 0, cbtn)
-        Form.n6_grid:SetGridText(gridIndex, 1, getTaskStatus(i + 1))
+
+        local taskStatusTxt, foreColor = getTaskStatus(i + 1)
+        Form.n6_grid:SetGridText(gridIndex, 1, taskStatusTxt)
+        Form.n6_grid:SetGridForeColor(gridIndex, 1, foreColor)
+
         Form.n6_grid:EndUpdate()
     end
 
@@ -127,7 +131,7 @@ end
 function getTaskStatus(index)
     local logic = TASK_LIST[index][3]
     if nx_execute(logic, "IsRunning") then
-        return Utf8ToWstr("Đang chạy...")
+        return Utf8ToWstr("Đang chạy..."), "255,255,255,255"
     end
     if resetTimeStr ~= "" then
         local resetTime = util_split_string(resetTimeStr, ";")
@@ -137,10 +141,9 @@ function getTaskStatus(index)
                 prop[1] == nx_string(TASK_LIST[index][1]) and
                     nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") < nx_number(prop[2])
              then
-                return Utf8ToWstr("Đã xong")
+                return Utf8ToWstr("Đã xong"), "255,128,101,74"
             end
         end
     end
-
-    return nx_widestr("-")
+    return nx_widestr("-"), "255,128,101,74"
 end

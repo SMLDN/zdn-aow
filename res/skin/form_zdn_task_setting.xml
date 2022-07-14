@@ -51,6 +51,13 @@
             <event on_click_hyperlink="onHyperUncheckAllClick" />
         </control>
 
+		<control name="lbl_header_start" entity="Label" script="" init="">
+            <prop RefCursor="WIN_HELP" Left="348" Top="95" Height="20" ForeColor="255,128,128,128" ShadowColor="0,0,0,0" Text="Bắt đầu" AutoSize="True" Font="font_text" />
+        </control>
+		<control name="lbl_header_end" entity="Label" script="" init="">
+            <prop RefCursor="WIN_HELP" Left="458" Top="95" Height="20" ForeColor="255,128,128,128" ShadowColor="0,0,0,0" Text="Kết thúc" AutoSize="True" Font="font_text" />
+        </control>
+
         <control name="task_grid" entity="Grid" script="" init="">
             <prop ShowComment="true" HeaderRowHeight="1" HeaderBackColor="0,255,255,255" ForeColor="255,128,101,74" BackColor="0,255,255,255" CanSelectRow="false" ColWidths="175,25,25,25,80,78,30,95,25" RowHeight="36" ColCount="9" ScrollSize="17" HasHScroll="true" AlwaysVScroll="false" AlwaysHScroll="false" Solid="true" Left="15" Top="110" Width="585" Height="252" LineColor="0,0,0,0" ShadowColor="0,255,255,255" Font="font_name_guild" TabStop="true" NoFrame="true" DrawMode="Expand" />
              <subor name="VScrollBar">

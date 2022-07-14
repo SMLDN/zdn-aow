@@ -84,11 +84,16 @@ function addRowToPositionGridByGridIndex(gridIndex, taskListIndex, checked, star
 	Form.task_grid:SetGridControl(gridIndex, 1, upBtn)
 	Form.task_grid:SetGridControl(gridIndex, 2, downBtn)
 	Form.task_grid:SetGridControl(gridIndex, 3, settingBtn)
-	Form.task_grid:SetGridText(gridIndex, 4, getTaskStatus(taskListIndex))
+
+	local taskStatusTxt, foreColor = getTaskStatus(taskListIndex)
+	Form.task_grid:SetGridText(gridIndex, 4, taskStatusTxt)
+	Form.task_grid:SetGridForeColor(gridIndex, 4, foreColor)
+
 	Form.task_grid:SetGridControl(gridIndex, 5, startTime)
 	Form.task_grid:SetGridText(gridIndex, 6, nx_widestr("~"))
 	Form.task_grid:SetGridControl(gridIndex, 7, endTime)
 	Form.task_grid:SetGridControl(gridIndex, 8, delBtn)
+
 	Form.task_grid:EndUpdate()
 end
 
@@ -377,12 +382,12 @@ end
 function getTaskStatus(index)
 	local logic = TASK_LIST[index][2]
 	if nx_execute(logic, "IsRunning") then
-		return Utf8ToWstr("Đang chạy...")
+		return Utf8ToWstr("Đang chạy..."), "255,255,255,255"
 	end
 	if nx_execute(logic, "IsTaskDone") then
-		return Utf8ToWstr("Đã xong")
+		return Utf8ToWstr("Đã xong"), "255,128,101,74"
 	end
-	return nx_widestr("-")
+	return nx_widestr("-"), "255,128,101,74"
 end
 
 function onHyperCheckAllClick()

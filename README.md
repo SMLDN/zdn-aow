@@ -1,7 +1,10 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
+*Update 7/14/2022*  
 *v1.11.0*  
+**Tính năng mới**
+- Trợ lý: cài giờ chạy
+
 **Thay đổi**
 - /shop: chuyển về nút Tiệm tạp hóa ở Túi của nhân vật
 
