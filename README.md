@@ -1,7 +1,7 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
-*v1.yy.0*  
+*Update 7/16/2022*  
+*v1.11.1*  
 **Sửa lỗi**
 - Kỳ ngộ: không tự nhận kỳ ngộ từ NPC có tên trùng mà ID khác
 - Gợi ý đào bảo: máy k hỗ trợ font Unicode k hiển thị gợi ý
