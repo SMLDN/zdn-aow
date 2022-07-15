@@ -56,7 +56,7 @@ end
 function needAcceptKyNgo(npcId)
     local cnt = #KyNgoList
     for i = 1, cnt do
-        if KyNgoList[i] == npcId then
+        if util_text(KyNgoList[i]) == util_text(npcId) then
             return true
         end
     end
@@ -94,7 +94,7 @@ function doAcceptByMail(npcId)
     local npc_id = form.npc
     nx_execute("custom_sender", "custom_give_item", 2, -1, form.npc)
     form:Close()
-    return npc_id == npcId
+    return util_text(npc_id) == util_text(npcId)
 end
 
 function doAcceptByTalk(npcId)
@@ -128,7 +128,7 @@ function doTalkToNpc(obj)
 end
 
 function isLastConfigId(obj)
-    if nx_string(obj:QueryProp("ConfigID")) == nx_string(lastNpcId) then
+    if util_text(obj:QueryProp("ConfigID")) == util_text(lastNpcId) then
         local fight = nx_value("fight")
         if not nx_is_valid(fight) then
             return false

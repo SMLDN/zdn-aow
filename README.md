@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.yy.0*  
+**Sửa lỗi**
+- Kỳ ngộ: không tự nhận kỳ ngộ từ NPC có tên trùng mà ID khác
+
+---
 *Update 7/14/2022*  
 *v1.11.0*  
 **Tính năng mới**
