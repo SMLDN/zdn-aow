@@ -4,6 +4,7 @@
 *v1.yy.0*  
 **Sửa lỗi**
 - Kỳ ngộ: không tự nhận kỳ ngộ từ NPC có tên trùng mà ID khác
+- Gợi ý đào bảo: máy k hỗ trợ font Unicode k hiển thị gợi ý
 
 ---
 *Update 7/14/2022*  
