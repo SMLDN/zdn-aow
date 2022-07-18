@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.yy.yy*  
+**Sửa lỗi**
+- Do thám: tự sát nhanh: kết hợp cùng tâm ma cho tự sát nhanh hơn nữa
+
+---
 *Update 7/16/2022*  
 *v1.11.1*  
 **Sửa lỗi**

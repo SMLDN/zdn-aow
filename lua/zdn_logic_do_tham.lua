@@ -682,7 +682,7 @@ function veSuMon()
         nx_pause(2)
         TeleToHomePoint(getMyHome())
     else
-        if InstantDieFlg then
+        if InstantDieFlg and nx_execute("zdn_logic_skill", "HaveBuff", "buf_CS_jh_tmjt06") then
             DieInstantly()
             return
         end
