@@ -1,9 +1,12 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
-*v1.yy.yy*  
-**Sửa lỗi**
+*Update 7/18/2022*  
+*v1.11.2*  
+**Thay đổi**
 - Do thám: tự sát nhanh: kết hợp cùng tâm ma cho tự sát nhanh hơn nữa
+
+**Sửa lỗi**
+- Nông phu: không lưu được tọa độ
 
 ---
 *Update 7/16/2022*  
