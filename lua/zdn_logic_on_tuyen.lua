@@ -16,7 +16,7 @@ function Start()
     PICKED_LIST = {}
     while Running do
         loopOnTuyen()
-        nx_pause(0.1)
+        nx_pause(0.2)
     end
 end
 
