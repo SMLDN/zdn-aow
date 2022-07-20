@@ -1,7 +1,7 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
-*v1.yy.yy*  
+*Update 7/20/2022*  
+*v1.11.3*  
 **Thay đổi**
 - Ôn tuyền: tăng thời gian chờ trước khi sang điểm có hoa tiếp theo
 
