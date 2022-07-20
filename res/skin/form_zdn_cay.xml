@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+    <control name="main_form" entity="Form" script="form_zdn_cay" init="formInit">
+        <prop LimitInScreen="true" ShowGrid="true" Width="480" Height="220" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
+        <event on_open="formOpen" on_close="formClose" />
+
+        <control name="btn_close" entity="Button" script="" init="">
+            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="450" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
+            <event on_click="onBtnCloseClick" />
+        </control>
+        <control name="lbl_title" entity="Label" script="" init="">
+            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="8" Width="480" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Font="font_title" Text="Cây ngày"/>
+        </control>
+
+        <control name="monday" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="10,0,450,20" LineHeight="20" HtmlText='<a href="">Thứ 2: Kim Lăng (383,403) - tele Kim Lăng Đông Giao</a>' ScrollSize="17" Width="450" Height="25" Top="40" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnTeleClick" />
+        </control>
+
+        <control name="tuesday" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="10,0,450,20" LineHeight="20" HtmlText='<a href="">Thứ 3: Trại Ngoại Đại Mạc (1349,276) - tele An Tức Hoang Mạc</a>' ScrollSize="17" Width="450" Height="25" Top="65" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnTeleClick" />
+        </control>
+
+        <control name="wednesday" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="10,0,450,20" LineHeight="20" HtmlText='<a href="">Thứ 4: Lạc Dương (738,1199) - tele Tần Vương Phủ</a>' ScrollSize="17" Width="450" Height="25" Top="90" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnTeleClick" />
+        </control>
+
+        <control name="thursday" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="10,0,450,20" LineHeight="20" HtmlText='<a href="">Thứ 5: Yến Kinh (831,-205) - tele Yến Kinh Thành</a>' ScrollSize="17" Width="450" Height="25" Top="115" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnTeleClick" />
+        </control>
+
+        <control name="friday" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,0,180,50" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="10,0,450,20" LineHeight="20" HtmlText='<a href="">Thứ 6: Tô Châu (290,838) - tele Tô Châu Thành</a>' ScrollSize="17" Width="450" Height="25" Top="140" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnTeleClick" />
+        </control>
+
+        <control name="return_cay" entity="MultiTextBox" script="" init="">
+            <prop TextColor="255,220,20,60" SelectBarColor="0,0,0,255" MouseInBarColor="0,255,255,0" ViewRect="10,0,120,20" LineHeight="20" HtmlText='<a href="">Điểm trả cây</a>' ScrollSize="17" Width="120" Left="340" Height="25" Top="180" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" />
+            <event on_click_hyperlink="onBtnReturnClick" />
+        </control>
+    </control>
+</form>

@@ -1,7 +1,10 @@
 # Release Note
 ---
 *Update 7/20/2022*  
-*v1.11.3*  
+*v1.12.0*  
+**Tính năng mới**
+- Thông tin cây ngày(/cay): không phải auto hoàn chỉnh, chỉ hiển thị thông tin, click vào sẽ dò đường
+
 **Thay đổi**
 - Ôn tuyền: tăng thời gian chờ trước khi sang điểm có hoa tiếp theo
 
@@ -254,3 +257,4 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /thuthap : thu thập  
  /nhatdo : thiết lập nhặt đồ. Có tác dụng cho thích quán, thth  
  /coc : dò cóc
+ /cay : thông tin cây ngày
