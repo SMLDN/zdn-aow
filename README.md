@@ -5,6 +5,9 @@
 **Thay đổi**
 - Ôn tuyền: tăng thời gian chờ trước khi sang điểm có hoa tiếp theo
 
+**Sửa lỗi**
+- Movie: bỏ qua cắt cảnh khiến không lên được đảo Thanh hải
+
 ---
 *Update 7/18/2022*  
 *v1.11.2*  
