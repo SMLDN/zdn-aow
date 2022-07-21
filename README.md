@@ -3,7 +3,7 @@
 *Update 7/yy/2022*  
 *v1.13.0*  
 **Tính năng mới**
-- Vật phẩm: hỗ trợ sử dụng vật phẩm tăng tốc độ Nội tu
+- Vật phẩm: hỗ trợ sử dụng vật phẩm tăng tốc độ Nội tu(có tính toán tốc độ nội tu tối đa)
 
 **Sửa lỗi**
 - Kỳ ngộ: không nhận được kỳ ngộ Tiểu Mẫn
