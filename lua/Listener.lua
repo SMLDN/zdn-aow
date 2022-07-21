@@ -59,7 +59,11 @@ function Resolve(msg, ...)
 		end
 	end
 
-	if nx_string(msg) == "Sysinfo_qyoptalk_000" then
+	if nx_number(msg) == 8006 then
+		nx_execute("custom_sender", "custom_send_faculty_msg", 11)
+	elseif nx_number(msg) == 9402 then
+		nx_execute("custom_sender", "custom_sitcross", 0)
+	elseif nx_string(msg) == "Sysinfo_qyoptalk_000" then
 		nx_execute("zdn_logic_ky_ngo", "OnReceiveKyNgo", nx_string(arg[1]))
 	end
 end

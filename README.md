@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.14.0*  
+**Tính năng mới**
+- Tiếp tục nội tu khi lên tầng
+
+---
 *Update 7/21/2022*  
 *v1.13.0*  
 **Tính năng mới**

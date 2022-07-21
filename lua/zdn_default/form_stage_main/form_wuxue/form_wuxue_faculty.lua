@@ -1,3 +1,4 @@
+require("zdn_util")
 --
 function auto_uplvl()
   nx_pause(5)
@@ -6,7 +7,7 @@ end
 function on_msg_level_up()
   nx_execute("form_stage_main\\form_wuxue\\form_wuxue_faculty", "auto_uplvl")
   nx_execute("custom_sender", "custom_send_faculty_msg", 11)
---
+  --
   local gui = nx_value("gui")
   local dialog = nx_execute("form_common\\form_confirm", "get_new_confirm_form", "wuxue_lvlup")
   local text = nx_widestr(util_text("ui_normal_faculty_level_up"))
@@ -21,7 +22,8 @@ function on_msg_level_up()
     text = nx_widestr(util_text("ui_normal_faculty_max_level"))
   else
     local wuxue_level = client_player:QueryProp("CurLevel")
-    text = gui.TextManager:GetFormatText(nx_string("ui_normal_faculty_level_up"), nx_string(wuxue_name), nx_int(wuxue_level))
+    text =
+      gui.TextManager:GetFormatText(nx_string("ui_normal_faculty_level_up"), nx_string(wuxue_name), nx_int(wuxue_level))
   end
   nx_execute("form_common\\form_confirm", "show_common_text", dialog, text)
   dialog:Show()
