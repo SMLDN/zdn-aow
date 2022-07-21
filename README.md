@@ -1,6 +1,6 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
+*Update 7/21/2022*  
 *v1.13.0*  
 **Tính năng mới**
 - Vật phẩm: hỗ trợ sử dụng vật phẩm tăng tốc độ Nội tu(có tính toán tốc độ nội tu tối đa)
