@@ -215,9 +215,11 @@ function loopVatPham()
             PickAllDropItem()
         end
         if not nx_execute("zdn_logic_skill", "HaveBuff", item.buffId) then
-            local index = FindItemIndexFromVatPham(item.itemId)
-            if UseItem(2, index) then
-                nx_pause(0.1)
+            if not item.noiTuFlg or canUseNoiTuItem(item.buffId) then
+                local index = FindItemIndexFromVatPham(item.itemId)
+                if UseItem(2, index) then
+                    nx_pause(0.1)
+                end
             end
         end
     end
@@ -252,6 +254,10 @@ function loadConfig()
                 local item = {}
                 item.itemId = prop[2]
                 item.buffId = prop[3]
+                item.noiTuFlg = false
+                if item.buffId == prop[4] then
+                    item.noiTuFlg = true
+                end
                 table.insert(ItemList, item)
                 loaded = true
             end
@@ -307,4 +313,37 @@ function getFixItemIndex()
         return i
     end
     return FindItemIndexFromVatPham("fixitem_002")
+end
+
+function canUseNoiTuItem(buffId)
+    local game_client = nx_value("game_client")
+    if not nx_is_valid(game_client) then
+        return true
+    end
+    local client_player = game_client:GetPlayer()
+    if not nx_is_valid(client_player) then
+        return true
+    end
+    local buffer_effect = nx_value("BufferEffect")
+    if not nx_is_valid(buffer_effect) then
+        return true
+    end
+    if not client_player:FindRecord("AddWuXueFacultyBufferRec") then
+        return true
+    end
+    local v = 0
+    local rownum = client_player:GetRecordRows("AddWuXueFacultyBufferRec")
+    for i = 0, rownum - 1 do
+        local index = client_player:QueryRecord("AddWuXueFacultyBufferRec", i, 0)
+        local b = buffer_effect:GetBufferDescIDByIndex(1, index)
+        local l = util_split_wstring(util_text(b), nx_widestr(" "))
+        for i = 1, #l do
+            v = v + nx_number(l[i])
+        end
+    end
+    local l2 = util_split_wstring(util_text(buffId), nx_widestr(" "))
+    for i = 1, #l2 do
+        v = v + nx_number(l2[i])
+    end
+    return v <= 1000
 end
