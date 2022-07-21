@@ -1,5 +1,14 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.13.0*  
+**Tính năng mới**
+- Vật phẩm: hỗ trợ sử dụng vật phẩm tăng tốc độ Nội tu
+
+**Sửa lỗi**
+- Kỳ ngộ: không nhận được kỳ ngộ Tiểu Mẫn
+
+---
 *Update 7/20/2022*  
 *v1.12.0*  
 **Tính năng mới**
