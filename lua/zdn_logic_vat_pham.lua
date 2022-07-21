@@ -191,6 +191,18 @@ function FixEquippedItemHardiness()
     end
 end
 
+function GetItemPhoto(itemId)
+    local toolItemIni = nx_execute("util_functions", "get_ini", "share\\item\\tool_item.ini")
+    if not nx_is_valid(toolItemIni) then
+        return ""
+    end
+    local sectionIndexNumber = toolItemIni:FindSectionIndex(itemId)
+    if sectionIndexNumber < 0 then
+        return ""
+    end
+    return toolItemIni:ReadString(sectionIndexNumber, "Photo", "")
+end
+
 -- private
 function loopVatPham()
     if IsDroppickShowed() then

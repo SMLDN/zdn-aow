@@ -2,10 +2,15 @@ require("util_gui")
 require("zdn_lib\\util_functions")
 require("zdn_form_common")
 
+local NoiTuData = {}
+
 function onFormOpen()
 	local gui = nx_value("gui")
 	Form.Left = (gui.Width - Form.Width) / 2
 	Form.Top = (gui.Height - Form.Height) / 2
+	if #NoiTuData == 0 then
+		loadNoiTuData()
+	end
 	loadConfig()
 end
 
@@ -41,6 +46,9 @@ function onBtnAddItemClick()
 		ShowText("Vật phẩm này đã được thêm từ trước")
 		return
 	end
+	if processNoiTuItem(itemId) then
+		return
+	end
 	util_show_form("form_zdn_select_buff", true)
 	nx_execute("form_zdn_select_buff", "SetItem", itemId)
 end
@@ -60,7 +68,7 @@ function addRowToItemGrid(item)
 	local target = Form.item_grid
 	local gridIndex = target.RowCount
 	local cbtn = createCheckboxButton(item)
-	local itemPhoto = createImageControl(item.itemId, getItemPhoto(item.itemId))
+	local itemPhoto = createImageControl(item.itemId, nx_execute("zdn_logic_vat_pham", "GetItemPhoto", item.itemId))
 	local buffPhoto = createImageControl(item.buffDescId, item.buffPhoto)
 	local delBtn = createDeleteButton()
 
@@ -206,18 +214,6 @@ function getHandItem()
 	return nx_string(item:QueryProp("ConfigID")), viewPort
 end
 
-function getItemPhoto(itemId)
-	local toolItemIni = nx_execute("util_functions", "get_ini", "share\\item\\tool_item.ini")
-	if not nx_is_valid(toolItemIni) then
-		return ""
-	end
-	local sectionIndexNumber = toolItemIni:FindSectionIndex(itemId)
-	if sectionIndexNumber < 0 then
-		return ""
-	end
-	return toolItemIni:ReadString(sectionIndexNumber, "Photo", "")
-end
-
 function onBtnDeleteRowClick(btn)
 	local cnt = Form.item_grid.RowCount - 1
 	for i = 0, cnt do
@@ -244,9 +240,7 @@ function saveConfig()
 		itemStr =
 			itemStr ..
 			(cbtn.Checked and "1" or "0") ..
-				"," ..
-				cbtn.ItemItemId ..
-						"," .. cbtn.ItemBuffId .. "," .. cbtn.ItemBuffDescId .. "," .. cbtn.ItemBuffPhoto
+				"," .. cbtn.ItemItemId .. "," .. cbtn.ItemBuffId .. "," .. cbtn.ItemBuffDescId .. "," .. cbtn.ItemBuffPhoto
 	end
 	IniWriteUserConfig("VatPham", "List", itemStr)
 end
@@ -261,6 +255,21 @@ function isItemExists(itemId)
 		local gb = Form.item_grid:GetGridControl(i, 0)
 		local btn = gb.btn
 		if itemId == btn.ItemItemId then
+			return true
+		end
+	end
+	return false
+end
+
+function loadNoiTuData()
+	NoiTuData = IniLoadAllData(nx_resource_path() .. "zdn\\data\\vatpham.ini")
+end
+
+function processNoiTuItem(itemId)
+	for _, detail in pairs(NoiTuData) do
+		if detail.item == itemId then
+			local buffId = detail.buff
+			DoAddItem(itemId, buffId, buffId, nx_execute("zdn_logic_vat_pham", "GetItemPhoto", itemId))
 			return true
 		end
 	end

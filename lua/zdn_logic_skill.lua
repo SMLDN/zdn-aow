@@ -118,8 +118,44 @@ function Fly()
 end
 
 function HaveBuff(buffId)
-    local obj = nx_value("game_client"):GetPlayer()
-    return ObjHaveBuff(obj, buffId)
+    local game_client = nx_value("game_client")
+    if not nx_is_valid(game_client) then
+        return false
+    end
+    local client_player = game_client:GetPlayer()
+    if not nx_is_valid(client_player) then
+        return false
+    end
+    if ObjHaveBuff(client_player, buffId) then
+        return true
+    end
+    -- noi tu
+    local buffer_effect = nx_value("BufferEffect")
+    if not nx_is_valid(buffer_effect) then
+        return false
+    end
+    if client_player:FindRecord("AddWuXueFacultyBufferRec") then
+        local rownum = client_player:GetRecordRows("AddWuXueFacultyBufferRec")
+        for i = 0, rownum - 1 do
+            local index = client_player:QueryRecord("AddWuXueFacultyBufferRec", i, 0)
+            local b = buffer_effect:GetBufferDescIDByIndex(1, index)
+            if b == buffId then
+                return true
+            end
+        end
+    end
+    -- lich luyen
+    if client_player:FindRecord("LivePointChangeBufferRec") then
+        local rownum = client_player:GetRecordRows("LivePointChangeBufferRec")
+        for i = 0, rownum - 1 do
+            local index = client_player:QueryRecord("LivePointChangeBufferRec", i, 0)
+            local b = buffer_effect:GetBufferDescIDByIndex(2, index)
+            if b == buffId then
+                return true
+            end
+        end
+    end
+    return false
 end
 
 function ObjHaveBuff(obj, buffId)
