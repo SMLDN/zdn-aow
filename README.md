@@ -1,10 +1,11 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
+*Update 7/23/2022*  
 *v1.14.0*  
 **Tính năng mới**
 - Tiếp tục nội tu khi lên tầng
 - Tự động bật nội tu khi chuyển map, chuyển giao với liên server
+- Trợ lý: thêm tùy chỉnh chạy thâu đêm suốt sáng
 
 **Thay đổi**
 - Do thám: tính là Đã xong nếu không có Q
