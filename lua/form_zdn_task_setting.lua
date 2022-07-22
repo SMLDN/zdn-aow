@@ -29,6 +29,8 @@ function loadConfig()
 			addRowToTaskGrid(nx_number(prop[2]), nx_string(prop[1]) == "1" and true or false, prop[3], prop[4], prop[5], prop[6])
 		end
 	end
+	local stopOnDoneStr = nx_string(IniReadUserConfig("TroLy", "StopOnDone", "1"))
+	Form.stop_on_done_cbtn.Checked = stopOnDoneStr == "1" and true or false
 end
 
 function onBtnSaveClick()
@@ -54,6 +56,8 @@ function onBtnSaveClick()
 										"," .. nx_string(endTime.input_hour.Text) .. "," .. nx_string(endTime.input_minute.Text)
 	end
 	IniWriteUserConfig("TroLy", "Task", taskStr)
+	local stopOnDoneFlg = Form.stop_on_done_cbtn.Checked
+	IniWriteUserConfig("TroLy", "StopOnDone", stopOnDoneFlg and "1" or "0")
 end
 
 function onBtnAddTaskClick()

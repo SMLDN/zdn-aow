@@ -8,6 +8,7 @@ local TodoList = {}
 local currentRunningTask = ""
 local TimeManager = {}
 local TimerTaskInterruptCheck = 0
+local StopOnDoneFlg = true
 
 function IsRunning()
     return Running
@@ -90,6 +91,8 @@ function loadConfig()
             )
         end
     end
+    local stopOnDoneStr = nx_string(IniReadUserConfig("TroLy", "StopOnDone", "1"))
+    StopOnDoneFlg = stopOnDoneStr == "1" and true or false
     if #TodoList > 0 then
         return true
     end
@@ -155,7 +158,31 @@ function checkNextTask()
         nx_pause(5)
     end
     Console("All task is done.")
-    Stop()
+
+    if StopOnDoneFlg then
+        Stop()
+        return
+    end
+
+    while not anyTaskAvailable() do
+        if not Running then
+            return
+        end
+        nx_pause(5)
+    end
+
+    checkNextTask()
+end
+
+function anyTaskAvailable()
+    local cnt = #TodoList
+    for i = 1, cnt do
+        local taskIndex = TodoList[i]
+        if canRunTask(taskIndex) then
+            return true
+        end
+    end
+    return false
 end
 
 function stopAllTaskSilently()

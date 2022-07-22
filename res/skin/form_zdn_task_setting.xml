@@ -74,6 +74,13 @@
             </subor>
         </control>
 
+		<control name="stop_on_done_cbtn" entity="CheckButton" script="" init="">
+            <prop HintText="Dừng trợ lý khi xong hết tác vụ ngày" Left="20" Top="390" Width="16" Height="16" Checked="true" BoxSize="12" NormalImage="gui\common\checkbutton\cbtn_2_out.png" FocusImage="gui\common\checkbutton\cbtn_2_on.png" CheckedImage="gui\common\checkbutton\cbtn_2_down.png" DisableImage="gui\common\checkbutton\cbtn_2_forbid.png" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" InSound="MouseOn_20" ClickSound="ok_7" />
+        </control>
+        <control name="stop_on_done_lbl" entity="Label" script="" init="">
+            <prop RefCursor="WIN_HELP" Left="40" Top="390" Width="140" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Dừng khi xong hết tác vụ" Font="font_text" />
+        </control>
+
         <control name="btn_save" entity="Button" script="" init="">
             <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="500" Top="377" Width="100" Height="32" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Lưu" Font="font_btn" HintText="" DrawMode="ExpandH" />
             <event on_click="onBtnSaveClick" />
