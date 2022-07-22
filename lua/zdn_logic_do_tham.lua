@@ -35,11 +35,11 @@ function CanRun()
 end
 
 function IsTaskDone()
-    local resetTimeStr = nx_string(IniReadUserConfig("DoTham", "ResetTime", ""))
-    if resetTimeStr == "" then
-        return false
+    local times = nx_execute("form_stage_main\\form_tvt\\form_tvt_main", "get_tvt_times", 0)
+    if nx_int(times) >= nx_int(5) then
+        return true
     end
-    return nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") < nx_number(resetTimeStr)
+    return getTaskSpy() == 999
 end
 
 function Start()
@@ -66,7 +66,7 @@ function loopDoTham()
         return
     end
     local times = nx_execute("form_stage_main\\form_tvt\\form_tvt_main", "get_tvt_times", 0)
-    if nx_int(times) == nx_int(5) then
+    if nx_int(times) >= nx_int(5) then
         onTaskDone()
         return
     end
@@ -205,7 +205,6 @@ function setSpyHomePointList()
 end
 
 function onTaskDone()
-    IniWriteUserConfig("DoTham", "ResetTime", nx_execute("zdn_logic_base", "GetNextDayStartTimestamp"))
     Stop()
 end
 
@@ -234,9 +233,9 @@ function getTaskSpy()
                 end
             end
         end
-        if hasDoThamQuest and i == rows - 1 then
-            return 999
-        end
+    end
+    if not hasDoThamQuest then
+        return 999
     end
     local school = player:QueryProp("School")
     if nx_string(school) == nx_string("school_jinyiwei") or getMyHome() == "HomePointborn02J" then

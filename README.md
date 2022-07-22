@@ -6,6 +6,9 @@
 - Tiếp tục nội tu khi lên tầng
 - Tự động bật nội tu khi chuyển map, chuyển giao với liên server
 
+**Thay đổi**
+- Do thám: tính là Đã xong nếu không có Q
+
 **Sửa lỗi**
 - Vận tiêu: qua ngày mới không reset số lần vận tiêu
 
