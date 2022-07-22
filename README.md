@@ -6,6 +6,9 @@
 - Tiếp tục nội tu khi lên tầng
 - Tự động bật nội tu khi chuyển map, chuyển giao với liên server
 
+**Sửa lỗi**
+- Vận tiêu: qua ngày mới không reset số lần vận tiêu
+
 ---
 *Update 7/21/2022*  
 *v1.13.0*  

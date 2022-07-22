@@ -49,6 +49,16 @@ function IsTaskDone()
 end
 
 function GetCompleteTimes()
+    local c = nx_value("game_client")
+    if nx_is_valid(c) then
+        local p = c:GetPlayer()
+        if nx_is_valid(p) then
+            local rec_row = p:FindRecordRow("ActivityCompliteRec", 0, nx_int(9), 0)
+            if rec_row < 0 then
+                return 0
+            end
+        end
+    end
     local mgr = nx_value("InteractManager")
     if not nx_is_valid(mgr) then
         return 0
