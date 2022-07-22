@@ -244,3 +244,15 @@ function CanTaskSubmit(id)
     end
     return false
 end
+
+function TurnOnFaculty()
+    local cnt = 0
+    while nx_value("loading") do
+        if cnt > 150 then
+            break
+        end
+        cnt = cnt + 1
+        nx_pause(0.1)
+    end
+    nx_execute("custom_sender", "custom_send_faculty_msg", 11)
+end

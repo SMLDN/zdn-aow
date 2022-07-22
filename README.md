@@ -4,6 +4,7 @@
 *v1.14.0*  
 **Tính năng mới**
 - Tiếp tục nội tu khi lên tầng
+- Tự động bật nội tu khi chuyển map, chuyển giao với liên server
 
 ---
 *Update 7/21/2022*  
