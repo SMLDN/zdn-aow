@@ -45,4 +45,5 @@ function onBtnReturnClick()
     return
   end
   pathFinding:FindPathScene(RETURN_MAP, RETURN_POS[1], RETURN_POS[2], RETURN_POS[3], 0)
+  nx_execute("zdn_logic_base" , "RideZdnConfigMount")
 end

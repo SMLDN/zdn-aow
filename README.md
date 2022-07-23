@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/25/2022*  
+*v1.15.0*  
+**Tính năng mới**
+- Thiết lập tọa kỵ mặc định(dùng được cho cả Thừa kỵ. Vào thiết lập hệ thống để cài ngựa)
+
+---
 *Update 7/23/2022*  
 *v1.14.0*  
 **Tính năng mới**

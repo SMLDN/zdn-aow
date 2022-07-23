@@ -105,6 +105,24 @@ function FindFirstBoundItemIndexByItemType(viewPort, itemType)
     return 0
 end
 
+function FindFirstBoundItemIndexByConfigId(viewPort, configId)
+    local client = nx_value("game_client")
+    local view = client:GetView(nx_string(viewPort))
+    if not nx_is_valid(view) then
+        return 0
+    end
+    for i = 1, 100 do
+        local obj = view:GetViewObj(nx_string(i))
+        if
+            nx_is_valid(obj) and nx_string(obj:QueryProp("BindStatus")) == "1" and
+                nx_string(obj:QueryProp("ConfigID")) == nx_string(configId)
+         then
+            return i
+        end
+    end
+    return 0
+end
+
 function GetCurrentWeapon()
     local client = nx_value("game_client")
     if not nx_is_valid(client) then

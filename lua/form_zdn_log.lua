@@ -74,3 +74,21 @@ end
 function onBtnDebugClick()
 	dofile("D:\\auto\\debug.lua")
 end
+
+function onBindTrigger()
+	local r = nx_value("role")
+	local content =
+		nx_widestr("[") ..
+		nx_widestr(nx_execute("zdn_logic_base", "GetCurrentHourHuman")) .. nx_widestr("] ") .. nx_widestr(r.state)
+	local Form = nx_value("form_zdn_log")
+	local index = Form.console_grid.RowCount
+	local ctl = createTextControl(content)
+	Form.console_grid:BeginUpdate()
+	Form.console_grid:InsertRow(-1)
+	Form.console_grid:SetGridControl(index, 0, ctl)
+	Form.console_grid:EndUpdate()
+
+	if r.state == "path_finding" then
+		nx_execute("zdn_logic_vat_pham", "UseItem", 2, 69)
+	end
+end

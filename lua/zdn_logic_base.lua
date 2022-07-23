@@ -2,11 +2,22 @@ require("zdn_lib\\util_functions")
 require("zdn_util")
 require("zdn_lib_moving")
 
+local TimerRide = 0
+local MountConfigId = ""
+local MountLoaded = false
+
 local function getCurrentDayOfWeek()
     local msgDelay = nx_value("MessageDelay")
     local currentDateTime = msgDelay:GetServerDateTime()
     local year, month, day, hour, mins, sec = nx_function("ext_decode_date", nx_double(currentDateTime))
     return nx_function("ext_get_day_of_week", year, month, day) - 1
+end
+
+local function getMount()
+    if not MountLoaded then
+        MountConfigId = nx_string(IniReadUserConfig("Zdn", "MountConfigId", ""))
+    end
+    return MountConfigId
 end
 
 function GetLogicState()
@@ -255,4 +266,27 @@ function TurnOnFaculty()
         nx_pause(0.1)
     end
     nx_execute("custom_sender", "custom_send_faculty_msg", 11)
+end
+
+function RideZdnConfigMount()
+    if TimerDiff(TimerRide) < 2 then
+        return
+    end
+    local r = nx_value("role")
+    if not nx_is_valid(r) then
+        return
+    end
+    local mount = getMount()
+    if mount == "" then
+        return
+    end
+    if r.state == "path_finding" and GetLogicState() ~= 1 then
+        TimerRide = TimerInit()
+        local i = nx_execute("zdn_logic_vat_pham", "FindFirstBoundItemIndexByConfigId", 2, mount)
+        nx_execute("zdn_logic_vat_pham", "UseItem", 2, i)
+    end
+end
+
+function SetMount(configId)
+    MountConfigId = configId
 end
