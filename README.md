@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.yy.yy*  
+**Thay đổi**
+- Hào kiệt: chỉnh lại thời gian check tác vụ chèn
+
+---
 *Update 7/25/2022*  
 *v1.15.0*  
 **Tính năng mới**

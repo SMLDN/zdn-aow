@@ -70,6 +70,7 @@ function loopHaoKiet()
         end
     else
         TimerWaitBossShow = TimerInit()
+        nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-interrupt")
     end
     if pickDeadBossItem() then
         local boss = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isBoss", "isNotInBlackList")
@@ -104,7 +105,6 @@ function loopHaoKiet()
     else
         nx_execute("zdn_logic_skill", "PauseAttack")
         GoToObj(target)
-        nx_execute("zdn_logic_common_listener", "ResolveListener", nx_current(), "on-task-interrupt")
     end
 end
 
