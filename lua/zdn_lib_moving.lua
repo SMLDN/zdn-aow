@@ -777,7 +777,7 @@ function GoToPosition(x, y, z)
 		return
 	end
 	nx_execute("zdn_logic_skill", "StopParry")
-	if GetDistance(x, y, z) > 10 then
+	if GetDistance(x, y, z) > 40 then
 		nx_execute("zdn_logic_base", "RideZdnConfigMount")
 	end
 	if not isFindPathStuck() or isFinding(x, y, z) then
