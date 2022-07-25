@@ -18,6 +18,7 @@ function OnReceiveKyNgo(npcId)
 end
 
 function LoadConfig()
+    KyNgoList = {}
     local kyNgoData = IniLoadAllData(nx_resource_path() .. "zdn\\data\\kyngo.ini")
     local changeList = {}
     local str = nx_string(IniReadUserConfig("KyNgo", "ChangeList", ""))

@@ -4,6 +4,7 @@
 *v1.yy.yy*  
 **Thay đổi**
 - Hào kiệt: chỉnh lại thời gian check tác vụ chèn
+- Vật phẩm: thêm Hoàng Tiên Lộ
 
 ---
 *Update 7/25/2022*  
