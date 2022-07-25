@@ -2,6 +2,10 @@
 ---
 *Update 7/yy/2022*  
 *v1.yy.yy*  
+**Tính năng mới**
+- Nghề: Thư sinh
+- Thu thập: Câu cá
+
 **Thay đổi**
 - Hào kiệt: chỉnh lại thời gian check tác vụ chèn
 - Vật phẩm: thêm Hoàng Tiên Lộ

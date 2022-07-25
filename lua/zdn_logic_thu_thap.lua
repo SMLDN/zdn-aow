@@ -60,6 +60,12 @@ function loopThuThap()
         return
     end
 
+    -- cau ca
+    if p.shape == "8" then
+        processCauCa(p)
+        return
+    end
+
     if GetDistance(p.x, p.y, p.z) >= 15 then
         GoToPosition(p.x, p.y, p.z)
         return
@@ -136,4 +142,47 @@ function isCurseLoading()
         TimerCurseLoading = TimerInit()
     end
     return TimerDiff(TimerCurseLoading) < 1.5
+end
+
+function processCauCa(p)
+    if TimerDiff(TimerObjNotValid) < 1 then
+        return
+    end
+    if GetDistance(p.x, p.y, p.z) >= 2 then
+        GoToPosition(p.x, p.y, p.z)
+        return
+    end
+    local obj = getObjByConfigId(p.configId)
+    if nx_is_valid(obj) and GetDistanceToObj(obj) < 12 then
+        XuongNgua()
+        if not isFishing() then
+            nx_execute("custom_sender", "custom_select", obj.Ident)
+            nx_execute("custom_sender", "custom_begin_fishing", 0)
+            TimerObjNotValid = TimerInit()
+            return
+        end
+        doCauCa()
+    else
+        waitTimeOut()
+    end
+end
+
+function isFishing()
+    local state = nx_execute("zdn_logic_base", "GetRoleState")
+    return nx_string(state) == "fishing"
+end
+
+function doCauCa()
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return
+    end
+    local player = client:GetPlayer()
+    if not nx_is_valid(player) then
+        return
+    end
+    local s = nx_number(player:QueryProp("FishingState"))
+    if s == 2 then
+        nx_execute("custom_sender", "custom_op_fishing")
+    end
 end

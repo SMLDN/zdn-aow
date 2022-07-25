@@ -5,7 +5,8 @@ require("zdn_lib_moving")
 
 local SHAPE_DEFINE = {
 	["14"] = "Chặt cây",
-	["6"] = "Đào khoáng"
+	["6"] = "Đào khoáng",
+	["8"] = "Câu cá"
 }
 
 function onBtnAddPositionClick()
