@@ -1,10 +1,10 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
-*v1.yy.yy*  
+*Update 7/26/2022*  
+*v1.16.0*  
 **Tính năng mới**
 - Nghề: Thư sinh
-- Thu thập: Câu cá
+- Thu thập: Câu cá, thợ săn
 
 **Thay đổi**
 - Hào kiệt: chỉnh lại thời gian check tác vụ chèn

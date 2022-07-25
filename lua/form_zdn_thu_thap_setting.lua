@@ -4,6 +4,7 @@ require("zdn_form_common")
 require("zdn_lib_moving")
 
 local SHAPE_DEFINE = {
+	["0"] = "Thợ săn",
 	["14"] = "Chặt cây",
 	["6"] = "Đào khoáng",
 	["8"] = "Câu cá"
