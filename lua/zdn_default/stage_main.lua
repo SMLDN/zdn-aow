@@ -22,8 +22,7 @@ function add_main_private_to_scene(scene)
     game_control = scene.game_control
   end
   if not firstLoad then
-    MaxFps = nx_number(IniReadUserConfig("Zdn", "MaxFps", 60))
-    firstLoad = true
+    zdnFirstLoadProcess()
   end
   game_control.MaxDisplayFPS = MaxFps
   local game_config = nx_value("game_config")
@@ -33,4 +32,12 @@ end
 
 function ZdnUpdateMaxFps(f)
   MaxFps = f
+end
+
+function zdnFirstLoadProcess()
+  MaxFps = nx_number(IniReadUserConfig("Zdn", "MaxFps", 60))
+  local ZdnHandwritingGame = nx_value("HandwritingGame")
+  ZdnHandwritingGame:LoadResource(nx_resource_path() .. "zdn\\default\\share\\")
+  nx_log("load HandwritingGame ended")
+  firstLoad = true
 end
