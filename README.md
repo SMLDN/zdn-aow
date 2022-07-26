@@ -1,6 +1,11 @@
 # Release Note
 ---
 *Update 7/26/2022*  
+*v1.16.1*  
+**Thay đổi**
+- Thu thập: thợ săn: thêm thoát phân cảnh Hào kiệt
+
+*Update 7/26/2022*  
 *v1.16.0*  
 **Tính năng mới**
 - Nghề: Thư sinh

@@ -200,6 +200,10 @@ function doCauCa()
 end
 
 function processThoSan(p)
+    if nx_execute("zdn_logic_hao_kiet", "IsInBossScene") then
+        nx_execute("zdn_logic_hao_kiet", "QuitBossScene")
+        return
+    end
     if GetDistance(p.x, p.y, p.z) > 50 then
         GoToPosition(p.x, p.y, p.z)
         return

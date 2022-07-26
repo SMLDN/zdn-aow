@@ -63,7 +63,7 @@ function loopHaoKiet()
         GoToPosition(Position.PosX, Position.PosY, Position.PosZ)
         return
     end
-    if isInBossScene() then
+    if IsInBossScene() then
         if TimerDiff(TimerWaitBossShow) < 8 then
             nx_execute("zdn_logic_skill", "PauseAttack")
             return
@@ -75,7 +75,7 @@ function loopHaoKiet()
     if pickDeadBossItem() then
         local boss = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isBoss", "isNotInBlackList")
         if not nx_is_valid(boss) then
-            quitBossScene()
+            QuitBossScene()
             nx_pause(4)
         end
         return
@@ -176,7 +176,7 @@ function isBoss(obj)
     return nx_number(obj:QueryProp("NpcType")) == 1
 end
 
-function isInBossScene()
+function IsInBossScene()
     local client = nx_value("game_client")
     local player = client:GetPlayer()
     if not nx_is_valid(player) then
@@ -294,7 +294,7 @@ function generateRecord(map, x, y, z, time)
                 "," .. nx_string(math.floor(y)) .. "," .. nx_string(math.floor(z)) .. "," .. time
 end
 
-function quitBossScene()
+function QuitBossScene()
     send_server_msg(g_msg_giveup, 27)
 end
 
