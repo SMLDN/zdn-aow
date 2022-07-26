@@ -2,6 +2,9 @@
 ---
 *Update 7/26/2022*  
 *v1.16.1*  
+**Sửa lỗi**
+- Thu thập: thợ săn: có lúc không chọn đối tượng để đánh
+
 **Thay đổi**
 - Thu thập: thợ săn: thêm thoát phân cảnh Hào kiệt
 

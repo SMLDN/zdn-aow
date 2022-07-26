@@ -266,6 +266,7 @@ function attackObj(obj)
         GoToObj(obj)
         return
     end
+    nx_execute("zdn_logic_base", "SelectTarget", obj)
     if nx_execute("zdn_logic_skill", "IsRunning") then
         StopFindPath()
         nx_execute("zdn_logic_skill", "ContinueAttack")
