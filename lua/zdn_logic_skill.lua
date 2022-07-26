@@ -104,9 +104,10 @@ end
 
 function StartParry()
     if not isParry() then
-        if nx_is_valid(nx_value("game_visual")) then
+        local v = nx_value("game_visual")
+        if nx_is_valid(v) then
             Paused = true
-            nx_value("game_visual"):CustomSend(nx_int(218), 1)
+            v:CustomSend(nx_int(218), 1)
         end
     end
 end

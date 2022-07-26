@@ -86,6 +86,10 @@ function FlyToObj(obj)
 end
 
 function FlyToPos(posX, posY, posZ)
+    local role = nx_value("role")
+    if not nx_is_valid(role) or role.state == "locked" then
+        return
+    end
     local pX, pY, pZ = GetPlayerPosition()
     flyToPos(pX, pY, pZ, posX, posY, posZ)
 end
@@ -115,35 +119,3 @@ function HighJumpToPos(x, y, z)
     game_visual:SetRoleMaxMoveDistance(role, 1)
     game_visual:SwitchPlayerState(role, 1, 103)
 end
-
--- die instantly
--- function JumpInstantly(x1, y1, z1)
---     local stepPause = 2
---     local stepDistance = 80
---     local x = nx_float(x1)
---     local y = nx_float(y1)
---     local z = nx_float(z1)
---     local game_visual = nx_value("game_visual")
---     if not nx_is_valid(game_visual) then
---         return false
---     end
---     local role = nx_value("role")
---     if not nx_is_valid(role) then
---         return false
---     end
---     local scene_obj = nx_value("scene_obj")
---     if not nx_is_valid(scene_obj) then
---         return false
---     end
---     scene_obj:SceneObjAdjustAngle(role, x, z)
---     role.move_dest_orient = role.AngleY
---     role.server_pos_can_accept = true
---     role:SetPosition(role.PositionX, y, role.PositionZ)
---     game_visual:SetRoleMoveDestX(role, x)
---     game_visual:SetRoleMoveDestY(role, y)
---     game_visual:SetRoleMoveDestZ(role, z)
---     game_visual:SetRoleMoveDistance(role, stepDistance)
---     game_visual:SetRoleMaxMoveDistance(role, stepDistance)
---     game_visual:SwitchPlayerState(role, 1, 103)
---     nx_pause(stepPause)
--- end

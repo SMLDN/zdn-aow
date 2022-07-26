@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<form>
+    <control name="main_form" entity="Form" script="form_zdn_tdc" init="formInit">
+        <prop LimitInScreen="true" ShowGrid="true" Width="180" Height="140" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
+        <event on_open="formOpen" on_close="formClose" />
+
+        <control name="btn_close" entity="Button" script="" init="">
+            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="150" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
+            <event on_click="onBtnCloseClick" />
+        </control>
+
+        <control name="lbl_title" entity="Label" script="" init="">
+            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="7" Width="180" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Tinh Dao Cung" Font="font_title" />
+        </control>
+		
+       <control name="lbl_turn_txt" entity="Label" script="" init="">
+            <prop RefCursor="WIN_HELP" Left="30" Top="50" Width="180" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Lượt:" Font="font_text" />
+        </control>
+		<control name="lbl_turn" entity="Label" script="" init="">
+            <prop RefCursor="WIN_HELP" Left="70" Top="50" Width="180" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="0/" Font="font_text" />
+        </control>
+        <control name="max_turn" entity="Edit" script="" init="">
+            <prop Left="90" Top="45" Width="50" Height="30" DragStep="1.000000" OnlyDigit = "true" ChangedEvent="true" MaxLength="2" MaxDigit="99" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Font="font_main" Cursor="WIN_IBEAM" TabStop="true" DrawMode="ExpandH" BackImage="gui\\common\\form_line\\ibox_1.png" />
+        </control>
+
+        <control name="btn_submit" entity="Button" script="" init="">
+            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="40" Top="90" Width="100" Height="35" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Start" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <event on_click="onBtnSubmitClick" />
+        </control>
+    </control>
+</form>

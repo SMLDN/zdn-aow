@@ -20,7 +20,12 @@ local PRESET_PICK_ITEM = {
 	"qizhen_0112",
 	"qizhen_0113",
 	"qizhen_0114",
-	"qizhen_0115"
+	"qizhen_0115",
+	"box_fc_mml_001", -- ma mon lenh
+	"box_fc_mml_002", -- ma mon lenh
+	"box_fc_hss_001", -- hoang thu thach
+	"box_fc_hss_002", -- hoang thu thach
+	"box_xmp_fc_01" -- long van cam thach
 }
 
 function onFormOpen()
