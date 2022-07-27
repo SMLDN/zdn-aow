@@ -18,7 +18,6 @@ local NEED_OPEN_ITEM = {
 }
 local BUFFER_BOSS_JUMP = {
     {},
-    -- {1465.0380859375, 32.180000305176, 199.87902832031},
     {1462.1048583984, 28.933506011963, 217.05558776855},
     {1466.9127197266, 31.283208847046, 148.8816986084}
 }
@@ -37,6 +36,7 @@ local TimerNextStep = 0
 local Step = 1
 local FinishTurn = 0
 local MaxTurn = 1
+local PickAllFlg = false
 
 function IsRunning()
     return Running
@@ -72,9 +72,6 @@ function loopTdc()
         return
     end
     if not isInClone() then
-        if needProcessItem() then
-            return
-        end
         if TimerDiff(TimerEnterClone) > 5 then
             TimerEnterClone = TimerInit()
             nx_execute("Listener", "addListen", nx_current(), "15906", "resetClone", 10)
@@ -104,7 +101,11 @@ function doClone()
         Step = 1
         return
     end
-    if needPickReward() then
+    if needPickDropItem() then
+        return
+    end
+    if needOpenReward() then
+        PickAllFlg = false
         nx_execute("zdn_logic_skill", "PauseAttack")
         return
     end
@@ -114,6 +115,10 @@ function doClone()
     local obj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isCurrentStepBoss")
     if not nx_is_valid(obj) then
         local b = BOSS_LIST[Step]
+        if needOpenBox() then
+            PickAllFlg = true
+            return
+        end
         if GetDistance(b[2], b[3], b[4]) <= 20 then
             local obj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isAttackingMeObj")
             if nx_is_valid(obj) then
@@ -220,11 +225,7 @@ function createTeam()
     end
 end
 
-function needPickReward()
-    if nx_execute("zdn_logic_vat_pham", "IsDroppickShowed") then
-        nx_execute("zdn_logic_vat_pham", "PickItemFromPickItemData")
-        return true
-    end
+function needOpenReward()
     if TimerDiff(TimerOpenReward) < 3 then
         return true
     end
@@ -275,7 +276,6 @@ end
 
 function onDoneTurn()
     FinishTurn = FinishTurn + 1
-    Console(FinishTurn)
     IniWriteUserConfig(
         "TDC",
         "FinishTurn",
@@ -291,7 +291,6 @@ end
 
 function initData()
     Step = 1
-    FinishTurn = 0
 end
 
 function isReadyToNextBoss()
@@ -311,15 +310,12 @@ function isReadyToNextBoss()
     return false
 end
 
-function needProcessItem()
-    if nx_execute("zdn_logic_vat_pham", "IsDroppickShowed") then
-        nx_execute("zdn_logic_vat_pham", "PickAllDropItem")
-        return true
-    end
+function needOpenBox()
     for i = 1, #NEED_OPEN_ITEM do
         local idx = nx_execute("zdn_logic_vat_pham", "FindItemIndexFromVatPham", NEED_OPEN_ITEM[i])
         if idx ~= 0 then
             nx_execute("zdn_logic_vat_pham", "UseItem", 2, idx)
+            PickAllFlg = true
             return true
         end
     end
@@ -345,13 +341,26 @@ function loadConfig()
     nx_execute("zdn_logic_vat_pham", "LoadPickItemData")
     MaxTurn = nx_number(IniReadUserConfig("TDC", "MaxTurn", 1))
 
-    local str = IniReadUserConfig("TDC", "FinishTurn", "")
-    local time = nx_execute("zdn_logic_base", "GetCurrentWeekStartTimestamp")
+    local str = nx_string(IniReadUserConfig("TDC", "FinishTurn", ""))
+    local cT = nx_execute("zdn_logic_base", "GetCurrentWeekStartTimestamp")
+    FinishTurn = 0
     if str ~= "" then
-        local prop = util_split_string("str", ",")
+        local prop = util_split_string(str, ",")
         local t = nx_number(prop[1])
-        if t == time then
+        if t == cT then
             FinishTurn = nx_number(prop[2])
         end
     end
+end
+
+function needPickDropItem()
+    if nx_execute("zdn_logic_vat_pham", "IsDroppickShowed") then
+        if PickAllFlg then
+            nx_execute("zdn_logic_vat_pham", "PickAllDropItem")
+        else
+            nx_execute("zdn_logic_vat_pham", "PickItemFromPickItemData")
+        end
+        return true
+    end
+    return false
 end

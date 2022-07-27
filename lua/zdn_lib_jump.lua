@@ -40,7 +40,8 @@ local function flyToPos(cur_x, cur_y, cur_z, x, y, z)
         return
     end
 
-    SwitchPlayerStateToFly()
+    StopFindPath()
+    nx_call("player_state\\state_input", "emit_player_input", role, 9)
     nx_pause(0.2)
     y = y + 0.1
     setAngle(x, y, z)
@@ -48,7 +49,10 @@ local function flyToPos(cur_x, cur_y, cur_z, x, y, z)
     nx_call("player_state\\state_input", "emit_player_input", role, 21, 36, x, y, z, 0, 3)
     nx_pause(2.8)
 
+    role.state = "zdn_jump"
     role.move_dest_orient = temp_angle
+    role.server_pos_can_accept = true
+    role:SetPosition(role.PositionX, y, role.PositionZ)
     game_visual:SetRoleMoveDestX(role, x)
     game_visual:SetRoleMoveDestY(role, y)
     game_visual:SetRoleMoveDestZ(role, z)
@@ -59,7 +63,7 @@ local function flyToPos(cur_x, cur_y, cur_z, x, y, z)
 
     local timeOut = TimerInit()
     while TimerDiff(timeOut) < 3 do
-        nx_pause(0.05)
+        nx_pause(0.1)
         if not isFlying() then
             return
         end

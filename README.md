@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/27/2022*  
+*v1.17.0*  
+**Tính năng mới**
+- Tinh dao cung (/tdc): Lưu ý cài /nhatdo trước k thì k nhặt đồ đc
+
+---
 *Update 7/26/2022*  
 *v1.16.1*  
 **Sửa lỗi**

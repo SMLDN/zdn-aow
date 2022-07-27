@@ -48,6 +48,12 @@ end
 function updateView()
 	local str = nx_string(IniReadUserConfig("TDC", "FinishTurn", "0,0"))
 	local prop = util_split_string(str, ",")
-	Form.lbl_turn.Text = nx_widestr(prop[2]) .. nx_widestr("/")
+	local cT = nx_execute("zdn_logic_base", "GetCurrentWeekStartTimestamp")
+	local t = nx_number(prop[1])
+	local turn = 0
+	if t == cT then
+		turn = nx_number(prop[2])
+	end
+	Form.lbl_turn.Text = nx_widestr(turn) .. nx_widestr("/")
 	Form.max_turn.Text = IniReadUserConfig("TDC", "MaxTurn", nx_widestr("1"))
 end
