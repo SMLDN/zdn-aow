@@ -7,6 +7,7 @@
 
 **Thay đổi**
 - Thu thập: mở rộng phạm vi tìm đối tượng
+- Kỳ ngộ: thêm kỳ ngộ A Đản, Diêu Hiền
 
 ---
 *Update 7/26/2022*  
