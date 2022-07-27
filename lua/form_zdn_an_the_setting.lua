@@ -1,4 +1,4 @@
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("zdn_util")
 require("zdn_form_common")
 require("zdn_define\\an_the_define")

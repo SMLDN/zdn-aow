@@ -1,29 +1,25 @@
 require("zdn_form_common")
+require("util_functions")
 
-local ZdnText = nil
 local Logic = "zdn_logic_escort"
 
 function onFormOpen()
 	Form.cbx_biao_type.DropListBox:ClearString()
 	for i = 1, 15 do
-		Form.cbx_biao_type.DropListBox:AddString(ZdnText["escort_name_" .. nx_string(i)])
+		Form.cbx_biao_type.DropListBox:AddString(util_text("zdn_escort_name_" .. nx_string(i)))
 	end
 	local xeTieuIdx = nx_number(IniReadUserConfig("Escort", "type", 1))
 	if nx_int(xeTieuIdx) <= nx_int(0) then
 		xeTieuIdx = 1
 	end
 	Form.cbx_biao_type.DropListBox.SelectIndex = xeTieuIdx - 1
-	Form.cbx_biao_type.Text = ZdnText["escort_name_" .. nx_string(xeTieuIdx)]
+	Form.cbx_biao_type.Text = util_text("zdn_escort_name_" .. nx_string(xeTieuIdx))
 	local maxTurn = nx_number(IniReadUserConfig("Escort", "max_turn", 5))
 	if 150 < maxTurn or maxTurn < 1 then
 		maxTurn = 5
 	end
 	Form.max_turn.Text = nx_widestr(maxTurn)
 	updateView()
-end
-
-function onFormInit()
-	ZdnText = IniReadZdnTextSection(nx_current())
 end
 
 function onBtnSubmitClick()

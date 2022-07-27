@@ -1,6 +1,6 @@
 require("zdn_lib_moving")
 require("zdn_form_common")
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("form_stage_main\\form_chat_system\\chat_util_define")
 
 local Running = false

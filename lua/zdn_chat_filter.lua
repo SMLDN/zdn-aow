@@ -1,5 +1,5 @@
 require("util_gui")
-require("zdn_lib\\util_functions")
+require("util_functions")
 
 function FilterCommand(chatStr)
   if nx_widestr(chatStr) == nx_widestr("/t") then
@@ -8,6 +8,10 @@ function FilterCommand(chatStr)
   end
   if nx_widestr(chatStr) == nx_widestr("/skill") then
     util_show_form("form_zdn_skill_set", true)
+    return true
+  end
+  if nx_widestr(chatStr) == nx_widestr("/s") then
+    util_show_form("form_zdn_skill_setting", true)
     return true
   end
   if nx_widestr(chatStr) == nx_widestr("/atk") then

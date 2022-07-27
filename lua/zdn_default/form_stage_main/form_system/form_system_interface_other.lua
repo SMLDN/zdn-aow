@@ -1,4 +1,4 @@
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("zdn_util")
 
 local function zdnAddPicture(form)

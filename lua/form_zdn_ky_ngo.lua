@@ -1,4 +1,4 @@
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("zdn_form_common")
 
 local KyNgoData = {}

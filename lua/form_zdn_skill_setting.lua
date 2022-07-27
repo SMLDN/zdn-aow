@@ -5,6 +5,11 @@ require("zdn_form_common")
 
 local MAX_SET = 3
 local PictureList = {}
+local ZdnText = nil
+
+function onFormInit()
+	initTextData()
+end
 
 function onBtnOkClick(btn)
 	saveSetting(btn)
@@ -153,6 +158,7 @@ function setPictureItem(pic, item)
 end
 
 function onSkillRightClick(self)
+	initTextData()
 	if not nx_find_custom(self, "SkillStyle") then
 		nx_set_custom(self, "SkillStyle", "1")
 	end
@@ -160,39 +166,47 @@ function onSkillRightClick(self)
 		nx_set_custom(self, "ConfigID", "null")
 	end
 	if self.ConfigID == "null" then
-		ShowText(util_text("zdn_must_place_skill"))
+		ShowText(ZdnText["must_place_skill"])
 		return
 	end
 	local skillStyle = self.SkillStyle
 	if skillStyle == "1" then
 		skillStyle = "2"
-		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. util_text("zdn_change_to_sky"))
+		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. ZdnText["change_to_sky"])
 	elseif skillStyle == "2" then
 		skillStyle = "3"
-		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. util_text("zdn_change_to_hide"))
+		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. ZdnText["change_to_hide"])
 	else
 		skillStyle = "1"
-		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. util_text("zdn_change_to_normal"))
+		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. ZdnText["change_to_normal"])
 	end
 	self.SkillStyle = skillStyle
 	updatePicture(self)
 end
 
+function initTextData()
+	if ZdnText == nil then
+		ZdnText = IniReadZdnTextSection(nx_current())
+	end
+end
+
 function updatePicture(self)
+	initTextData()
 	local skillStyle = self.SkillStyle
 	if skillStyle == "2" then
 		self.LineColor = "255,0,255,0"
-		self.HintText = util_text("zdn_fly_skill")
+		self.HintText = ZdnText["fly_skill"]
 	elseif skillStyle == "3" then
 		self.LineColor = "255,255,0,0"
-		self.HintText = util_text("zdn_hide_skill")
+		self.HintText = ZdnText["hide_skill"]
 	else
 		self.LineColor = "255,128,101,74"
-		self.HintText = util_text("zdn_right_click_change")
+		self.HintText = ZdnText["right_click_change"]
 	end
 end
 
 function onWeaponLeftClick(self)
+	initTextData()
 	if not nx_find_custom(self, "UniqueID") then
 		nx_set_custom(self, "UniqueID", "1")
 	end

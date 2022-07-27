@@ -38,6 +38,12 @@ function zdnFirstLoadProcess()
   MaxFps = nx_number(IniReadUserConfig("Zdn", "MaxFps", 60))
   local ZdnHandwritingGame = nx_value("HandwritingGame")
   ZdnHandwritingGame:LoadResource(nx_resource_path() .. "zdn\\default\\share\\")
-  nx_log("load HandwritingGame ended")
+
+  local gui = nx_value("gui")
+  gui.TextManager:Clear()
+  gui.TextManager.UseResProcess = false
+  gui.TextManager:LoadFiles("text\\chineses\\")
+  gui.TextManager:LoadFiles("zdn\\default\\text\\")
+  -- gui.TextManager:SetText("desc_zdn_buff_no_delay", Utf8ToWstr('<font color="#FFFF00">Dùng liên tục</font>'))
   firstLoad = true
 end

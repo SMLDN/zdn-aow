@@ -1,4 +1,4 @@
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("zdn_util")
 require("zdn_define\\task_define")
 require("zdn_define\\logic_define")

@@ -1,4 +1,4 @@
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("util_static_data")
 require("zdn_util")
 require("zdn_lib_moving")

@@ -1,4 +1,4 @@
-require("zdn_lib\\util_functions")
+require("util_functions")
 require("share\\client_custom_define")
 require("form_stage_main\\form_tvt\\define")
 require("zdn_util")
