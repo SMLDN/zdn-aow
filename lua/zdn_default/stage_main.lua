@@ -40,10 +40,9 @@ function zdnFirstLoadProcess()
   ZdnHandwritingGame:LoadResource(nx_resource_path() .. "zdn\\default\\share\\")
 
   local gui = nx_value("gui")
-  gui.TextManager:Clear()
-  gui.TextManager.UseResProcess = false
-  gui.TextManager:LoadFiles("text\\chineses\\")
-  gui.TextManager:LoadFiles("zdn\\default\\text\\")
-  -- gui.TextManager:SetText("desc_zdn_buff_no_delay", Utf8ToWstr('<font color="#FFFF00">Dùng liên tục</font>'))
+  local txtList = IniReadSection(nx_resource_path() .. "zdn\\default\\text\\zdn.idres", "text", true)
+  for k, v in pairs(txtList) do
+    gui.TextManager:SetText(nx_string(k), v)
+  end
   firstLoad = true
 end
