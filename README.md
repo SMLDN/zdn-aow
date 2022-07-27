@@ -5,6 +5,9 @@
 **Tính năng mới**
 - Tinh dao cung (/tdc): Lưu ý cài /nhatdo trước k thì k nhặt đồ đc
 
+**Thay đổi**
+- Thu thập: mở rộng phạm vi tìm đối tượng
+
 ---
 *Update 7/26/2022*  
 *v1.16.1*  

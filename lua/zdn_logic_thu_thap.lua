@@ -78,7 +78,7 @@ function loopThuThap()
         return
     end
 
-    if GetDistance(p.x, p.y, p.z) >= 15 then
+    if GetDistance(p.x, p.y, p.z) > 50 then
         GoToPosition(p.x, p.y, p.z)
         return
     end
