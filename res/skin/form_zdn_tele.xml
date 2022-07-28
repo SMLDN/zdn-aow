@@ -79,6 +79,11 @@
 		<control name="lbl_time" entity="Label" script="" init="">
             <prop RefCursor="WIN_HELP" Left="545" Top="325" Width="100" Height="20" ForeColor="255,128,128,128" ShadowColor="0,0,0,0" Text="--:--" Font="font_title" />
         </control>
+		
+        <control name="btn_school_home_point" entity="Button" script="" init="">
+            <prop Left="550" Top="350" Width="100" Height="35" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Về nhà" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <event on_click="onBtnMyHouseClick" />
+        </control>
 
         <control name="btn_school_home_point" entity="Button" script="" init="">
             <prop Left="700" Top="350" Width="100" Height="35" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Về môn phái" Font="font_btn" HintText="" DrawMode="ExpandH" />

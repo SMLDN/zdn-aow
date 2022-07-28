@@ -3,6 +3,16 @@
 *Update 7/27/2022*  
 *v1.17.0*  
 **Tính năng mới**
+- Thần hành: thêm nút Về nhà
+
+**Thay đổi**
+- Chỉnh lại hệ thống text của zdn
+
+
+---
+*Update 7/27/2022*  
+*v1.17.0*  
+**Tính năng mới**
 - Tinh dao cung (/tdc): Lưu ý cài /nhatdo trước k thì k nhặt đồ đc
 
 **Thay đổi**

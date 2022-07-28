@@ -329,3 +329,27 @@ function addRowToBookMark(homePointId, name)
 	g:SetGridControl(g.RowCount - 1, 0, teleLink)
 	g:SetGridControl(g.RowCount - 1, 1, delBtn)
 end
+
+function onBtnMyHouseClick()
+	local c = nx_value("game_client")
+	if not nx_is_valid(c) then
+		return
+	end
+	local p = c:GetPlayer()
+	if not nx_is_valid(p) then
+		return
+	end
+	local homeid = p:QueryRecord("self_home_rec", 0)
+	if nx_string(homeid) ~= "0" then
+		local CLIENT_SUB_ENTRY = 2
+		nx_execute(
+			"form_stage_main\\form_home\\form_home_msg",
+			"client_to_server_msg",
+			CLIENT_SUB_ENTRY,
+			nx_string(homeid),
+			nx_int(1)
+		)
+		return
+	end
+	ShowText("Có nhà đâu mà đòi về!")
+end
