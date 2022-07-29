@@ -7,6 +7,7 @@
 
 **Thay đổi**
 - Chỉnh lại hệ thống text của zdn
+- Q nội 6: Tô châu: sử dụng điểm dịch chuyển Hổ khâu cho gần hơn
 
 
 ---

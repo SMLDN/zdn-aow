@@ -65,7 +65,7 @@ function startQuest()
     local map = "city02"
     local npcConfigId = "home_mj_yd"
     if GetCurMap() ~= map then
-        GoToMapByPublicHomePoint(map)
+        TeleToHomePoint("HomePointcity02F")
         return
     end
 
@@ -207,7 +207,7 @@ end
 function finishSceneQuest(npc)
     XuongNgua()
     StopFindPath()
-    TalkToNpc(npc,0)
-    TalkToNpc(npc,0)
+    TalkToNpc(npc, 0)
+    TalkToNpc(npc, 0)
     onTaskDone()
 end
