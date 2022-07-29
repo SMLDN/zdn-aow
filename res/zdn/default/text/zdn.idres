@@ -23,3 +23,6 @@ zdn_must_place_weapon=Yêu cầu đặt vào vũ khí
 zdn_change_to_sky=được đổi thành đánh trên không
 zdn_change_to_hide=được đổi thành chiêu thức ẩn
 zdn_change_to_normal=được đổi thành chiêu thức thường
+zdn_must_place_book=Yêu cầu đặt vào bình thư
+zdn_drop_book_here=Kéo bình thư vào đây
+zdn_drop_weapon_here=Kéo vũ khí vào đây

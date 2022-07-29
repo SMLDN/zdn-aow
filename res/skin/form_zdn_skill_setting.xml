@@ -1,179 +1,188 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <form>
     <control name="main_form" entity="Form" script="form_zdn_skill_setting" init="formInit">
-        <prop LimitInScreen="true" ShowGrid="true" Width="640" Height="260" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
+        <prop LimitInScreen="true" ShowGrid="true" Width="540" Height="380" BackColor="0,255,255,255" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="Expand" BackImage="gui\common\form_back\bg_form.png"/>
         <event on_open="formOpen" on_close="formClose" />
 
         <control name="btn_close" entity="Button" script="" init="">
-            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="611" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
+            <prop NormalImage="gui\common\button\btn_close_out.png" FocusImage="gui\common\button\btn_close_on.png" PushImage="gui\common\button\btn_close_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="510" Top="7" Width="20" Height="22" BackColor="255,192,192,192" ShadowColor="0,0,0,0" TabStop="true" AutoSize="true" />
             <event on_click="onBtnCloseClick" />
         </control>
 
         <control name="lbl_title" entity="Label" script="" init="">
-            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="8" Width="640" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Thiết Lập Kỹ Năng" Font="font_title" />
+            <prop Align="Center" RefCursor="WIN_HELP" Left="0" Top="8" Width="540" Height="20" ForeColor="255,255,255,255" ShadowColor="0,0,0,0" Text="Thiết Lập Kỹ Năng" Font="font_title" />
+        </control>
+		
+        <control name="cbx_set" entity="ComboBox" script="" init="">
+            <prop ButtonWidth="20" DropDownWidth="220" DropDownHeight="65" OnlySelect="true" Left="300" Top="40" Width="220" Height="30" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_text" NoFrame="true" BackImage="gui\common\form_line\ibox_2.png" DrawMode="Expand" />
+            <event on_selected="onCbxSetSelected" />
+            <subor name="InputEdit">
+                <prop ReadOnly="true" TextOffsetX="2" Align="Center" SelectBackColor="190,190,190,190" Caret="Default" ForeColor="255,76,61,44" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,20,0,0" Font="font_main" Cursor="WIN_IBEAM" DrawMode="ExpandH" />
+            </subor>
+            <subor name="DropButton">
+                <prop NormalImage="gui\common\combobox\btn_down2_out.png" FocusImage="gui\common\combobox\btn_down2_on.png" PushImage="gui\common\combobox\btn_down2_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="30" Height="30" Top="5" Left ="196" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" DrawMode="FitWindow" />
+            </subor>
+            <subor name="DropListBox">
+                <prop MouseSelect="true" ItemHeight="20" TextOffsetX="4" SelectBackImage="gui\common\combobox\bg_select2.png" ScrollSize="14" ForeColor="255,255,255,255" BackColor="176,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" Font="font_combox_text" NoFrame="true" DrawMode="Expand" BackImage="gui\common\combobox\bg_list2.png" />
+                <subor name="VScrollBar">
+                    <prop ButtonSize="14" FullBarBack="false" Maximum="10" SmallChange="1" LargeChange="5" BackColor="0,255,255,255" LineColor="0,0,0,0" ShadowColor="0,0,0,0" NoFrame="true" DrawMode="ExpandV" BackImage="gui\common\scrollbar\bg_scrollbar2.png" />
+                    <subor name="DecButton">
+                        <prop NormalImage="gui\common\scrollbar\button_2\btn_up_out.png" FocusImage="gui\common\scrollbar\button_2\btn_up_on.png" PushImage="gui\common\scrollbar\button_2\btn_up_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="14" Height="14" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" DrawMode="Center" />
+                    </subor>
+                    <subor name="IncButton">
+                        <prop NormalImage="gui\common\scrollbar\button_2\btn_down_out.png" FocusImage="gui\common\scrollbar\button_2\btn_down_on.png" PushImage="gui\common\scrollbar\button_2\btn_down_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="14" Height="14" BackColor="255,192,192,192" ShadowColor="0,0,0,0" AutoSize="true" />
+                    </subor>
+                    <subor name="TrackButton">
+                        <prop NormalImage="gui\common\scrollbar\button_2\btn_trace_out.png" FocusImage="gui\common\scrollbar\button_2\btn_trace_on.png" PushImage="gui\common\scrollbar\button_2\btn_trace_down.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Width="14" Height="81" BackColor="255,192,192,192" ShadowColor="0,0,0,0" DrawMode="ExpandV" />
+                    </subor>
+                </subor>
+            </subor>
+        </control>
+		
+        <control name="groupbox_master" entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="130" Top="80" Width="600" Height="50" BackColor="0,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
+            <control entity="Label" script="" init="">
+                <prop Align="Center" RefCursor="WIN_HELP" Left="60" Top="17" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Vũ khí" Font="font_main" />
+            </control>
+            <control name="pic_master_weapon" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="60" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
+            </control>
+            <control entity="Label" script="" init="">
+                <prop Align="Center" RefCursor="WIN_HELP" Left="145" Top="17" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Nộ chiêu" Font="font_main" />
+            </control>
+            <control name="pic_master_rage" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="145" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
+            </control>
+            <control entity="Label" script="" init="">
+                <prop Align="Center" RefCursor="WIN_HELP" Left="225" Top="17" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Hư chiêu" Font="font_main" />
+            </control>
+            <control name="pic_master_break" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="225" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
+            </control>
         </control>
 
-        <control name="groupbox_set_1" entity="GroupBox" script="" init="">
-            <prop Transparent="true" Left="20" Top="50" Width="600" Height="50" BackColor="0,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
+        <control name="groupbox_skill" entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="20" Top="150" Width="600" Height="50" BackColor="0,0,0,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
             <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="5" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Bộ 1" Font="font_main" />
+                <prop Align="Center" RefCursor="WIN_HELP" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Kỹ năng" Font="font_main" />
             </control>
-                <control name="pic_skill_1_1" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="50" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh" />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+                <control name="pic_skill_1" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="60" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_2" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="105" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_2" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="115" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_3" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="160" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_3" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="170" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_4" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="215" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_4" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="225" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_5" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="270" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_5" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="280" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_6" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="325" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_6" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="335" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_7" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="380" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_7" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="390" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
-            <control name="pic_skill_1_8" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="435" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_skill_8" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="445" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
+                <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
+        </control>
+
+        <control name="groupbox_weapon" entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="20" Top="210" Width="600" Height="50" BackColor="0,50,50,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
             <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="490" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Nộ" Font="font_main" />
+                <prop Align="Center" RefCursor="WIN_HELP" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Vũ khí" Font="font_main" />
             </control>
-            <control name="pic_skill_1_9" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="490" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_weapon_1" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="60" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
             </control>
-            <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="545" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Vũ khí" Font="font_main" />
+            <control name="pic_weapon_2" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="115" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
             </control>
-            <control name="pic_vk_1" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="545" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để xóa vũ khí" />
+            <control name="pic_weapon_3" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="170" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
+            </control>
+            <control name="pic_weapon_4" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="225" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
+            </control>
+            <control name="pic_weapon_5" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="280" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
+            </control>
+            <control name="pic_weapon_6" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="335" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
+            </control>
+            <control name="pic_weapon_7" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="390" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
+            </control>
+            <control name="pic_weapon_8" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="445" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
                 <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
             </control>
         </control>
 
-        <control name="groupbox_set_2" entity="GroupBox" script="" init="">
-            <prop Transparent="true" Left="20" Top="110" Width="600" Height="50" BackColor="0,50,50,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
+        <control name="groupbox_book" entity="GroupBox" script="" init="">
+            <prop Transparent="true" Left="20" Top="270" Width="600" Height="50" BackColor="0,50,50,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
             <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="5" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Bộ 2" Font="font_main" />
+                <prop Align="Center" RefCursor="WIN_HELP" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Bình thư" Font="font_main" />
             </control>
-            <control name="pic_skill_2_1" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="50" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_1" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="60" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_2" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="105" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_2" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="115" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_3" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="160" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_3" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="170" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_4" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="215" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_4" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="225" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_5" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="270" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_5" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="280" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_6" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="325" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_6" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="335" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_7" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="380" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
+            <control name="pic_book_7" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="390" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
-            <control name="pic_skill_2_8" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="435" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="490" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Nộ" Font="font_main" />
-            </control>
-            <control name="pic_skill_2_9" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="490" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="545" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Vũ khí" Font="font_main" />
-            </control>
-            <control name="pic_vk_2" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="545" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để xóa vũ khí"  />
-                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick" />
-            </control>
-        </control>
-
-        <control name="groupbox_set_3" entity="GroupBox" script="" init="">
-            <prop Transparent="true" Left="20" Top="170" Width="600" Height="50" BackColor="0,50,50,0" LineColor="0,0,0,0" ShadowColor="0,0,0,0" />
-            <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="5" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Bộ 3" Font="font_main" />
-            </control>
-            <control name="pic_skill_3_1" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="50" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_2" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="105" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_3" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="160" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_4" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="215" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_5" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="270" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_6" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="325" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_7" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="380" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control name="pic_skill_3_8" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="435" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="490" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Nộ" Font="font_main" />
-            </control>
-            <control name="pic_skill_3_9" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="490" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để đổi kiểu đánh"  />
-                <event on_left_up="onSkillLeftClick" on_right_up= "onSkillRightClick" />
-            </control>
-            <control entity="Label" script="" init="">
-                <prop Align="Center" RefCursor="WIN_HELP" Left="545" Top="19" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Vũ khí" Font="font_main" />
-            </control>
-            <control name="pic_vk_3" entity="Picture" script="" init="">
-                <prop Image="icon\prop\hd_jiu.png" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="545" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="Chuột phải để xóa vũ khí" />
-                <event on_left_up="onWeaponLeftClick" on_right_up="onWeaponRightClick"/>
+            <control name="pic_book_8" entity="Picture" script="" init="">
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="445" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_book_here"  />
+                <event on_left_up="onBookLeftClick" on_right_up="onBookRightClick" />
             </control>
         </control>
 
         <control name="btn_ok" entity="Button" script="" init="">
-            <prop NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" Left="525" Top="222" Width="90" Height="30" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Lưu" Font="font_btn" HintText="" DrawMode="ExpandH" />
+            <prop Left="425" Top="335" Width="90" Height="30" NormalImage="gui\common\button\btn_normal2_out.png" FocusImage="gui\common\button\btn_normal2_on.png" PushImage="gui\common\button\btn_normal2_down.png" DisableImage="gui\common\button\btn_normal2_forbid.png" FocusBlendColor="255,255,255,255" PushBlendColor="255,255,255,255" DisableBlendColor="255,255,255,255" NormalColor="0,0,0,0" FocusColor="0,0,0,0" PushColor="0,0,0,0" DisableColor="0,0,0,0" ForeColor="255,255,255,255" BackColor="255,192,192,192" ShadowColor="0,0,0,0" Text="Lưu" Font="font_btn" HintText="" DrawMode="ExpandH" />
             <event on_click="onBtnOkClick" />
         </control>
     </control>

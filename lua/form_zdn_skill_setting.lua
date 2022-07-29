@@ -4,60 +4,20 @@ require("util_functions")
 require("zdn_form_common")
 
 local MAX_SET = 3
-local PictureList = {}
-local ZdnText = nil
-
-function onFormInit()
-	initTextData()
-end
+local MAX_SKILL = 8
+local Selected = 1
 
 function onBtnOkClick(btn)
-	saveSetting(btn)
+	saveConfig(btn)
 end
 
-function onFormOpen(form)
-	PictureList[1] = {
-		form.pic_skill_1_1,
-		form.pic_skill_1_2,
-		form.pic_skill_1_3,
-		form.pic_skill_1_4,
-		form.pic_skill_1_5,
-		form.pic_skill_1_6,
-		form.pic_skill_1_7,
-		form.pic_skill_1_8,
-		form.pic_skill_1_9,
-		form.pic_vk_1
-	}
-	PictureList[2] = {
-		form.pic_skill_2_1,
-		form.pic_skill_2_2,
-		form.pic_skill_2_3,
-		form.pic_skill_2_4,
-		form.pic_skill_2_5,
-		form.pic_skill_2_6,
-		form.pic_skill_2_7,
-		form.pic_skill_2_8,
-		form.pic_skill_2_9,
-		form.pic_vk_2
-	}
-	PictureList[3] = {
-		form.pic_skill_3_1,
-		form.pic_skill_3_2,
-		form.pic_skill_3_3,
-		form.pic_skill_3_4,
-		form.pic_skill_3_5,
-		form.pic_skill_3_6,
-		form.pic_skill_3_7,
-		form.pic_skill_3_8,
-		form.pic_skill_3_9,
-		form.pic_vk_3
-	}
+function onFormOpen()
+	Form.cbx_set.DropListBox:ClearString()
 	for i = 1, MAX_SET do
-		for j, pic in pairs(PictureList[i]) do
-			pic.Image = ""
-			pic.ConfigID = "null"
-		end
+		Form.cbx_set.DropListBox:AddString(Utf8ToWstr("Bộ ") .. nx_widestr(i))
 	end
+	Form.cbx_set.DropListBox.SelectIndex = Selected - 1
+	Form.cbx_set.Text = Utf8ToWstr("Bộ ") .. nx_widestr(Selected)
 	loadFormData()
 end
 
@@ -146,19 +106,18 @@ function setPictureItem(pic, item)
 		return
 	end
 	if item == nil then
-		pic.Image = ""
 		pic.ConfigID = "null"
 		pic.SkillStyle = "1"
+		pic.Image = ""
 	else
-		pic.Image = item.Image
 		pic.ConfigID = item.ConfigID
 		pic.SkillStyle = item.SkillStyle
+		pic.Image = item.Image
 	end
 	updatePicture(pic)
 end
 
 function onSkillRightClick(self)
-	initTextData()
 	if not nx_find_custom(self, "SkillStyle") then
 		nx_set_custom(self, "SkillStyle", "1")
 	end
@@ -166,47 +125,39 @@ function onSkillRightClick(self)
 		nx_set_custom(self, "ConfigID", "null")
 	end
 	if self.ConfigID == "null" then
-		ShowText(ZdnText["must_place_skill"])
+		ShowText(util_text("zdn_must_place_skill"))
 		return
 	end
 	local skillStyle = self.SkillStyle
 	if skillStyle == "1" then
 		skillStyle = "2"
-		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. ZdnText["change_to_sky"])
+		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. util_text("zdn_change_to_sky"))
 	elseif skillStyle == "2" then
 		skillStyle = "3"
-		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. ZdnText["change_to_hide"])
+		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. util_text("zdn_change_to_hide"))
 	else
 		skillStyle = "1"
-		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. ZdnText["change_to_normal"])
+		ShowText(util_text(self.ConfigID) .. nx_widestr(" ") .. util_text("zdn_change_to_normal"))
 	end
 	self.SkillStyle = skillStyle
 	updatePicture(self)
 end
 
-function initTextData()
-	if ZdnText == nil then
-		ZdnText = IniReadZdnTextSection(nx_current())
-	end
-end
-
 function updatePicture(self)
-	initTextData()
 	local skillStyle = self.SkillStyle
 	if skillStyle == "2" then
 		self.LineColor = "255,0,255,0"
-		self.HintText = ZdnText["fly_skill"]
+		self.HintText = util_text("zdn_fly_skill")
 	elseif skillStyle == "3" then
 		self.LineColor = "255,255,0,0"
-		self.HintText = ZdnText["hide_skill"]
+		self.HintText = util_text("zdn_hide_skill")
 	else
 		self.LineColor = "255,128,101,74"
-		self.HintText = ZdnText["right_click_change"]
+		self.HintText = util_text("zdn_right_click_change")
 	end
 end
 
 function onWeaponLeftClick(self)
-	initTextData()
 	if not nx_find_custom(self, "UniqueID") then
 		nx_set_custom(self, "UniqueID", "1")
 	end
@@ -220,13 +171,14 @@ function onWeaponLeftClick(self)
 	end
 	if game_hand.Type == "viewitem" and game_hand.Para1 == "121" then
 		if not isWeaponItem(game_hand.Para1, game_hand.Para2) then
-			ShowText(ZdnText["must_place_weapon"])
+			ShowText(util_text("zdn_must_place_weapon"))
 		else
 			local item = nx_execute("goods_grid", "get_view_item", game_hand.Para1, game_hand.Para2)
 			if nx_is_valid(item) then
 				self.UniqueID = item:QueryProp("UniqueID")
 				self.ConfigID = item:QueryProp("ConfigID")
 				self.Image = game_hand.Image
+				self.HintText = util_text(item:QueryProp("ConfigID"))
 			end
 		end
 	end
@@ -241,7 +193,7 @@ function isWeaponItem(view_id, pos)
 	local goods_grid = nx_value("GoodsGrid")
 	local list = goods_grid:GetEquipPositionList(item)
 	for _, value in pairs(list) do
-		if nx_number(value) == 22 then
+		if nx_number(value) == 22 or nx_number(value) == 7 or nx_number(value) == 6 then
 			return true
 		end
 	end
@@ -258,74 +210,235 @@ function onWeaponRightClick(self)
 	self.UniqueID = "1"
 	self.ConfigID = "null"
 	self.Image = ""
+	self.HintText = util_text("zdn_drop_weapon_here")
 end
 
-function saveSetting(btn)
-	for i = 1, MAX_SET do
-		local text = ""
-		for j = 1, 9 do
-			local pic = PictureList[i][j]
-			if not nx_find_custom(pic, "SkillStyle") then
-				nx_set_custom(pic, "SkillStyle", "1")
-			end
-			if not nx_find_custom(pic, "ConfigID") then
-				nx_set_custom(pic, "ConfigID", "null")
-			end
-			text = text .. nx_string(pic.ConfigID) .. "," .. nx_string(pic.SkillStyle) .. "," .. nx_string(pic.Image) .. ";"
-		end
-		if not nx_find_custom(PictureList[i][10], "UniqueID") then
-			nx_set_custom(PictureList[i][10], "UniqueID", "1")
-		end
-		if not nx_find_custom(PictureList[i][10], "ConfigID") then
-			nx_set_custom(PictureList[i][10], "ConfigID", "null")
-		end
-		text =
-			text ..
-			nx_string(PictureList[i][10].ConfigID) ..
-				"," .. nx_string(PictureList[i][10].UniqueID) .. "," .. nx_string(PictureList[i][10].Image)
-		IniWriteUserConfig("Skill", "set_" .. nx_string(i), text)
-	end
+function saveConfig()
+	saveMasterConfig()
+	saveSkillConfig()
+	saveWeaponConfig()
+	saveBookConfig()
 end
 
 function loadFormData()
-	for i = 1, MAX_SET do
-		local text = nx_string(IniReadUserConfig("Skill", "set_" .. nx_string(i), "0"))
-		if text == "0" then
-			return
-		end
-		local list = util_split_string(text, ";")
-		if #list ~= 10 then
-			return
-		end
-		for j = 1, 9 do
-			local pic = PictureList[i][j]
-			if not nx_find_custom(pic, "SkillStyle") then
-				nx_set_custom(pic, "SkillStyle", "1")
-			end
-			if not nx_find_custom(pic, "ConfigID") then
-				nx_set_custom(pic, "ConfigID", "null")
-			end
-			local data = util_split_string(list[j], ",")
-			if #data ~= 3 then
-				return
-			end
-			pic.ConfigID = data[1]
-			pic.SkillStyle = data[2]
-			pic.Image = data[3]
-			updatePicture(pic)
-		end
-		if not nx_find_custom(PictureList[i][10], "UniqueID") then
-			nx_set_custom(PictureList[i][10], "UniqueID", "1")
-		end
-		if not nx_find_custom(PictureList[i][10], "ConfigID") then
-			nx_set_custom(PictureList[i][10], "ConfigID", "null")
-		end
-		local data = util_split_string(list[10], ",")
-		if #data ~= 3 then
-			return
-		end
-		PictureList[i][10].ConfigID = data[1]
-		PictureList[i][10].UniqueID = data[2]
-		PictureList[i][10].Image = data[3]
+	loadMasterConfig()
+	loadSkillConfig()
+	loadWeaponConfig()
+	loadBookConfig()
+end
+
+function onBookLeftClick(self)
+	if not nx_find_custom(self, "UniqueID") then
+		nx_set_custom(self, "UniqueID", "1")
 	end
+	if not nx_find_custom(self, "ConfigID") then
+		nx_set_custom(self, "ConfigID", "null")
+	end
+	local gui = nx_value("gui")
+	local game_hand = gui.GameHand
+	if game_hand:IsEmpty() then
+		return
+	end
+	if game_hand.Type == "viewitem" and game_hand.Para1 == "121" then
+		if not isBookItem(game_hand.Para1, game_hand.Para2) then
+			ShowText(util_text("zdn_must_place_book"))
+		else
+			local item = nx_execute("goods_grid", "get_view_item", game_hand.Para1, game_hand.Para2)
+			if nx_is_valid(item) then
+				self.UniqueID = item:QueryProp("UniqueID")
+				self.ConfigID = item:QueryProp("ConfigID")
+				self.Image = game_hand.Image
+				self.HintText = util_text(item:QueryProp("ConfigID"))
+			end
+		end
+	end
+	game_hand:ClearHand()
+end
+
+function onBookRightClick(self)
+	if not nx_find_custom(self, "UniqueID") then
+		nx_set_custom(self, "UniqueID", "1")
+	end
+	if not nx_find_custom(self, "ConfigID") then
+		nx_set_custom(self, "ConfigID", "null")
+	end
+	self.UniqueID = "1"
+	self.ConfigID = "null"
+	self.Image = ""
+	self.HintText = util_text("zdn_drop_book_here")
+end
+
+function isBookItem(viewId, pos)
+	local item = nx_execute("goods_grid", "get_view_item", viewId, pos)
+	if not nx_is_valid(item) then
+		return false
+	end
+	local goods_grid = nx_value("GoodsGrid")
+	local list = goods_grid:GetEquipPositionList(item)
+	for _, value in pairs(list) do
+		if nx_number(value) == 24 then
+			return true
+		end
+	end
+	return false
+end
+
+function saveMasterConfig()
+	local weaStr = "null"
+	if nx_find_custom(Form.pic_master_weapon, "UniqueID") and Form.pic_master_weapon.UniqueID ~= "1" then
+		weaStr = Form.pic_master_weapon.UniqueID
+		weaStr = weaStr .. "," .. Form.pic_master_weapon.ConfigID
+		weaStr = weaStr .. "," .. Form.pic_master_weapon.Image
+	end
+	local rageStr = "null"
+	if nx_find_custom(Form.pic_master_rage, "ConfigID") and Form.pic_master_rage.ConfigID ~= "null" then
+		rageStr = Form.pic_master_rage.ConfigID
+		rageStr = rageStr .. "," .. Form.pic_master_rage.SkillStyle
+		rageStr = rageStr .. "," .. Form.pic_master_rage.Image
+	end
+	local breakStr = "null"
+	if nx_find_custom(Form.pic_master_break, "ConfigID") and Form.pic_master_break.ConfigID ~= "null" then
+		breakStr = Form.pic_master_break.ConfigID
+		breakStr = breakStr .. "," .. Form.pic_master_break.SkillStyle
+		breakStr = breakStr .. "," .. Form.pic_master_break.Image
+	end
+	IniWriteUserConfig("KyNang", "M" .. nx_string(Selected), weaStr .. ";" .. rageStr .. ";" .. breakStr)
+end
+
+function saveSkillConfig()
+	local str = ""
+	for i = 1, MAX_SKILL do
+		local t = Form["pic_skill_" .. nx_string(i)]
+		local s = "null"
+		if nx_find_custom(t, "ConfigID") and t.ConfigID ~= "null" then
+			s = t.ConfigID
+			s = s .. "," .. t.SkillStyle
+			s = s .. "," .. t.Image
+		end
+		str = str .. s
+		if i < MAX_SKILL then
+			str = str .. ";"
+		end
+	end
+	IniWriteUserConfig("KyNang", "S" .. nx_string(Selected), str)
+end
+
+function saveWeaponConfig()
+	local str = ""
+	for i = 1, MAX_SKILL do
+		local t = Form["pic_weapon_" .. nx_string(i)]
+		local s = "null"
+		if nx_find_custom(t, "UniqueID") and t.UniqueID ~= "1" then
+			s = t.UniqueID
+			s = s .. "," .. t.ConfigID
+			s = s .. "," .. t.Image
+		end
+		str = str .. s
+		if i < MAX_SKILL then
+			str = str .. ";"
+		end
+	end
+	IniWriteUserConfig("KyNang", "W" .. nx_string(Selected), str)
+end
+
+function saveBookConfig()
+	local str = ""
+	for i = 1, MAX_SKILL do
+		local t = Form["pic_book_" .. nx_string(i)]
+		local s = "null"
+		if nx_find_custom(t, "UniqueID") and t.UniqueID ~= "1" then
+			s = t.UniqueID
+			s = s .. "," .. t.ConfigID
+			s = s .. "," .. t.Image
+		end
+		str = str .. s
+		if i < MAX_SKILL then
+			str = str .. ";"
+		end
+	end
+	IniWriteUserConfig("KyNang", "B" .. nx_string(Selected), str)
+end
+
+function loadMasterConfig()
+	local str = nx_string(IniReadUserConfig("KyNang", "M" .. nx_string(Selected), "null;null;null"))
+	local prop = util_split_string(str, ";")
+	setPicWeaponFromStr(Form.pic_master_weapon, prop[1])
+	setPicSkillFromStr(Form.pic_master_rage, prop[2])
+	setPicSkillFromStr(Form.pic_master_break, prop[3])
+end
+
+function setPicWeaponFromStr(node, str)
+	if str == "null" then
+		node.UniqueID = "1"
+		node.ConfigID = "null"
+		node.Image = ""
+		return
+	end
+	local prop = util_split_string(str, ",")
+	node.UniqueID = prop[1]
+	node.ConfigID = prop[2]
+	node.Image = prop[3]
+	node.HintText = util_text(prop[2])
+end
+
+function setPicSkillFromStr(node, str)
+	if str == "null" then
+		node.ConfigID = "null"
+		node.SkillStyle = "1"
+		node.Image = ""
+		return
+	end
+	local prop = util_split_string(str, ",")
+	node.ConfigID = prop[1]
+	node.SkillStyle = prop[2]
+	node.Image = prop[3]
+end
+
+function setPicBookFromStr(node, str)
+	if str == "null" then
+		node.UniqueID = "1"
+		node.ConfigID = "null"
+		node.Image = ""
+		return
+	end
+	local prop = util_split_string(str, ",")
+	node.UniqueID = prop[1]
+	node.ConfigID = prop[2]
+	node.Image = prop[3]
+end
+
+function loadSkillConfig()
+	local str =
+		nx_string(IniReadUserConfig("KyNang", "S" .. nx_string(Selected), "null;null;null;null;null;null;null;null;null"))
+	local prop = util_split_string(str, ";")
+	for i = 1, MAX_SKILL do
+		setPicSkillFromStr(Form["pic_skill_" .. i], prop[i])
+	end
+end
+
+function loadWeaponConfig()
+	local str =
+		nx_string(IniReadUserConfig("KyNang", "W" .. nx_string(Selected), "null;null;null;null;null;null;null;null;null"))
+	local prop = util_split_string(str, ";")
+	for i = 1, MAX_SKILL do
+		setPicWeaponFromStr(Form["pic_weapon_" .. i], prop[i])
+	end
+end
+
+function loadBookConfig()
+	local str =
+		nx_string(IniReadUserConfig("KyNang", "B" .. nx_string(Selected), "null;null;null;null;null;null;null;null;null"))
+	local prop = util_split_string(str, ";")
+	for i = 1, MAX_SKILL do
+		setPicBookFromStr(Form["pic_book_" .. i], prop[i])
+	end
+end
+
+function onCbxSetSelected()
+	local s = Form.cbx_set.DropListBox.SelectIndex + 1
+	if s == Selected then
+		return
+	end
+	Selected = s
+	loadFormData()
 end
