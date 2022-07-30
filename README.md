@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 7/yy/2022*  
+*v1.19.0*  
+**Tính năng mới**
+- Q Ẩn thế: Niệm la bá: Thí luyện Phấn Hoa
+
+---
 *Update 7/30/2022*  
 *v1.18.0*  
 **Tính năng mới**
