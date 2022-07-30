@@ -10,7 +10,7 @@ function IsRunning()
 end
 
 function CanRun()
-    if not isSpecificNewSchool("newschool_xingmiao") then
+    if not isSpecificNewSchool("newschool_xingmiao") and not isSpecificNewSchool("newschool_nianluo") then
         return false
     end
     local cnt = #TodoList
@@ -36,8 +36,8 @@ function Start()
         return
     end
     Running = true
-    if not isSpecificNewSchool("newschool_xingmiao") then
-        ShowText("Hiện chỉ hỗ trợ Tinh Miễu Các")
+    if not isSpecificNewSchool("newschool_xingmiao") and not isSpecificNewSchool("newschool_nianluo") then
+        ShowText("Hiện chỉ hỗ trợ Tinh Miễu Các, Niệm La Bá")
         Stop()
         return
     end
@@ -138,16 +138,16 @@ function loadConfig()
     TodoList = {}
     local disableListStr = nx_string(IniReadUserConfig("AnThe", "DisableList", ""))
     if disableListStr == "" then
-        TodoList = TASK_LIST
+        TodoList = getTaskList()
         return
     end
     local disableList = util_split_string(disableListStr, ",")
     if #disableList == 0 then
-        TodoList = TASK_LIST
+        TodoList = getTaskList()
         return
     end
-
-    for i = 1, #TASK_LIST do
+    local l = getTaskList()
+    for i = 1, #l do
         local addFlg = true
         for j = 1, #disableList do
             if i == nx_number(disableList[j]) then
@@ -156,7 +156,20 @@ function loadConfig()
             end
         end
         if addFlg then
-            table.insert(TodoList, TASK_LIST[i])
+            table.insert(TodoList, l[i])
         end
     end
+end
+
+function getTaskList()
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return false
+    end
+    local player = client:GetPlayer()
+    if not nx_is_valid(player) then
+        return false
+    end
+    local ns = nx_string(player:QueryProp("NewSchool"))
+    return TASK_LIST[ns]
 end

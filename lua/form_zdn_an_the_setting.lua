@@ -14,7 +14,8 @@ function initGridView()
         return
     end
     resetTimeStr = nx_string(IniReadUserConfig("AnThe", "ResetTime", ""))
-    for i = 0, #TASK_LIST - 1 do
+    local lst = getTaskList()
+    for i = 0, #lst - 1 do
         local gridIndex = Form.an_the_grid.RowCount
         local cbtn = createCheckboxButton(i + 1)
         Form.an_the_grid:BeginUpdate()
@@ -44,7 +45,8 @@ function initGridView()
 end
 
 function createCheckboxButton(index)
-    local data = TASK_LIST[index]
+    local lst = getTaskList()
+    local data = lst[index]
     local gui = nx_value("gui")
     if not nx_is_valid(gui) then
         return 0
@@ -129,7 +131,8 @@ function onHyperUncheckAllClick()
 end
 
 function getTaskStatus(index)
-    local logic = TASK_LIST[index][3]
+    local lst = getTaskList()
+    local logic = lst[index][3]
     if nx_execute(logic, "IsRunning") then
         return Utf8ToWstr("Đang chạy..."), "255,255,255,255"
     end
@@ -138,7 +141,7 @@ function getTaskStatus(index)
         for _, record in pairs(resetTime) do
             local prop = util_split_string(nx_string(record), ",")
             if
-                prop[1] == nx_string(TASK_LIST[index][1]) and
+                prop[1] == nx_string(lst[index][1]) and
                     nx_execute("zdn_logic_base", "GetCurrentDayStartTimestamp") < nx_number(prop[2])
              then
                 return Utf8ToWstr("Đã xong"), "255,128,101,74"
@@ -146,4 +149,17 @@ function getTaskStatus(index)
         end
     end
     return nx_widestr("-"), "255,128,101,74"
+end
+
+function getTaskList()
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return false
+    end
+    local player = client:GetPlayer()
+    if not nx_is_valid(player) then
+        return false
+    end
+    local ns = nx_string(player:QueryProp("NewSchool"))
+    return TASK_LIST[ns]
 end
