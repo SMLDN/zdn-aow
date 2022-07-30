@@ -377,7 +377,7 @@ function doAttack(target)
         nx_execute("custom_sender", "custom_select", target.Ident)
         return
     end
-    nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
+    nx_execute("zdn_logic_skill", "FlexAttack")
 end
 
 function getVisualObj(obj)

@@ -59,7 +59,7 @@
                 <prop Align="Center" RefCursor="WIN_HELP" Left="225" Top="17" Width="50" Height="16" ForeColor="255,255,255,255" ShadowColor="0,255,0,0" Text="Hư chiêu" Font="font_main" />
             </control>
             <control name="pic_master_break" entity="Picture" script="" init="">
-                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="225" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_drop_weapon_here" />
+                <prop Image="" ZoomWidth="0.232420" ZoomHeight="0.193359" CenterX="-1" CenterY="-1" Left="225" Top="0" Width="50" Height="50" LineColor="255,128,101,74" ShadowColor="0,0,0,0" HintText="@zdn_right_click_change" />
                 <event on_left_up="onSkillLeftClick" on_right_up="onSkillRightClick" />
             </control>
         </control>

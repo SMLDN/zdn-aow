@@ -96,12 +96,7 @@ function loopHaoKiet()
     TimerGoToCenter = TimerInit()
     nx_execute("zdn_logic_base", "SelectTarget", target)
     if GetDistanceToObj(target) < 2.8 then
-        if (nx_execute("zdn_logic_skill", "IsRunning")) then
-            StopFindPath()
-            nx_execute("zdn_logic_skill", "ContinueAttack")
-        else
-            nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
-        end
+        nx_execute("zdn_logic_skill", "FlexAttack")
     else
         nx_execute("zdn_logic_skill", "PauseAttack")
         GoToObj(target)

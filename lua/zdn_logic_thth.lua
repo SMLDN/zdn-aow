@@ -26,7 +26,7 @@ function Start()
     AbstructRunning = true
     NeedResetTurnFlg = false
     nx_execute("zdn_logic_skill", "LeaveTeam")
-    nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
+    nx_execute("zdn_logic_skill", "FlexAttack")
     nx_execute("zdn_logic_skill", "PauseAttack")
     nx_execute("Listener", "addListen", nx_current(), "dttiaozhanjiemian_3", "onOutOfTime", -1)
     loadThichQuanData()

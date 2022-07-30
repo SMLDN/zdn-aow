@@ -28,9 +28,9 @@ function onBtnSubmitClick(btn)
 end
 
 function loadFormData(form)
-	local set = nx_number(IniReadUserConfig("Skill", "skill_set", "0"))
+	local set = nx_number(IniReadUserConfig("KyNang", "Selected", "0"))
 	if set == 0 then
-		IniWriteUserConfig("Skill", "skill_set", "1")
+		IniWriteUserConfig("KyNang", "Selected", "1")
 		set = 1
 	end
 	if set == 1 then
@@ -46,9 +46,9 @@ function loadFormData(form)
 		form.rbtn_set_2.Checked = false
 		form.rbtn_set_3.Checked = true
 	end
-	local goNearFlg = nx_string(IniReadUserConfig("Skill", "go_near_flg", "-1"))
+	local goNearFlg = nx_string(IniReadUserConfig("KyNang", "GoNear", "-1"))
 	if goNearFlg == "-1" then
-		IniWriteUserConfig("Skill", "go_near_flg", "0")
+		IniWriteUserConfig("KyNang", "GoNear", "0")
 		goNearFlg = "0"
 	end
 	form.cbtn_go_near.Checked = goNearFlg == "1" and true or false
@@ -61,10 +61,10 @@ function saveFormData(form)
 	elseif form.rbtn_set_3.Checked then
 		set = 3
 	end
-	IniWriteUserConfig("Skill", "skill_set", set)
-	IniWriteUserConfig("Skill", "go_near_flg", form.cbtn_go_near.Checked and "1" or "0")
+	IniWriteUserConfig("KyNang", "Selected", set)
+	IniWriteUserConfig("KyNang", "GoNear", form.cbtn_go_near.Checked and "1" or "0")
 end
 
 function onBtnSettingClick(btn)
-	util_auto_show_hide_form("form_zdn_skill_set")
+	util_auto_show_hide_form("form_zdn_skill_setting")
 end

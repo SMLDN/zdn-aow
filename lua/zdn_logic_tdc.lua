@@ -184,12 +184,7 @@ function attackObj(obj)
         return
     end
     nx_execute("zdn_logic_base", "SelectTarget", obj)
-    if nx_execute("zdn_logic_skill", "IsRunning") then
-        StopFindPath()
-        nx_execute("zdn_logic_skill", "ContinueAttack")
-    else
-        nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
-    end
+    nx_execute("zdn_logic_skill", "FlexAttack")
 end
 
 function needParry(obj)
@@ -218,8 +213,9 @@ function createTeam()
     local cn = nx_widestr(player:QueryProp("TeamCaptain"))
     if cn == nx_widestr("0") or cn == nx_widestr("") then
         nx_execute("custom_sender", "custom_team_create")
-        nx_pause(1)
+        nx_pause(2)
     end
+    cn = nx_widestr(player:QueryProp("TeamCaptain"))
     if cn == nx_widestr(player:QueryProp("Name")) then
         nx_execute("custom_sender", "custom_set_team_allot_mode", 0)
     end

@@ -191,12 +191,7 @@ function attackOtherPlayer()
         nx_execute("zdn_logic_skill", "StopNgoiThien")
         nx_execute("custom_sender", "custom_select", enemy.Ident)
         if GetDistanceToObj(enemy) < 2.8 then
-            if (nx_execute("zdn_logic_skill", "IsRunning")) then
-                StopFindPath()
-                nx_execute("zdn_logic_skill", "ContinueAttack")
-            else
-                nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
-            end
+            nx_execute("zdn_logic_skill", "FlexAttack")
         else
             nx_execute("zdn_logic_skill", "PauseAttack")
             GoToObj(enemy)

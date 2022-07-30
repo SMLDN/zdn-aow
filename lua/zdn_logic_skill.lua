@@ -4,13 +4,19 @@ require("zdn_util")
 require("zdn_lib_moving")
 
 local Data = {}
+local UseMaster = {}
 local UseSkillList = {}
-local UseWeapon = {}
+local UseWeaponList = {}
+local UseBookList = {}
 local UseSkillProp = {}
 local Running = false
 local Paused = false
+local TimerWeaponUseItem = 0
+local LastWeaponItemIndex = 0
+local TimerBookUseItem = 0
+local LastBookItemIndex = 0
 
-local MAX_SKILL = 9
+local MAX_SKILL = 8
 local CHANGE_ATTRIBUTE_POINT_SKILL = {
     ["CS_change_1"] = "buf_CS_change_1",
     ["CS_change_2"] = "buf_CS_change_2",
@@ -24,14 +30,13 @@ local CHANGE_ATTRIBUTE_POINT_SKILL = {
 
 function LoadSkillSet(set)
     initLoadSkill()
-    local text = nx_string(IniReadUserConfig("Skill", "set_" .. nx_string(set), "0"))
-    if text == "0" then
-        return
-    end
-    local list = util_split_string(text, ";")
-    loadUseSkillList(list)
-    loadUseWeapon(list)
-    UseSkillProp.GoNearFlg = nx_string(IniReadUserConfig("Skill", "go_near_flg", "0")) == "1" and true or false
+
+    loadUseMaster(set)
+    loadUseSkillList(set)
+    loadUseWeaponList(set)
+    loadUseBookList(set)
+
+    UseSkillProp.GoNearFlg = nx_string(IniReadUserConfig("KyNang", "GoNear", "0")) == "1" and true or false
     loadShortcut()
 end
 
@@ -41,7 +46,7 @@ function AutoAttackDefaultSkillSet()
     end
     Paused = false
     Running = true
-    LoadSkillSet(getDefaulSkillSet())
+    LoadSkillSet(getDefaultSkillSet())
     doAutoAttack()
 end
 
@@ -53,6 +58,14 @@ function AutoAttack(set)
     Running = true
     LoadSkillSet(set)
     doAutoAttack()
+end
+
+function FlexAttack()
+    if Running then
+        Paused = false
+    else
+        AutoAttackDefaultSkillSet()
+    end
 end
 
 function StopAutoAttack()
@@ -234,9 +247,12 @@ function initLoadSkill()
         TimerUseSkill = {}
         TimerUseSkill.CheckDistance = 0
         TimerUseSkill.UseSkill = 0
-        TargetTypeList = {}
-        TimerUseSkill.CheckWeapon = 0
     end
+    UseMaster = {}
+    UseMaster.WeaponUniqueID = "1"
+    UseMaster.RageSkill = {}
+    UseMaster.BreakSkill = {}
+
     for i = 1, MAX_SKILL do
         UseSkillList[i] = {}
         UseSkillList[i].ConfigID = "null"
@@ -244,47 +260,34 @@ function initLoadSkill()
         UseSkillList[i].TargetType = "1"
         UseSkillList[i].CoolType = "1"
     end
-
-    UseWeapon.ConfigID = "null"
-    UseWeapon.UniqueID = "0"
-    UseWeapon.Image = "null"
-    UseSkillProp.GoNearFlg = false
-end
-
-function loadUseSkillList(list)
-    if #list ~= MAX_SKILL + 1 then
-        return
+    for i = 1, MAX_SKILL do
+        UseWeaponList[i] = {}
+        UseWeaponList[i].UniqueID = "1"
+        UseWeaponList[i].ConfigID = "null"
     end
     for i = 1, MAX_SKILL do
-        local skill = UseSkillList[i]
+        UseBookList[i] = {}
+        UseBookList[i].UniqueID = "1"
+        UseBookList[i].ConfigID = "null"
+    end
+    UseSkillProp.GoNearFlg = false
+    TargetTypeList = {}
+end
+
+function loadUseSkillList(set)
+    local text = nx_string(IniReadUserConfig("KyNang", "S" .. nx_string(set), ""))
+    if text == "" then
+        return
+    end
+    local list = util_split_string(text, ";")
+    for i = 1, MAX_SKILL do
         local data = util_split_string(list[i], ",")
         if #data ~= 3 then
             return
         end
-        skill.ConfigID = data[1]
-        skill.SkillStyle = data[2]
-        skill.Image = data[3]
-        if skill.SkillStyle == "2" then
-            if isSkillExists(skill.ConfigID .. "_sky") then
-                skill.ConfigID = skill.ConfigID .. "_sky"
-            end
-        elseif skill.SkillStyle == "3" then
-            if isSkillExists(skill.ConfigID .. "_hide") then
-                skill.ConfigID = skill.ConfigID .. "_hide"
-            elseif skill.ConfigID == "CS_jh_lhbwq03" then
-                skill.ConfigID = "CS_jh_lhbwq08"
-            end
-        end
-        skill.TargetType = getSkillTargetType(skill.ConfigID)
-        skill.CoolType = GetSkillCoolDownType(skill.ConfigID)
-        if skill.ConfigID ~= "null" then
-            nx_execute("custom_sender", "custom_set_shortcut", 190 + i, "skill", skill.ConfigID)
-        end
-        if isSkillExists("wuji_" .. skill.ConfigID) then
-            -- neu co skill vo ky
-            skill.HasVoKyFlg = true
-        else
-            skill.HasVoKyFlg = false
+        UseSkillList[i] = loadOneSkill(data[1], data[2])
+        if UseSkillList[i].ConfigID ~= "null" then
+            nx_execute("custom_sender", "custom_set_shortcut", 190 + i, "skill", UseSkillList[i].ConfigID)
         end
     end
 end
@@ -301,14 +304,37 @@ function getSkillTargetType(config)
     return skill_static_query_by_id(config, "TargetType")
 end
 
-function loadUseWeapon(list)
-    local data = util_split_string(list[10], ",")
-    if #data ~= 3 then
+function loadUseWeaponList(set)
+    local text = nx_string(IniReadUserConfig("KyNang", "W" .. nx_string(set), ""))
+    if text == "" then
         return
     end
-    UseWeapon.ConfigID = data[1]
-    UseWeapon.UniqueID = data[2]
-    UseWeapon.Image = data[3]
+    local list = util_split_string(text, ";")
+    for i = 1, MAX_SKILL do
+        if list[i] ~= "null" then
+            local data = util_split_string(list[i], ",")
+            UseWeaponList[i].UniqueID = data[1]
+        else
+            UseWeaponList[i].UniqueID = UseMaster.WeaponUniqueID
+        end
+    end
+end
+
+function loadUseBookList(set)
+    local text = nx_string(IniReadUserConfig("KyNang", "B" .. nx_string(set), ""))
+    if text == "" then
+        return
+    end
+    local list = util_split_string(text, ";")
+    for i = 1, MAX_SKILL do
+        local data = util_split_string(list[i], ",")
+        if list[i] ~= "null" then
+            local data = util_split_string(list[i], ",")
+            UseBookList[i].UniqueID = data[1]
+        else
+            UseBookList[i].UniqueID = "1"
+        end
+    end
 end
 
 function loadShortcut()
@@ -323,23 +349,24 @@ function loadShortcut()
     nx_pause(1)
     grid.page = current
     nx_execute("form_stage_main\\form_main\\form_main_shortcut", "on_shortcut_record_change", grid)
-    for i = 0, MAX_SKILL do
+    for i = 0, MAX_SKILL + 1 do -- them no chieu
         nx_execute("custom_sender", "custom_remove_shortcut", 190 + i)
     end
 end
 
-function getDefaulSkillSet()
-    return nx_number(IniReadUserConfig("Skill", "skill_set", "1"))
+function getDefaultSkillSet()
+    return nx_number(IniReadUserConfig("KyNang", "Selected", "1"))
 end
 
 function doAutoAttack()
+    useMasterWeapon()
     while Running do
         if not Paused then
             if checkNearTarget() then
                 loopAttack()
             end
         end
-        nx_pause(0.1)
+        nx_pause(0.05)
     end
 end
 
@@ -380,19 +407,29 @@ function loopAttack()
     if HaveBuff("buf_hurt_1") then
         return
     end
-    if TimerDiff(TimerUseSkill.CheckWeapon) > 2 then
-        checkWeapon()
+    checkWeapon()
+    checkBook()
+    local obj = getTargetObj()
+    if nx_is_valid(obj) and isObjParry(obj) and UseMaster.BreakSkill.ConfigID ~= "null" then
+        if not isSkillOnCooldown(UseMaster.BreakSkill) then
+            local fight = nx_value("fight")
+            if nx_is_valid(fight) then
+                fight:StopUseSkill()
+            end
+            useSkill(UseMaster.BreakSkill)
+            return
+        end
     end
     if
-        getRage() > 50 and not HaveBuff("buf_" .. UseSkillList[9].ConfigID) and UseSkillList[9].ConfigID ~= "null" and
-            not isSkillOnCooldown(UseSkillList[9])
+        getRage() > 50 and not HaveBuff("buf_" .. UseMaster.RageSkill.ConfigID) and
+            UseMaster.RageSkill.ConfigID ~= "null" and
+            useSkill(UseMaster.RageSkill)
      then
-        useSkill(UseSkillList[9])
-    else
-        for i = 1, 8 do
-            if useSkill(UseSkillList[i]) then
-                break
-            end
+        return
+    end
+    for i = 1, MAX_SKILL do
+        if useSkill(UseSkillList[i]) then
+            return
         end
     end
 end
@@ -469,12 +506,27 @@ function isFlying()
 end
 
 function checkWeapon()
-    TimerUseSkill.CheckWeapon = TimerInit()
-    if UseWeapon.ConfigID == "null" then
-        return
-    end
     local client = nx_value("game_client")
     if not nx_is_valid(client) then
+        return
+    end
+    local p = client:GetPlayer()
+    if not nx_is_valid(p) then
+        return
+    end
+    local sId = nx_string(p:QueryProp("CurSkillID"))
+    if sId == "" or sId == "0" then
+        return
+    end
+
+    local w = UseMaster.WeaponUniqueID
+    for i = 1, MAX_SKILL do
+        if UseSkillList[i].ConfigID == sId or "wuji_" .. UseSkillList[i].ConfigID == sId then
+            w = UseWeaponList[i].UniqueID
+            break
+        end
+    end
+    if w == "1" then
         return
     end
     local equip = client:GetView("1")
@@ -483,16 +535,72 @@ function checkWeapon()
         return
     end
     local currentWeapon = equip:GetViewObj("22")
-    if nx_is_valid(currentWeapon) and nx_string(currentWeapon:QueryProp("UniqueID")) == UseWeapon.UniqueID then
+    if nx_is_valid(currentWeapon) and nx_string(currentWeapon:QueryProp("UniqueID")) == w then
         return
     end
     for i = 1, 100 do
         local item = bag:GetViewObj(nx_string(i))
-        if nx_is_valid(item) and nx_string(item:QueryProp("UniqueID")) == UseWeapon.UniqueID then
+        if nx_is_valid(item) and nx_string(item:QueryProp("UniqueID")) == w then
+            if TimerDiff(TimerWeaponUseItem) < 0.2 and LastWeaponItemIndex == i then
+                return
+            end
             local grid = nx_value("GoodsGrid")
             if not nx_is_valid(grid) then
                 return
             end
+            TimerWeaponUseItem = TimerInit()
+            LastWeaponItemIndex = i
+            grid:ViewUseItem(121, i, "", "")
+            return
+        end
+    end
+end
+
+function checkBook()
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return
+    end
+    local p = client:GetPlayer()
+    if not nx_is_valid(p) then
+        return
+    end
+    local sId = nx_string(p:QueryProp("CurSkillID"))
+    if sId == "" or sId == "0" then
+        return
+    end
+
+    local b = "null"
+    for i = 1, MAX_SKILL do
+        if UseSkillList[i].ConfigID == sId or "wuji_" .. UseSkillList[i].ConfigID == sId then
+            b = UseBookList[i].UniqueID
+            break
+        end
+    end
+    if b == "null" then
+        return
+    end
+    local equip = client:GetView("1")
+    local bag = client:GetView("121")
+    if not nx_is_valid(equip) or not nx_is_valid(bag) then
+        return
+    end
+    local currentBook = equip:GetViewObj("24")
+    if nx_is_valid(currentBook) and nx_string(currentBook:QueryProp("UniqueID")) == b then
+        return
+    end
+    for i = 1, 100 do
+        local item = bag:GetViewObj(nx_string(i))
+        if nx_is_valid(item) and nx_string(item:QueryProp("UniqueID")) == b then
+            if TimerDiff(TimerBookUseItem) < 0.2 and LastBookItemIndex == i then
+                return
+            end
+            local grid = nx_value("GoodsGrid")
+            if not nx_is_valid(grid) then
+                return
+            end
+            TimerBookUseItem = TimerInit()
+            LastBookItemIndex = i
             grid:ViewUseItem(121, i, "", "")
             return
         end
@@ -581,10 +689,14 @@ end
 
 function isParry()
     local player = nx_value("game_client"):GetPlayer()
-    if not nx_is_valid(player) then
+    return isObjParry(player)
+end
+
+function isObjParry(obj)
+    if not nx_is_valid(obj) then
         return false
     end
-    local bufferList = nx_function("get_buffer_list", player)
+    local bufferList = nx_function("get_buffer_list", obj)
     local bufferCount = table.getn(bufferList) / 2
     for i = 1, bufferCount do
         if nx_string(bufferList[i * 2 - 1]) == nx_string("BuffInParry") then
@@ -609,4 +721,90 @@ end
 function isSwimming()
     local state = nx_execute("zdn_logic_base", "GetRoleState")
     return string.find(state, "swim") ~= nil
+end
+
+function loadUseMaster(set)
+    local text = nx_string(IniReadUserConfig("KyNang", "M" .. nx_string(set), ""))
+    if text == "" then
+        return
+    end
+    local list = util_split_string(text, ";")
+    if #list ~= 3 then
+        return
+    end
+
+    local p = util_split_string(list[1], ",")
+    UseMaster.WeaponUniqueID = p[1]
+
+    p = util_split_string(list[2], ",")
+    UseMaster.RageSkill = loadOneSkill(p[1], p[2])
+    if UseMaster.RageSkill.ConfigID ~= "null" then
+        nx_execute("custom_sender", "custom_set_shortcut", 190 + MAX_SKILL + 1, "skill", UseMaster.RageSkill.ConfigID)
+    end
+
+    p = util_split_string(list[3], ",")
+    UseMaster.BreakSkill = loadOneSkill(p[1], p[2])
+    if UseMaster.BreakSkill.ConfigID ~= "null" then
+        nx_execute("custom_sender", "custom_set_shortcut", 190 + MAX_SKILL + 2, "skill", UseMaster.BreakSkill.ConfigID)
+    end
+end
+
+function loadOneSkill(cId, sStyle)
+    if sStyle == "2" then
+        if isSkillExists(cId .. "_sky") then
+            cId = cId .. "_sky"
+        end
+    elseif sStyle == "3" then
+        if isSkillExists(cId .. "_hide") then
+            cId = cId .. "_hide"
+        elseif cId == "CS_jh_lhbwq03" then
+            cId = "CS_jh_lhbwq08"
+        end
+    end
+
+    local skill = {}
+    skill.ConfigID = cId
+    skill.SkillStyle = sStyle
+    skill.TargetType = getSkillTargetType(cId)
+    skill.CoolType = GetSkillCoolDownType(cId)
+    if isSkillExists("wuji_" .. cId) then
+        -- neu co skill vo ky
+        skill.HasVoKyFlg = true
+    else
+        skill.HasVoKyFlg = false
+    end
+    return skill
+end
+
+function useMasterWeapon()
+    local client = nx_value("game_client")
+    if not nx_is_valid(client) then
+        return
+    end
+    local w = UseMaster.WeaponUniqueID
+    if w == "1" then
+        return
+    end
+    local equip = client:GetView("1")
+    local bag = client:GetView("121")
+    if not nx_is_valid(equip) or not nx_is_valid(bag) then
+        return
+    end
+    local currentWeapon = equip:GetViewObj("22")
+    if not nx_is_valid(currentWeapon) or nx_string(currentWeapon:QueryProp("UniqueID")) == w then
+        return
+    end
+    for i = 1, 100 do
+        local item = bag:GetViewObj(nx_string(i))
+        if nx_is_valid(item) and nx_string(item:QueryProp("UniqueID")) == w then
+            local grid = nx_value("GoodsGrid")
+            if not nx_is_valid(grid) then
+                return
+            end
+            TimerWeaponUseItem = TimerInit()
+            LastWeaponItemIndex = i
+            grid:ViewUseItem(121, i, "", "")
+            return
+        end
+    end
 end

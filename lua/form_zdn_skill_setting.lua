@@ -372,6 +372,7 @@ function setPicWeaponFromStr(node, str)
 		node.UniqueID = "1"
 		node.ConfigID = "null"
 		node.Image = ""
+		node.HintText = util_text("zdn_drop_weapon_here")
 		return
 	end
 	local prop = util_split_string(str, ",")
@@ -386,12 +387,14 @@ function setPicSkillFromStr(node, str)
 		node.ConfigID = "null"
 		node.SkillStyle = "1"
 		node.Image = ""
+		node.HintText = util_text("zdn_right_click_change")
 		return
 	end
 	local prop = util_split_string(str, ",")
 	node.ConfigID = prop[1]
 	node.SkillStyle = prop[2]
 	node.Image = prop[3]
+	node.HintText = util_text(prop[1])
 end
 
 function setPicBookFromStr(node, str)
@@ -399,12 +402,14 @@ function setPicBookFromStr(node, str)
 		node.UniqueID = "1"
 		node.ConfigID = "null"
 		node.Image = ""
+		node.HintText = util_text("zdn_drop_book_here")
 		return
 	end
 	local prop = util_split_string(str, ",")
 	node.UniqueID = prop[1]
 	node.ConfigID = prop[2]
 	node.Image = prop[3]
+	node.HintText = util_text(prop[2])
 end
 
 function loadSkillConfig()

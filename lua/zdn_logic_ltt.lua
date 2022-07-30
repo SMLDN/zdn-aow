@@ -257,11 +257,7 @@ function doAttackNpc(npc)
         nx_execute("zdn_logic_skill", "PauseAttack")
         WalkToObj(npc)
     end
-    if nx_execute("zdn_logic_skill", "IsRunning") then
-        nx_execute("zdn_logic_skill", "ContinueAttack")
-    else
-        nx_execute("zdn_logic_skill", "AutoAttackDefaultSkillSet")
-    end
+    nx_execute("zdn_logic_skill", "FlexAttack")
 end
 
 function isAttackable(obj)
