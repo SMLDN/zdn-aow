@@ -9,6 +9,7 @@
 **Thay đổi**
 - Chỉnh lại hệ thống text của zdn
 - Q nội 6: Tô châu: sử dụng điểm dịch chuyển Hổ khâu cho gần hơn
+- Kỳ ngộ: thêm: Hồng Bảo, Phổ Cầm Chi, Hồ Phức Ngưng(mặc định là k nhận)
 
 
 ---
