@@ -1,7 +1,7 @@
 # Release Note
 ---
 *Update 7/yy/2022*  
-*v1.17.0*  
+*v1.18.0*  
 **Tính năng mới**
 - Kỹ năng: làm mới lại hoàn toàn. Có kèm Hư chiêu. Có đổi vũ khí, bình thư theo chiêu thức(Lưu ý: chỉ dùng cho tự động đánh, ngươi chơi dùng không có tác dụng). Khuyến cáo /skill thiết lập lại.
 - Thần hành: thêm nút Về nhà
