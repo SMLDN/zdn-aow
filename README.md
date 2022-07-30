@@ -11,6 +11,8 @@
 - Q nội 6: Tô châu: sử dụng điểm dịch chuyển Hổ khâu cho gần hơn
 - Kỳ ngộ: thêm: Hồng Bảo, Phổ Cầm Chi, Hồ Phức Ngưng(mặc định là k nhận)
 
+**Sửa lỗi**
+- Thiên thê: thỉnh thoảng ra khởi Thiên thê vẫn tiếp tục đánh
 
 ---
 *Update 7/27/2022*  

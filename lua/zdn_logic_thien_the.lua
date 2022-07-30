@@ -116,6 +116,7 @@ function prepareForMatch()
     if IsMapLoading() then
         return
     end
+    nx_execute("zdn_logic_skill", "PauseAttack")
     if processPrizeForm() then
         return
     end
