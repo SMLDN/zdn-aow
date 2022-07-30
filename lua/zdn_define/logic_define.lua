@@ -17,5 +17,6 @@ CAN_RUN_LOGIC_LIST = {
     "zdn_logic_on_tuyen",
     "zdn_logic_bat_tho",
     "zdn_logic_thu_thap",
-    "zdn_logic_tdc"
+    "zdn_logic_tdc",
+    "zdn_logic_tam_ma"
 }

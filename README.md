@@ -4,6 +4,7 @@
 *v1.18.0*  
 **Tính năng mới**
 - Kỹ năng: làm mới lại hoàn toàn. Có kèm Hư chiêu. Có đổi vũ khí, bình thư theo chiêu thức(Lưu ý: chỉ dùng cho tự động đánh, ngươi chơi dùng không có tác dụng). Khuyến cáo /skill thiết lập lại.
+- Thêm diễn võ để ra Tâm ma(/tm)
 - Thần hành: thêm nút Về nhà
 
 **Thay đổi**
@@ -12,7 +13,7 @@
 - Kỳ ngộ: thêm: Hồng Bảo, Phổ Cầm Chi, Hồ Phức Ngưng(mặc định là k nhận)
 
 **Sửa lỗi**
-- Thiên thê: thỉnh thoảng ra khởi Thiên thê vẫn tiếp tục đánh
+- Thiên thê: thỉnh thoảng ra khỏi Thiên thê vẫn tiếp tục đánh
 
 ---
 *Update 7/27/2022*  
@@ -331,3 +332,5 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /nhatdo : thiết lập nhặt đồ. Có tác dụng cho thích quán, thth  
  /coc : dò cóc
  /cay : thông tin cây ngày
+ /tdc : tinh dao cung
+ /tm : diễn võ tâm ma
