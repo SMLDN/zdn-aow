@@ -1,9 +1,9 @@
 # Release Note
 ---
-*Update 7/yy/2022*  
+*Update 7/31/2022*  
 *v1.19.0*  
 **Tính năng mới**
-- Q Ẩn thế: Niệm la bá: Thí luyện Phấn Hoa
+- Q Ẩn thế: Niệm la bá: Thí luyện Phấn Hoa, Tặng hoa nhận phấn, Tù Lung Đấu Nô, Tập Vũ Kỹ
 
 ---
 *Update 7/30/2022*  
@@ -336,7 +336,7 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /tho : bắt thỏ  
  /thuthap : thu thập  
  /nhatdo : thiết lập nhặt đồ. Có tác dụng cho thích quán, thth  
- /coc : dò cóc
- /cay : thông tin cây ngày
- /tdc : tinh dao cung
- /tm : diễn võ tâm ma
+ /coc : dò cóc  
+ /cay : thông tin cây ngày  
+ /tdc : tinh dao cung  
+ /tm : diễn võ tâm ma  
