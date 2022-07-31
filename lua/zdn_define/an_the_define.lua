@@ -7,8 +7,8 @@ TASK_LIST = {
         {"tmc_tvmp", "Tạp Vụ Môn Phái", "zdn_logic_an_the_tmc_tvmp"}
     },
     ["newschool_nianluo"] = {
-        {"nlb_tlph", "Thí luyện Phấn Hoa", "zdn_logic_an_the_nlb_tlph"}
-        -- {"nlb_thnp", "Tặng hoa nhận phấn", "zdn_logic_an_the_nlb_thnp"},
+        {"nlb_tlph", "Thí luyện Phấn Hoa", "zdn_logic_an_the_nlb_tlph"},
+        {"nlb_thnp", "Tặng hoa nhận phấn", "zdn_logic_an_the_nlb_thnp"}
         -- {"nlb_tldn", "Tù Lung Đấu Nô", "zdn_logic_an_the_nlb_tldn"},
         -- {"nlb_tvk", "Tập Vũ Kỹ", "zdn_logic_an_the_nlb_tvk"}
     }
