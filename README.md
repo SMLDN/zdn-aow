@@ -1,5 +1,11 @@
 # Release Note
 ---
+*Update 8/1/2022*  
+*v1.20.0*  
+**Tính năng mới**
+- Đào bảo: tự tele map, di chuyển tới tọa độ của Tàng Bảo Đồ khi chuột phải vào
+
+---
 *Update 7/31/2022*  
 *v1.19.0*  
 **Tính năng mới**
