@@ -1,6 +1,12 @@
 # Release Note
 ---
 *Update 8/1/2022*  
+*v1.20.1*  
+**Sửa lỗi**
+- Kỹ năng: cài phá chiêu làm đè nên ô kỹ năng thêm đầu tiên
+
+---
+*Update 8/1/2022*  
 *v1.20.0*  
 **Tính năng mới**
 - Đào bảo: tự tele map, di chuyển tới tọa độ của Tàng Bảo Đồ khi chuột phải vào

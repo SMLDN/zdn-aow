@@ -287,7 +287,7 @@ function loadUseSkillList(set)
         end
         UseSkillList[i] = loadOneSkill(data[1], data[2])
         if UseSkillList[i].ConfigID ~= "null" then
-            nx_execute("custom_sender", "custom_set_shortcut", 190 + i, "skill", UseSkillList[i].ConfigID)
+            nx_execute("custom_sender", "custom_set_shortcut", 190 + i - 1, "skill", UseSkillList[i].ConfigID)
         end
     end
 end
@@ -739,13 +739,13 @@ function loadUseMaster(set)
     p = util_split_string(list[2], ",")
     UseMaster.RageSkill = loadOneSkill(p[1], p[2])
     if UseMaster.RageSkill.ConfigID ~= "null" then
-        nx_execute("custom_sender", "custom_set_shortcut", 190 + MAX_SKILL + 1, "skill", UseMaster.RageSkill.ConfigID)
+        nx_execute("custom_sender", "custom_set_shortcut", 190 + MAX_SKILL, "skill", UseMaster.RageSkill.ConfigID)
     end
 
     p = util_split_string(list[3], ",")
     UseMaster.BreakSkill = loadOneSkill(p[1], p[2])
     if UseMaster.BreakSkill.ConfigID ~= "null" then
-        nx_execute("custom_sender", "custom_set_shortcut", 190 + MAX_SKILL + 2, "skill", UseMaster.BreakSkill.ConfigID)
+        nx_execute("custom_sender", "custom_set_shortcut", 190 + MAX_SKILL + 1, "skill", UseMaster.BreakSkill.ConfigID)
     end
 end
 
