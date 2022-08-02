@@ -358,3 +358,4 @@ Age Of Wushu(九陰真經) - Cửu Âm Chân Kinh Auto by ZDN
  /cay : thông tin cây ngày  
  /tdc : tinh dao cung  
  /tm : diễn võ tâm ma  
+ /c {nội dung chat} : tự động chat  
