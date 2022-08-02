@@ -10,6 +10,7 @@
 
 **Sửa lỗi**
 - Thiên thê: thỉnh thoảng hiện lỗi lúc thoát Thiên thê
+- Thu thập: thợ săn: thỉnh thoảng bị lỗi đứng im ngắm quái chết
 
 ---
 *Update 8/1/2022*  
