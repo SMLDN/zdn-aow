@@ -78,7 +78,7 @@ function loopThuThap()
         return
     end
 
-    if GetDistance(p.x, p.y, p.z) > 50 then
+    if GetDistance(p.x, p.y, p.z) > 100 then
         GoToPosition(p.x, p.y, p.z)
         return
     end
@@ -227,12 +227,12 @@ function processThoSan(p)
         return
     end
 
-    obj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLastConfigIdObj")
+    obj = nx_execute("zdn_logic_base", "GetNearestObj", nx_current(), "isLastConfigIdObj", "isNotDead")
     if nx_is_valid(obj) then
         attackObj(obj)
         return
     end
-
+    nx_execute("zdn_logic_skill", "PauseAttack")
     waitTimeOut()
 end
 
@@ -333,4 +333,9 @@ function setCurrentObjIsCollected()
     if nx_is_valid(obj) then
         obj.ZdnIsCollected = 1
     end
+end
+
+function isNotDead(obj)
+    local dead = nx_number(obj:QueryProp("Dead")) == 1
+    return not dead
 end
