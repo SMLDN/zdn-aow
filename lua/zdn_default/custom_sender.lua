@@ -1,7 +1,17 @@
 require("zdn_util")
 function custom_chat(chat_type, content, ...)
-  local filter = nx_execute("zdn_chat_filter", "FilterCommand", nx_widestr(content))
+  content = nx_widestr(content)
+  local filter = nx_execute("zdn_chat_filter", "FilterCommand", content)
   if filter then
+    return
+  end
+  if nx_function("ext_ws_find", content, nx_widestr("/c ")) == 0 then
+    nx_execute(
+      "zdn_logic_chat_loop",
+      "Start",
+      chat_type,
+      nx_function("ext_ws_substr", content, 2, nx_ws_length(content))
+    )
     return
   end
   local game_visual = nx_value("game_visual")

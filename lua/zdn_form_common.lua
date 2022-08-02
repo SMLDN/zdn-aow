@@ -41,9 +41,3 @@ function updateBtnSubmitState(isRunning)
 		Form.btn_submit.ForeColor = "255,255,255,255"
 	end
 end
-
--- for debug
-function debug()
-	dofile("D:\\auto\\debug.lua")
-end
--- for debug

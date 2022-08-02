@@ -1,6 +1,12 @@
 # Release Note
 ---
 *Update 8/1/2022*  
+*v1.21.0*  
+**Tính năng mới**
+- Tự động chat: /c {nộidungchat} để chạy
+
+---
+*Update 8/1/2022*  
 *v1.20.1*  
 **Sửa lỗi**
 - Kỹ năng: cài phá chiêu làm đè nên ô kỹ năng thêm đầu tiên
