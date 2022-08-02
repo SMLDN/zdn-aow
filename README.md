@@ -5,6 +5,9 @@
 **Tính năng mới**
 - Tự động chat: /c {nộidungchat} để chạy
 
+***Thay đổi*
+- Kỳ ngộ: thêm Ngô Quỳnh
+
 **Sửa lỗi**
 - Thiên thê: thỉnh thoảng hiện lỗi lúc thoát Thiên thê
 
