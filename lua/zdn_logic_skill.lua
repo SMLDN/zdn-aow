@@ -608,6 +608,14 @@ function checkBook()
 end
 
 function createDecal()
+    local scene = nx_value("game_scene")
+    if not nx_is_valid(scene) then
+        return
+    end
+    local terrain = scene.terrain
+    if not nx_is_valid(terrain) then
+        return
+    end
     nx_execute("game_effect", "add_ground_pick_decal", "map\\tex\\Target_area_G.dds", 1, 20)
 end
 

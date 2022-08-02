@@ -196,6 +196,7 @@ function isInTaskTime()
 end
 
 function leaveMatchScene()
+    nx_execute("zdn_logic_skill", "PauseAttack")
     if TimerDiff(TimerLeaveMatch) < 10 then
         return
     end

@@ -1,9 +1,12 @@
 # Release Note
 ---
-*Update 8/1/2022*  
+*Update 8/2/2022*  
 *v1.21.0*  
 **Tính năng mới**
 - Tự động chat: /c {nộidungchat} để chạy
+
+**Sửa lỗi**
+- Thiên thê: thỉnh thoảng hiện lỗi lúc thoát Thiên thê
 
 ---
 *Update 8/1/2022*  
