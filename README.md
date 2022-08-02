@@ -11,6 +11,7 @@
 **Sửa lỗi**
 - Thiên thê: thỉnh thoảng hiện lỗi lúc thoát Thiên thê
 - Thu thập: thợ săn: thỉnh thoảng bị lỗi đứng im ngắm quái chết
+- Thu thập: thợ săn: mở rộng phạm vi tìm đối tượng lên 100
 
 ---
 *Update 8/1/2022*  
