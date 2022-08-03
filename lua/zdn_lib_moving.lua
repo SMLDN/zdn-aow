@@ -7,7 +7,7 @@ local TimerTele = 0
 local TimerMapLoading = 0
 
 local function isCurseLoading()
-	if TimerDiff(TimerTele) < 3 then
+	if TimerDiff(TimerTele) < 0.5 then
 		return true
 	end
 	local load = nx_value("form_stage_main\\form_main\\form_main_curseloading")
