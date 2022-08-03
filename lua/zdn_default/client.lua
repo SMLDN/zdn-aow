@@ -125,7 +125,7 @@ function zdnAddBtn(form)
     btn.TabStop = "true"
     btn.AutoSize = "true"
     btn.DrawMode = "ExpandH"
-    btn.Text = Utf8ToWstr("Thoát liên server")
+    btn.Text = nx_function("ext_utf8_to_widestr", "Thoát liên server")
     nx_bind_script(btn, nx_current())
     nx_callback(btn, "on_click", "onZdnOutServer")
 end
